@@ -1,0 +1,84 @@
+{
+  "delta": 0.5,
+  "train_years": [
+    2024
+  ],
+  "rule": "smallest delta with under-warning <= 0.05 for primary profile (k=3)",
+  "candidates": [
+    {
+      "delta": 0.0,
+      "k": 3,
+      "hours": 1340,
+      "events_ref": 1219,
+      "tp": 1208,
+      "fp": 72,
+      "fn": 11,
+      "pod": 0.991,
+      "far": 0.0563,
+      "csi": 0.9357,
+      "bias_ratio": 1.05,
+      "exact_level_agreement": 0.759,
+      "under_warning_rate": 0.0522
+    },
+    {
+      "delta": 0.5,
+      "k": 3,
+      "hours": 1340,
+      "events_ref": 1219,
+      "tp": 1216,
+      "fp": 84,
+      "fn": 3,
+      "pod": 0.9975,
+      "far": 0.0646,
+      "csi": 0.9332,
+      "bias_ratio": 1.0664,
+      "exact_level_agreement": 0.7075,
+      "under_warning_rate": 0.0194
+    },
+    {
+      "delta": 1.0,
+      "k": 3,
+      "hours": 1340,
+      "events_ref": 1219,
+      "tp": 1219,
+      "fp": 98,
+      "fn": 0,
+      "pod": 1.0,
+      "far": 0.0744,
+      "csi": 0.9256,
+      "bias_ratio": 1.0804,
+      "exact_level_agreement": 0.6187,
+      "under_warning_rate": 0.0082
+    },
+    {
+      "delta": 1.5,
+      "k": 3,
+      "hours": 1340,
+      "events_ref": 1219,
+      "tp": 1219,
+      "fp": 108,
+      "fn": 0,
+      "pod": 1.0,
+      "far": 0.0814,
+      "csi": 0.9186,
+      "bias_ratio": 1.0886,
+      "exact_level_agreement": 0.5448,
+      "under_warning_rate": 0.0045
+    },
+    {
+      "delta": 2.0,
+      "k": 3,
+      "hours": 1340,
+      "events_ref": 1219,
+      "tp": 1219,
+      "fp": 110,
+      "fn": 0,
+      "pod": 1.0,
+      "far": 0.0828,
+      "csi": 0.9172,
+      "bias_ratio": 1.0902,
+      "exact_level_agreement": 0.4791,
+      "under_warning_rate": 0.0015
+    }
+  ]
+}

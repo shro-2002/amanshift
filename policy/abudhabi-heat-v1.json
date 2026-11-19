@@ -1,0 +1,875 @@
+{
+  "version": "abudhabi-heat-v1",
+  "description": "AmanShift policy. Every value carries a citation and status. Engineering parameter = AmanShift design choice, not a scientific or regulatory value.",
+  "timezone_offset_h": {
+    "value": 4,
+    "citation": "Gulf Standard Time (UTC+4), no DST",
+    "status": "fact"
+  },
+  "niosh": {
+    "value": {
+      "rel": {
+        "a": 56.7,
+        "b": 11.5
+      },
+      "ral": {
+        "a": 59.9,
+        "b": 14.1
+      }
+    },
+    "citation": "NIOSH 2016-106: REL [degC-WBGT] = 56.7 - 11.5 log10 M [W]; RAL = 59.9 - 14.1 log10 M [W]; M in W, 1-h TWA",
+    "status": "confirmed"
+  },
+  "metabolic_w": {
+    "value": {
+      "light": 208.8,
+      "moderate": 348.9,
+      "heavy": 481.4,
+      "very_heavy": 603.2
+    },
+    "citation": "NIOSH 2016-106 ch.8 (ACGIH categories quoted: light <180, moderate 180-300, heavy 300-415, very heavy >520 kcal/h; 1 kcal/h = 1.16 W); moderate 300 kcal/h = 348.9 W is the NIOSH worked example. Verified against docs/sources text 2026-11-19 (415-520 gap is in the source); very_heavy is the lower bound of an open range (not conservative)",
+    "status": "verified-text; OH review pending"
+  },
+  "metabolic_rest_w": {
+    "value": 105,
+    "citation": "NIOSH 2016-106 ch.3 physiology example ('at rest, if M = 105 W'); lower than Table 5-1 resting 117 W, hence stricter in the TWA",
+    "status": "flagged for OH review"
+  },
+  "clothing_adjustment_c": {
+    "value": {
+      "work_clothes": 0,
+      "cloth_coveralls": 0,
+      "double_layer_cloth": 3,
+      "sms_coveralls": 0.5,
+      "polyolefin_coveralls": 1,
+      "limited_use_vapor_barrier": 11
+    },
+    "citation": "NIOSH 2016-106 Table 3-2 (2006 column, adapted from Bernard/ACGIH), degC-WBGT",
+    "status": "confirmed"
+  },
+  "work_fractions": {
+    "value": [
+      1.0,
+      0.75,
+      0.5,
+      0.333,
+      0.25
+    ],
+    "citation": "NIOSH 60/45/30/15 min-per-hour schedules + ADOSH 20/40",
+    "status": "confirmed"
+  },
+  "twl_zones": {
+    "value": {
+      "medium_max": 140,
+      "high_max": 115
+    },
+    "citation": "ADOSH-SF Technical Guideline Safety in the Heat v4.0 Table 1: low >140, medium 115-140, high <115 W/m2. Boundary rule (140 -> medium, 115 -> high) is a conservative design decision",
+    "status": "confirmed"
+  },
+  "twl_caps": {
+    "value": {
+      "medium": {
+        "f_cap": {
+          "light": 1.0,
+          "moderate": 0.75,
+          "heavy": 0.75,
+          "very_heavy": 0.75
+        },
+        "min_level": {
+          "light": 2,
+          "moderate": 1,
+          "heavy": 1,
+          "very_heavy": 1
+        }
+      },
+      "high": {
+        "f_cap": {
+          "light": 0.75,
+          "moderate": 0.333,
+          "heavy": 0.333,
+          "very_heavy": 0.333
+        },
+        "min_level": {
+          "light": 1,
+          "moderate": 1,
+          "heavy": 1,
+          "very_heavy": 1
+        }
+      },
+      "stop_level_unacclimatized": 4,
+      "stop_level_crew_size_max": 1
+    },
+    "citation": "ADOSH-SF Tech. Guideline v4.0 Table 1 (medium: heavy 45/15, no unacclimatized, no lone work; high: light 45/15, heavy 20/40, no unacclimatized, no lone work). Mapping moderate and very heavy to ADOSH 'heavy' is a conservative design decision",
+    "status": "confirmed; mapping is design decision"
+  },
+  "midday_break": {
+    "value": {
+      "start": "12:30",
+      "end": "15:00",
+      "from_mmdd": "06-15",
+      "to_mmdd": "09-15",
+      "exposures": [
+        "direct_sun"
+      ]
+    },
+    "citation": "UAE MoHRE midday break 2026 (secondary sources: WhatsOn 14 Jun 2026; Dubai Media Office). Start inclusive, end exclusive; dates inclusive",
+    "status": "secondary-source"
+  },
+  "forecast_margin_c": {
+    "value": 0.5,
+    "citation": "AmanShift engineering parameter delta, chosen from candidates on 2022-2024 only (eval/out/delta_frozen.json)",
+    "status": "engineering parameter",
+    "candidates": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ]
+  },
+  "clim_p99_raw": {
+    "value": {
+      "6": {
+        "0": {
+          "sun": 29.244,
+          "shade": 29.244,
+          "n": 29
+        },
+        "1": {
+          "sun": 29.144,
+          "shade": 29.144,
+          "n": 29
+        },
+        "2": {
+          "sun": 29.137,
+          "shade": 29.137,
+          "n": 29
+        },
+        "3": {
+          "sun": 29.041,
+          "shade": 29.041,
+          "n": 29
+        },
+        "4": {
+          "sun": 29.155,
+          "shade": 29.155,
+          "n": 30
+        },
+        "5": {
+          "sun": 29.134,
+          "shade": 29.134,
+          "n": 30
+        },
+        "6": {
+          "sun": 29.367,
+          "shade": 29.367,
+          "n": 30
+        },
+        "7": {
+          "sun": 30.944,
+          "shade": 30.174,
+          "n": 30
+        },
+        "8": {
+          "sun": 32.475,
+          "shade": 30.957,
+          "n": 30
+        },
+        "9": {
+          "sun": 34.909,
+          "shade": 32.043,
+          "n": 30
+        },
+        "10": {
+          "sun": 36.46,
+          "shade": 32.82,
+          "n": 30
+        },
+        "11": {
+          "sun": 37.239,
+          "shade": 33.167,
+          "n": 30
+        },
+        "12": {
+          "sun": 36.936,
+          "shade": 33.701,
+          "n": 30
+        },
+        "13": {
+          "sun": 38.053,
+          "shade": 33.892,
+          "n": 30
+        },
+        "14": {
+          "sun": 38.723,
+          "shade": 34.069,
+          "n": 30
+        },
+        "15": {
+          "sun": 35.271,
+          "shade": 33.07,
+          "n": 30
+        },
+        "16": {
+          "sun": 35.557,
+          "shade": 32.611,
+          "n": 30
+        },
+        "17": {
+          "sun": 32.828,
+          "shade": 31.474,
+          "n": 30
+        },
+        "18": {
+          "sun": 32.051,
+          "shade": 31.212,
+          "n": 30
+        },
+        "19": {
+          "sun": 30.656,
+          "shade": 30.418,
+          "n": 30
+        },
+        "20": {
+          "sun": 30.332,
+          "shade": 30.332,
+          "n": 30
+        },
+        "21": {
+          "sun": 30.134,
+          "shade": 30.134,
+          "n": 30
+        },
+        "22": {
+          "sun": 29.775,
+          "shade": 29.775,
+          "n": 30
+        },
+        "23": {
+          "sun": 29.566,
+          "shade": 29.566,
+          "n": 30
+        }
+      },
+      "7": {
+        "0": {
+          "sun": 31.731,
+          "shade": 31.731,
+          "n": 31
+        },
+        "1": {
+          "sun": 31.749,
+          "shade": 31.749,
+          "n": 31
+        },
+        "2": {
+          "sun": 31.714,
+          "shade": 31.714,
+          "n": 31
+        },
+        "3": {
+          "sun": 31.805,
+          "shade": 31.805,
+          "n": 31
+        },
+        "4": {
+          "sun": 32.088,
+          "shade": 32.088,
+          "n": 31
+        },
+        "5": {
+          "sun": 32.029,
+          "shade": 32.029,
+          "n": 31
+        },
+        "6": {
+          "sun": 32.054,
+          "shade": 32.054,
+          "n": 31
+        },
+        "7": {
+          "sun": 32.897,
+          "shade": 32.516,
+          "n": 31
+        },
+        "8": {
+          "sun": 34.444,
+          "shade": 32.94,
+          "n": 31
+        },
+        "9": {
+          "sun": 36.163,
+          "shade": 33.756,
+          "n": 31
+        },
+        "10": {
+          "sun": 36.969,
+          "shade": 33.983,
+          "n": 31
+        },
+        "11": {
+          "sun": 37.738,
+          "shade": 35.119,
+          "n": 31
+        },
+        "12": {
+          "sun": 37.439,
+          "shade": 35.289,
+          "n": 31
+        },
+        "13": {
+          "sun": 38.502,
+          "shade": 34.995,
+          "n": 31
+        },
+        "14": {
+          "sun": 37.246,
+          "shade": 35.267,
+          "n": 31
+        },
+        "15": {
+          "sun": 36.486,
+          "shade": 34.791,
+          "n": 31
+        },
+        "16": {
+          "sun": 36.036,
+          "shade": 34.459,
+          "n": 31
+        },
+        "17": {
+          "sun": 35.591,
+          "shade": 34.417,
+          "n": 31
+        },
+        "18": {
+          "sun": 34.414,
+          "shade": 33.726,
+          "n": 31
+        },
+        "19": {
+          "sun": 33.219,
+          "shade": 33.038,
+          "n": 31
+        },
+        "20": {
+          "sun": 32.653,
+          "shade": 32.653,
+          "n": 31
+        },
+        "21": {
+          "sun": 32.542,
+          "shade": 32.542,
+          "n": 31
+        },
+        "22": {
+          "sun": 31.858,
+          "shade": 31.858,
+          "n": 31
+        },
+        "23": {
+          "sun": 31.868,
+          "shade": 31.868,
+          "n": 31
+        }
+      },
+      "8": {
+        "0": {
+          "sun": 31.434,
+          "shade": 31.434,
+          "n": 31
+        },
+        "1": {
+          "sun": 31.267,
+          "shade": 31.267,
+          "n": 31
+        },
+        "2": {
+          "sun": 31.236,
+          "shade": 31.236,
+          "n": 31
+        },
+        "3": {
+          "sun": 31.531,
+          "shade": 31.531,
+          "n": 31
+        },
+        "4": {
+          "sun": 31.583,
+          "shade": 31.583,
+          "n": 31
+        },
+        "5": {
+          "sun": 31.294,
+          "shade": 31.294,
+          "n": 31
+        },
+        "6": {
+          "sun": 30.912,
+          "shade": 30.912,
+          "n": 31
+        },
+        "7": {
+          "sun": 32.421,
+          "shade": 32.07,
+          "n": 31
+        },
+        "8": {
+          "sun": 34.747,
+          "shade": 33.125,
+          "n": 31
+        },
+        "9": {
+          "sun": 36.411,
+          "shade": 33.786,
+          "n": 31
+        },
+        "10": {
+          "sun": 37.448,
+          "shade": 34.163,
+          "n": 31
+        },
+        "11": {
+          "sun": 38.046,
+          "shade": 34.384,
+          "n": 31
+        },
+        "12": {
+          "sun": 38.157,
+          "shade": 34.625,
+          "n": 31
+        },
+        "13": {
+          "sun": 38.77,
+          "shade": 34.956,
+          "n": 31
+        },
+        "14": {
+          "sun": 38.811,
+          "shade": 35.002,
+          "n": 31
+        },
+        "15": {
+          "sun": 37.515,
+          "shade": 34.748,
+          "n": 31
+        },
+        "16": {
+          "sun": 36.746,
+          "shade": 34.71,
+          "n": 31
+        },
+        "17": {
+          "sun": 35.057,
+          "shade": 33.911,
+          "n": 31
+        },
+        "18": {
+          "sun": 34.01,
+          "shade": 33.352,
+          "n": 31
+        },
+        "19": {
+          "sun": 33.082,
+          "shade": 33.082,
+          "n": 31
+        },
+        "20": {
+          "sun": 32.899,
+          "shade": 32.899,
+          "n": 31
+        },
+        "21": {
+          "sun": 32.648,
+          "shade": 32.648,
+          "n": 31
+        },
+        "22": {
+          "sun": 31.806,
+          "shade": 31.806,
+          "n": 31
+        },
+        "23": {
+          "sun": 31.698,
+          "shade": 31.698,
+          "n": 31
+        }
+      },
+      "9": {
+        "0": {
+          "sun": 30.932,
+          "shade": 30.932,
+          "n": 30
+        },
+        "1": {
+          "sun": 30.36,
+          "shade": 30.36,
+          "n": 30
+        },
+        "2": {
+          "sun": 29.914,
+          "shade": 29.914,
+          "n": 30
+        },
+        "3": {
+          "sun": 29.799,
+          "shade": 29.799,
+          "n": 30
+        },
+        "4": {
+          "sun": 29.859,
+          "shade": 29.859,
+          "n": 30
+        },
+        "5": {
+          "sun": 29.676,
+          "shade": 29.676,
+          "n": 30
+        },
+        "6": {
+          "sun": 29.484,
+          "shade": 29.484,
+          "n": 30
+        },
+        "7": {
+          "sun": 30.52,
+          "shade": 30.13,
+          "n": 30
+        },
+        "8": {
+          "sun": 32.148,
+          "shade": 30.994,
+          "n": 30
+        },
+        "9": {
+          "sun": 34.423,
+          "shade": 32.0,
+          "n": 30
+        },
+        "10": {
+          "sun": 36.076,
+          "shade": 32.255,
+          "n": 30
+        },
+        "11": {
+          "sun": 36.868,
+          "shade": 32.455,
+          "n": 30
+        },
+        "12": {
+          "sun": 36.662,
+          "shade": 32.182,
+          "n": 30
+        },
+        "13": {
+          "sun": 35.908,
+          "shade": 32.369,
+          "n": 30
+        },
+        "14": {
+          "sun": 36.902,
+          "shade": 32.781,
+          "n": 30
+        },
+        "15": {
+          "sun": 36.064,
+          "shade": 32.188,
+          "n": 30
+        },
+        "16": {
+          "sun": 34.824,
+          "shade": 31.932,
+          "n": 30
+        },
+        "17": {
+          "sun": 32.765,
+          "shade": 31.624,
+          "n": 30
+        },
+        "18": {
+          "sun": 31.719,
+          "shade": 31.112,
+          "n": 30
+        },
+        "19": {
+          "sun": 30.341,
+          "shade": 30.341,
+          "n": 30
+        },
+        "20": {
+          "sun": 30.449,
+          "shade": 30.449,
+          "n": 30
+        },
+        "21": {
+          "sun": 30.343,
+          "shade": 30.343,
+          "n": 30
+        },
+        "22": {
+          "sun": 30.241,
+          "shade": 30.241,
+          "n": 30
+        },
+        "23": {
+          "sun": 30.023,
+          "shade": 30.023,
+          "n": 30
+        }
+      },
+      "10": {
+        "0": {
+          "sun": 27.512,
+          "shade": 27.512,
+          "n": 1
+        },
+        "1": {
+          "sun": 27.427,
+          "shade": 27.427,
+          "n": 1
+        },
+        "2": {
+          "sun": 27.333,
+          "shade": 27.333,
+          "n": 1
+        },
+        "3": {
+          "sun": 27.097,
+          "shade": 27.097,
+          "n": 1
+        }
+      },
+      "default": {
+        "0": {
+          "sun": 31.731,
+          "shade": 31.731,
+          "n": 122
+        },
+        "1": {
+          "sun": 31.749,
+          "shade": 31.749,
+          "n": 122
+        },
+        "2": {
+          "sun": 31.714,
+          "shade": 31.714,
+          "n": 122
+        },
+        "3": {
+          "sun": 31.805,
+          "shade": 31.805,
+          "n": 122
+        },
+        "4": {
+          "sun": 32.088,
+          "shade": 32.088,
+          "n": 122
+        },
+        "5": {
+          "sun": 32.029,
+          "shade": 32.029,
+          "n": 122
+        },
+        "6": {
+          "sun": 32.054,
+          "shade": 32.054,
+          "n": 122
+        },
+        "7": {
+          "sun": 32.897,
+          "shade": 32.516,
+          "n": 122
+        },
+        "8": {
+          "sun": 34.747,
+          "shade": 33.125,
+          "n": 122
+        },
+        "9": {
+          "sun": 36.411,
+          "shade": 33.786,
+          "n": 122
+        },
+        "10": {
+          "sun": 37.448,
+          "shade": 34.163,
+          "n": 122
+        },
+        "11": {
+          "sun": 38.046,
+          "shade": 35.119,
+          "n": 122
+        },
+        "12": {
+          "sun": 38.157,
+          "shade": 35.289,
+          "n": 122
+        },
+        "13": {
+          "sun": 38.77,
+          "shade": 34.995,
+          "n": 122
+        },
+        "14": {
+          "sun": 38.811,
+          "shade": 35.267,
+          "n": 122
+        },
+        "15": {
+          "sun": 37.515,
+          "shade": 34.791,
+          "n": 122
+        },
+        "16": {
+          "sun": 36.746,
+          "shade": 34.71,
+          "n": 122
+        },
+        "17": {
+          "sun": 35.591,
+          "shade": 34.417,
+          "n": 122
+        },
+        "18": {
+          "sun": 34.414,
+          "shade": 33.726,
+          "n": 122
+        },
+        "19": {
+          "sun": 33.219,
+          "shade": 33.082,
+          "n": 122
+        },
+        "20": {
+          "sun": 32.899,
+          "shade": 32.899,
+          "n": 122
+        },
+        "21": {
+          "sun": 32.648,
+          "shade": 32.648,
+          "n": 122
+        },
+        "22": {
+          "sun": 31.858,
+          "shade": 31.858,
+          "n": 122
+        },
+        "23": {
+          "sun": 31.868,
+          "shade": 31.868,
+          "n": 122
+        }
+      }
+    },
+    "citation": "AmanShift derived: 99th percentile of forecast-based estimated WBGT per month x hour(local) x {sun, shade}, 2022-2024; delta is added at run time. Called 'seasonal 99th percentile' in UI",
+    "status": "derived (backend/eval/build_climatology.py)",
+    "train_years": [
+      2024
+    ],
+    "samples": 2928
+  },
+  "forecast_max_retrieval_age_h": {
+    "value": 3,
+    "citation": "AmanShift engineering parameter",
+    "status": "engineering parameter"
+  },
+  "forecast_max_issue_age_h": {
+    "value": 30,
+    "citation": "AmanShift engineering parameter",
+    "status": "engineering parameter"
+  },
+  "resource_confirmation_ttl_min": {
+    "value": 30,
+    "citation": "AmanShift engineering parameter",
+    "status": "engineering parameter"
+  },
+  "max_walk_min": {
+    "value": {
+      "shade": 5,
+      "cooled_rest": 10,
+      "water": 5
+    },
+    "citation": "AmanShift engineering parameter, configurable per site",
+    "status": "engineering parameter"
+  },
+  "offline_stale_after_min": {
+    "value": 60,
+    "citation": "AmanShift engineering parameter",
+    "status": "engineering parameter"
+  },
+  "offline_expiry_min": {
+    "value": 180,
+    "citation": "AmanShift engineering parameter",
+    "status": "engineering parameter"
+  },
+  "level_dwell_steps": {
+    "value": 2,
+    "citation": "AmanShift engineering parameter (x tick_min)",
+    "status": "engineering parameter"
+  },
+  "tick_min": {
+    "value": 15,
+    "citation": "AmanShift engineering parameter (doc 05 section 9)",
+    "status": "engineering parameter"
+  },
+  "coverage_priority_by_level": {
+    "value": {
+      "1": 1,
+      "2": 2,
+      "3": 5,
+      "4": 10
+    },
+    "citation": "AmanShift engineering parameter (ordering only matters)",
+    "status": "engineering parameter"
+  },
+  "require_rest_resource_below_full_work": {
+    "value": true,
+    "citation": "ADPHC guidance: shaded/cooled rest areas required; doc 05 section 3",
+    "status": "confirmed"
+  },
+  "require_water_resource_for_work": {
+    "value": true,
+    "citation": "ADPHC guidance: water access (>= 2 L every 2-3 h)",
+    "status": "confirmed"
+  },
+  "wind_floor_ms": {
+    "value": 0.5,
+    "citation": "AmanShift engineering choice: Liljegren unstable at calm (doc 02 section 3)",
+    "status": "engineering parameter"
+  },
+  "work_hours_local": {
+    "value": {
+      "start": 6,
+      "end": 18
+    },
+    "citation": "AmanShift engineering parameter: replay and defer window",
+    "status": "engineering parameter"
+  },
+  "input_bounds": {
+    "value": {
+      "crew_size": [
+        1,
+        30
+      ],
+      "capacity": [
+        0,
+        200
+      ],
+      "walk_min": [
+        0,
+        60
+      ],
+      "wbgt_c": [
+        -10,
+        50
+      ],
+      "twl_wm2": [
+        0,
+        400
+      ]
+    },
+    "citation": "doc 05 section 1 input validation",
+    "status": "engineering parameter"
+  }
+}

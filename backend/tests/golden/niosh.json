@@ -1,0 +1,31 @@
+{
+  "source": "NIOSH 2016-106 REL = 56.7 - 11.5 log10 M; RAL = 59.9 - 14.1 log10 M (M in W). Hand values rounded to 0.01 degC. Note: NIOSH reads 27.8 degC off Figure 8-2 for M = 348.9 W; the equation gives 27.46 degC and AmanShift uses the equation.",
+  "tolerance_c": 0.05,
+  "rows": [
+    {
+      "M_w": 105,
+      "rel_c": 33.46,
+      "ral_c": 31.4
+    },
+    {
+      "M_w": 208.8,
+      "rel_c": 30.02,
+      "ral_c": 27.19
+    },
+    {
+      "M_w": 348.9,
+      "rel_c": 27.46,
+      "ral_c": 24.05
+    },
+    {
+      "M_w": 481.4,
+      "rel_c": 25.85,
+      "ral_c": 22.08
+    },
+    {
+      "M_w": 603.2,
+      "rel_c": 24.72,
+      "ral_c": 20.7
+    }
+  ]
+}

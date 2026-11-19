@@ -1,0 +1,110 @@
+{
+  "site_id": "demo-site-a",
+  "label": "Demo Site A (SYNTHETIC)",
+  "data_type": "SIM-SITE",
+  "note": "Synthetic worksite: crews, resources and walk times are invented. Weather is real (Open-Meteo Previous Runs, Abu Dhabi grid point). No person identities exist.",
+  "zones": [
+    "Z1",
+    "Z2",
+    "Z3"
+  ],
+  "walk_min": {
+    "Z1|Z2": 6,
+    "Z2|Z3": 6,
+    "Z1|Z3": 12
+  },
+  "crews": [
+    {
+      "crew_id": "C1",
+      "size": 10,
+      "workload": "moderate",
+      "ppe": "work_clothes",
+      "acclimatization": "acclimatized",
+      "exposure": "direct_sun",
+      "zone_id": "Z1"
+    },
+    {
+      "crew_id": "C2",
+      "size": 8,
+      "workload": "moderate",
+      "ppe": "work_clothes",
+      "acclimatization": "acclimatized",
+      "exposure": "direct_sun",
+      "zone_id": "Z2"
+    },
+    {
+      "crew_id": "C3",
+      "size": 6,
+      "workload": "heavy",
+      "ppe": "polyolefin_coveralls",
+      "acclimatization": "acclimatized",
+      "exposure": "direct_sun",
+      "zone_id": "Z3"
+    },
+    {
+      "crew_id": "C4",
+      "size": 6,
+      "workload": "light",
+      "ppe": "work_clothes",
+      "acclimatization": "acclimatized",
+      "exposure": "shaded_outdoor",
+      "zone_id": "Z1"
+    },
+    {
+      "crew_id": "C5",
+      "size": 6,
+      "workload": "light",
+      "ppe": "work_clothes",
+      "acclimatization": "unacclimatized",
+      "exposure": "shaded_outdoor",
+      "zone_id": "Z2"
+    },
+    {
+      "crew_id": "C6",
+      "size": 6,
+      "workload": "moderate",
+      "ppe": "work_clothes",
+      "acclimatization": "acclimatized",
+      "exposure": "indoor_unconditioned",
+      "zone_id": "Z3"
+    }
+  ],
+  "resources": [
+    {
+      "resource_id": "R1",
+      "type": "shade",
+      "zone_id": "Z1",
+      "capacity": 20
+    },
+    {
+      "resource_id": "R2",
+      "type": "cooled_rest",
+      "zone_id": "Z2",
+      "capacity": 16
+    },
+    {
+      "resource_id": "R3",
+      "type": "shade",
+      "zone_id": "Z3",
+      "capacity": 12
+    },
+    {
+      "resource_id": "W1",
+      "type": "water",
+      "zone_id": "Z1",
+      "capacity": 30
+    },
+    {
+      "resource_id": "W2",
+      "type": "water",
+      "zone_id": "Z2",
+      "capacity": 30
+    },
+    {
+      "resource_id": "W3",
+      "type": "water",
+      "zone_id": "Z3",
+      "capacity": 30
+    }
+  ]
+}

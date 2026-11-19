@@ -1,0 +1,59 @@
+{
+  "data_type": "SYNTH-TEST",
+  "generator": "hypothesis, derandomized",
+  "tests": [
+    {
+      "test": "test_t_ker_01_02_single_degradation_shrinks_permitted_and_raises_level",
+      "examples": 10000,
+      "violations": 0,
+      "status": "passed",
+      "seconds": 77.955
+    },
+    {
+      "test": "test_t_ker_03_composition",
+      "examples": 2000,
+      "violations": 0,
+      "status": "passed",
+      "seconds": 21.506
+    },
+    {
+      "test": "test_t_ker_04_planner_output_on_degraded_state_is_approved",
+      "examples": 2000,
+      "violations": 0,
+      "status": "passed",
+      "seconds": 29.447
+    },
+    {
+      "test": "test_t_ker_05_meter_reading_never_lowers_level",
+      "examples": 2000,
+      "violations": 0,
+      "status": "passed",
+      "seconds": 22.006
+    },
+    {
+      "test": "test_t_ker_06_no_relaxation_before_dwell_or_confirmation",
+      "examples": 2000,
+      "violations": 0,
+      "status": "passed",
+      "seconds": 15.502
+    },
+    {
+      "test": "test_t_ker_07_determinism_and_canonical_roundtrip",
+      "examples": 500,
+      "violations": 0,
+      "status": "passed",
+      "seconds": 5.067
+    },
+    {
+      "test": "test_t_chk_diff_checker_verdict_equals_kernel_membership",
+      "examples": 500,
+      "violations": 0,
+      "status": "passed",
+      "seconds": 11.0
+    }
+  ],
+  "total_examples": 19000,
+  "failures": 0,
+  "elapsed_s": 183.6,
+  "command": "make eval (backend/eval/property_report.py)"
+}

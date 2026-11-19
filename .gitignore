@@ -1,0 +1,21 @@
+# environments / builds
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+web/dist/
+web/test-results/
+web/playwright-report/
+*.sqlite
+*.db
+.DS_Store
+# local tooling / private planning material (not part of the submission repo)
+.remember/
+.claude/
+*.docx
+KULYA*.md
+deep-research-report.md

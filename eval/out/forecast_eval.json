@@ -1,0 +1,852 @@
+{
+  "data_types": [
+    "HIST-FCST",
+    "REAL-OBS"
+  ],
+  "delta_frozen": {
+    "value": 0.5,
+    "rule": "smallest delta with under-warning <= 0.05 for primary profile (k=3)",
+    "train_years": [
+      2024
+    ]
+  },
+  "b2_thresholds_c": {
+    "3": 32.7,
+    "4": 40.4
+  },
+  "lead_time": "fixed by design: day-ahead (previous_day1) warning available by 18:00 GST on D-1, >= 13 h before the first work hour; not a skill metric",
+  "train": {
+    "years": [
+      2024
+    ],
+    "data_quality": {
+      "2024": {
+        "rows_raw": 3017.0,
+        "rows_on_hour": 2925.0,
+        "rows_kept": 2925.0,
+        "pct_removed": 0.0,
+        "forecast_hours": 2928.0,
+        "paired_hours": 2925.0,
+        "paired_share": 0.999
+      }
+    },
+    "profiles": {
+      "primary_moderate_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1340,
+          "events_ref": 1219,
+          "tp": 1216,
+          "fp": 84,
+          "fn": 3,
+          "pod": 0.9975,
+          "far": 0.0646,
+          "csi": 0.9332,
+          "bias_ratio": 1.0664,
+          "exact_level_agreement": 0.7075,
+          "under_warning_rate": 0.0194
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1340,
+          "events_ref": 503,
+          "tp": 480,
+          "fp": 279,
+          "fn": 23,
+          "pod": 0.9543,
+          "far": 0.3676,
+          "csi": 0.6138,
+          "bias_ratio": 1.5089,
+          "exact_level_agreement": 0.7075,
+          "under_warning_rate": 0.0194
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        },
+        "bootstrap95_k3": {
+          "pod": [
+            0.9944,
+            1.0
+          ],
+          "far": [
+            0.0451,
+            0.0844
+          ],
+          "csi": [
+            0.914,
+            0.9523
+          ],
+          "under_warning_rate": [
+            0.0112,
+            0.0284
+          ]
+        },
+        "baselines_k3": {
+          "B4_raw_forecast_delta0": {
+            "k": 3,
+            "hours": 1340,
+            "events_ref": 1219,
+            "tp": 1208,
+            "fp": 72,
+            "fn": 11,
+            "pod": 0.991,
+            "far": 0.0563,
+            "csi": 0.9357,
+            "bias_ratio": 1.05,
+            "exact_level_agreement": 0.759,
+            "under_warning_rate": 0.0522
+          },
+          "B1_clock_rule": {
+            "k": 3,
+            "hours": 1340,
+            "events_ref": 1219,
+            "tp": 186,
+            "fp": 0,
+            "fn": 1033,
+            "pod": 0.1526,
+            "far": 0.0,
+            "csi": 0.1526,
+            "bias_ratio": 0.1526,
+            "exact_level_agreement": 0.097,
+            "under_warning_rate": 0.8537
+          },
+          "B2_air_temperature": {
+            "k": 3,
+            "hours": 1340,
+            "events_ref": 1219,
+            "tp": 1144,
+            "fp": 76,
+            "fn": 75,
+            "pod": 0.9385,
+            "far": 0.0623,
+            "csi": 0.8834,
+            "bias_ratio": 1.0008,
+            "exact_level_agreement": 0.494,
+            "under_warning_rate": 0.2634
+          },
+          "B3_persistence": {
+            "k": 3,
+            "hours": 1340,
+            "events_ref": 1219,
+            "tp": 1141,
+            "fp": 68,
+            "fn": 78,
+            "pod": 0.936,
+            "far": 0.0562,
+            "csi": 0.8866,
+            "bias_ratio": 0.9918,
+            "exact_level_agreement": 0.6172,
+            "under_warning_rate": 0.1933
+          }
+        }
+      },
+      "light_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1340,
+          "events_ref": 776,
+          "tp": 757,
+          "fp": 277,
+          "fn": 19,
+          "pod": 0.9755,
+          "far": 0.2679,
+          "csi": 0.7189,
+          "bias_ratio": 1.3325,
+          "exact_level_agreement": 0.5687,
+          "under_warning_rate": 0.0291
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1340,
+          "events_ref": 236,
+          "tp": 220,
+          "fp": 215,
+          "fn": 16,
+          "pod": 0.9322,
+          "far": 0.4943,
+          "csi": 0.4878,
+          "bias_ratio": 1.8432,
+          "exact_level_agreement": 0.5687,
+          "under_warning_rate": 0.0291
+        },
+        "days_k3": {
+          "days_with_event": 110,
+          "missed_days": 1
+        }
+      },
+      "heavy_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1340,
+          "events_ref": 1303,
+          "tp": 1300,
+          "fp": 29,
+          "fn": 3,
+          "pod": 0.9977,
+          "far": 0.0218,
+          "csi": 0.976,
+          "bias_ratio": 1.02,
+          "exact_level_agreement": 0.7478,
+          "under_warning_rate": 0.0172
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1340,
+          "events_ref": 722,
+          "tp": 702,
+          "fp": 286,
+          "fn": 20,
+          "pod": 0.9723,
+          "far": 0.2895,
+          "csi": 0.6964,
+          "bias_ratio": 1.3684,
+          "exact_level_agreement": 0.7478,
+          "under_warning_rate": 0.0172
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      },
+      "moderate_unacc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1340,
+          "events_ref": 1330,
+          "tp": 1330,
+          "fp": 9,
+          "fn": 0,
+          "pod": 1.0,
+          "far": 0.0067,
+          "csi": 0.9933,
+          "bias_ratio": 1.0068,
+          "exact_level_agreement": 0.8545,
+          "under_warning_rate": 0.009
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1340,
+          "events_ref": 1068,
+          "tp": 1056,
+          "fp": 174,
+          "fn": 12,
+          "pod": 0.9888,
+          "far": 0.1415,
+          "csi": 0.8502,
+          "bias_ratio": 1.1517,
+          "exact_level_agreement": 0.8545,
+          "under_warning_rate": 0.009
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      },
+      "moderate_acc_sun_PARTLY_CIRCULAR": {
+        "reference": "REF-SUN (partly circular)",
+        "k3": {
+          "k": 3,
+          "hours": 1340,
+          "events_ref": 1288,
+          "tp": 1286,
+          "fp": 42,
+          "fn": 2,
+          "pod": 0.9984,
+          "far": 0.0316,
+          "csi": 0.9669,
+          "bias_ratio": 1.0311,
+          "exact_level_agreement": 0.7351,
+          "under_warning_rate": 0.0127
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1340,
+          "events_ref": 622,
+          "tp": 607,
+          "fp": 293,
+          "fn": 15,
+          "pod": 0.9759,
+          "far": 0.3256,
+          "csi": 0.6634,
+          "bias_ratio": 1.4469,
+          "exact_level_agreement": 0.7351,
+          "under_warning_rate": 0.0127
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      }
+    },
+    "wbgt_shade_error": {
+      "mae_c": 0.965,
+      "bias_c": 0.546,
+      "n": 1340
+    }
+  },
+  "holdout_exposed_2025": {
+    "years": [
+      2025
+    ],
+    "data_quality": {
+      "2025": {
+        "rows_raw": 3035.0,
+        "rows_on_hour": 2927.0,
+        "rows_kept": 2927.0,
+        "pct_removed": 0.0,
+        "forecast_hours": 2928.0,
+        "paired_hours": 2927.0,
+        "paired_share": 0.9997
+      }
+    },
+    "profiles": {
+      "primary_moderate_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1152,
+          "tp": 1151,
+          "fp": 171,
+          "fn": 1,
+          "pod": 0.9991,
+          "far": 0.1293,
+          "csi": 0.87,
+          "bias_ratio": 1.1476,
+          "exact_level_agreement": 0.5287,
+          "under_warning_rate": 0.0112
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 267,
+          "tp": 253,
+          "fp": 454,
+          "fn": 14,
+          "pod": 0.9476,
+          "far": 0.6421,
+          "csi": 0.3509,
+          "bias_ratio": 2.6479,
+          "exact_level_agreement": 0.5287,
+          "under_warning_rate": 0.0112
+        },
+        "days_k3": {
+          "days_with_event": 120,
+          "missed_days": 0
+        },
+        "bootstrap95_k3": {
+          "pod": [
+            0.9973,
+            1.0
+          ],
+          "far": [
+            0.1002,
+            0.1619
+          ],
+          "csi": [
+            0.8375,
+            0.899
+          ],
+          "under_warning_rate": [
+            0.0045,
+            0.0194
+          ]
+        },
+        "baselines_k3": {
+          "B4_raw_forecast_delta0": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1152,
+            "tp": 1144,
+            "fp": 148,
+            "fn": 8,
+            "pod": 0.9931,
+            "far": 0.1146,
+            "csi": 0.88,
+            "bias_ratio": 1.1215,
+            "exact_level_agreement": 0.6137,
+            "under_warning_rate": 0.0306
+          },
+          "B1_clock_rule": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1152,
+            "tp": 181,
+            "fp": 5,
+            "fn": 971,
+            "pod": 0.1571,
+            "far": 0.0269,
+            "csi": 0.1564,
+            "bias_ratio": 0.1615,
+            "exact_level_agreement": 0.0619,
+            "under_warning_rate": 0.8523
+          },
+          "B2_air_temperature": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1152,
+            "tp": 1074,
+            "fp": 127,
+            "fn": 78,
+            "pod": 0.9323,
+            "far": 0.1057,
+            "csi": 0.8397,
+            "bias_ratio": 1.0425,
+            "exact_level_agreement": 0.5362,
+            "under_warning_rate": 0.2081
+          },
+          "B3_persistence": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1152,
+            "tp": 1056,
+            "fp": 87,
+            "fn": 96,
+            "pod": 0.9167,
+            "far": 0.0761,
+            "csi": 0.8523,
+            "bias_ratio": 0.9922,
+            "exact_level_agreement": 0.6682,
+            "under_warning_rate": 0.1708
+          }
+        }
+      },
+      "light_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 599,
+          "tp": 587,
+          "fp": 427,
+          "fn": 12,
+          "pod": 0.98,
+          "far": 0.4211,
+          "csi": 0.5721,
+          "bias_ratio": 1.6928,
+          "exact_level_agreement": 0.4206,
+          "under_warning_rate": 0.0209
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 104,
+          "tp": 89,
+          "fp": 272,
+          "fn": 15,
+          "pod": 0.8558,
+          "far": 0.7535,
+          "csi": 0.2367,
+          "bias_ratio": 3.4712,
+          "exact_level_agreement": 0.4206,
+          "under_warning_rate": 0.0209
+        },
+        "days_k3": {
+          "days_with_event": 103,
+          "missed_days": 1
+        }
+      },
+      "heavy_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1286,
+          "tp": 1286,
+          "fp": 51,
+          "fn": 0,
+          "pod": 1.0,
+          "far": 0.0381,
+          "csi": 0.9619,
+          "bias_ratio": 1.0397,
+          "exact_level_agreement": 0.6092,
+          "under_warning_rate": 0.0112
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 521,
+          "tp": 506,
+          "fp": 461,
+          "fn": 15,
+          "pod": 0.9712,
+          "far": 0.4767,
+          "csi": 0.5153,
+          "bias_ratio": 1.856,
+          "exact_level_agreement": 0.6092,
+          "under_warning_rate": 0.0112
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      },
+      "moderate_unacc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1329,
+          "tp": 1329,
+          "fp": 12,
+          "fn": 0,
+          "pod": 1.0,
+          "far": 0.0089,
+          "csi": 0.9911,
+          "bias_ratio": 1.009,
+          "exact_level_agreement": 0.7763,
+          "under_warning_rate": 0.0067
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 965,
+          "tp": 956,
+          "fp": 279,
+          "fn": 9,
+          "pod": 0.9907,
+          "far": 0.2259,
+          "csi": 0.7685,
+          "bias_ratio": 1.2798,
+          "exact_level_agreement": 0.7763,
+          "under_warning_rate": 0.0067
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      },
+      "moderate_acc_sun_PARTLY_CIRCULAR": {
+        "reference": "REF-SUN (partly circular)",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1265,
+          "tp": 1265,
+          "fp": 72,
+          "fn": 0,
+          "pod": 1.0,
+          "far": 0.0539,
+          "csi": 0.9461,
+          "bias_ratio": 1.0569,
+          "exact_level_agreement": 0.5749,
+          "under_warning_rate": 0.0067
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 377,
+          "tp": 368,
+          "fp": 493,
+          "fn": 9,
+          "pod": 0.9761,
+          "far": 0.5726,
+          "csi": 0.423,
+          "bias_ratio": 2.2838,
+          "exact_level_agreement": 0.5749,
+          "under_warning_rate": 0.0067
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      }
+    },
+    "wbgt_shade_error": {
+      "mae_c": 1.358,
+      "bias_c": 1.117,
+      "n": 1341
+    }
+  },
+  "holdout_clean_2026": {
+    "years": [
+      2026
+    ],
+    "data_quality": {
+      "2026": {
+        "rows_raw": 5911.0,
+        "rows_on_hour": 2927.0,
+        "rows_kept": 2927.0,
+        "pct_removed": 0.0,
+        "forecast_hours": 2928.0,
+        "paired_hours": 2927.0,
+        "paired_share": 0.9997
+      }
+    },
+    "profiles": {
+      "primary_moderate_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1180,
+          "tp": 1168,
+          "fp": 95,
+          "fn": 12,
+          "pod": 0.9898,
+          "far": 0.0752,
+          "csi": 0.9161,
+          "bias_ratio": 1.0703,
+          "exact_level_agreement": 0.736,
+          "under_warning_rate": 0.0373
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 388,
+          "tp": 351,
+          "fp": 203,
+          "fn": 37,
+          "pod": 0.9046,
+          "far": 0.3664,
+          "csi": 0.5939,
+          "bias_ratio": 1.4278,
+          "exact_level_agreement": 0.736,
+          "under_warning_rate": 0.0373
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        },
+        "bootstrap95_k3": {
+          "pod": [
+            0.9832,
+            0.995
+          ],
+          "far": [
+            0.0564,
+            0.0958
+          ],
+          "csi": [
+            0.8967,
+            0.9345
+          ],
+          "under_warning_rate": [
+            0.0231,
+            0.0544
+          ]
+        },
+        "baselines_k3": {
+          "B4_raw_forecast_delta0": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1180,
+            "tp": 1149,
+            "fp": 78,
+            "fn": 31,
+            "pod": 0.9737,
+            "far": 0.0636,
+            "csi": 0.9134,
+            "bias_ratio": 1.0398,
+            "exact_level_agreement": 0.7785,
+            "under_warning_rate": 0.0753
+          },
+          "B1_clock_rule": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1180,
+            "tp": 183,
+            "fp": 3,
+            "fn": 997,
+            "pod": 0.1551,
+            "far": 0.0161,
+            "csi": 0.1547,
+            "bias_ratio": 0.1576,
+            "exact_level_agreement": 0.0798,
+            "under_warning_rate": 0.8546
+          },
+          "B2_air_temperature": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1180,
+            "tp": 1111,
+            "fp": 94,
+            "fn": 69,
+            "pod": 0.9415,
+            "far": 0.078,
+            "csi": 0.8721,
+            "bias_ratio": 1.0212,
+            "exact_level_agreement": 0.4549,
+            "under_warning_rate": 0.1685
+          },
+          "B3_persistence": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1180,
+            "tp": 1086,
+            "fp": 84,
+            "fn": 94,
+            "pod": 0.9203,
+            "far": 0.0718,
+            "csi": 0.8592,
+            "bias_ratio": 0.9915,
+            "exact_level_agreement": 0.6361,
+            "under_warning_rate": 0.1834
+          }
+        }
+      },
+      "light_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 647,
+          "tp": 611,
+          "fp": 242,
+          "fn": 36,
+          "pod": 0.9444,
+          "far": 0.2837,
+          "csi": 0.6873,
+          "bias_ratio": 1.3184,
+          "exact_level_agreement": 0.6092,
+          "under_warning_rate": 0.0515
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 155,
+          "tp": 128,
+          "fp": 151,
+          "fn": 27,
+          "pod": 0.8258,
+          "far": 0.5412,
+          "csi": 0.4183,
+          "bias_ratio": 1.8,
+          "exact_level_agreement": 0.6092,
+          "under_warning_rate": 0.0515
+        },
+        "days_k3": {
+          "days_with_event": 102,
+          "missed_days": 3
+        }
+      },
+      "heavy_acc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1296,
+          "tp": 1294,
+          "fp": 28,
+          "fn": 2,
+          "pod": 0.9985,
+          "far": 0.0212,
+          "csi": 0.9773,
+          "bias_ratio": 1.0201,
+          "exact_level_agreement": 0.7763,
+          "under_warning_rate": 0.0306
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 603,
+          "tp": 563,
+          "fp": 231,
+          "fn": 40,
+          "pod": 0.9337,
+          "far": 0.2909,
+          "csi": 0.6751,
+          "bias_ratio": 1.3167,
+          "exact_level_agreement": 0.7763,
+          "under_warning_rate": 0.0306
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      },
+      "moderate_unacc_shade": {
+        "reference": "REF-SHADE",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1332,
+          "tp": 1331,
+          "fp": 7,
+          "fn": 1,
+          "pod": 0.9992,
+          "far": 0.0052,
+          "csi": 0.994,
+          "bias_ratio": 1.0045,
+          "exact_level_agreement": 0.827,
+          "under_warning_rate": 0.0149
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 979,
+          "tp": 960,
+          "fp": 205,
+          "fn": 19,
+          "pod": 0.9806,
+          "far": 0.176,
+          "csi": 0.8108,
+          "bias_ratio": 1.19,
+          "exact_level_agreement": 0.827,
+          "under_warning_rate": 0.0149
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      },
+      "moderate_acc_sun_PARTLY_CIRCULAR": {
+        "reference": "REF-SUN (partly circular)",
+        "k3": {
+          "k": 3,
+          "hours": 1341,
+          "events_ref": 1262,
+          "tp": 1258,
+          "fp": 34,
+          "fn": 4,
+          "pod": 0.9968,
+          "far": 0.0263,
+          "csi": 0.9707,
+          "bias_ratio": 1.0238,
+          "exact_level_agreement": 0.7696,
+          "under_warning_rate": 0.0343
+        },
+        "k4": {
+          "k": 4,
+          "hours": 1341,
+          "events_ref": 496,
+          "tp": 454,
+          "fp": 226,
+          "fn": 42,
+          "pod": 0.9153,
+          "far": 0.3324,
+          "csi": 0.6288,
+          "bias_ratio": 1.371,
+          "exact_level_agreement": 0.7696,
+          "under_warning_rate": 0.0343
+        },
+        "days_k3": {
+          "days_with_event": 122,
+          "missed_days": 0
+        }
+      }
+    },
+    "wbgt_shade_error": {
+      "mae_c": 0.855,
+      "bias_c": 0.277,
+      "n": 1341
+    }
+  },
+  "excluded_years": {
+    "2022": "day-ahead RH, pressure, wind, radiation null in Previous Runs API",
+    "2023": "day-ahead RH, pressure, wind, radiation null in Previous Runs API"
+  },
+  "limitations": [
+    "airport is not a construction site",
+    "METAR lacks radiation and globe temperature; reference radiation comes from the forecast",
+    "Liljegren is a model of WBGT, not a measurement",
+    "one grid point",
+    "no surface heat (asphalt, steel)",
+    "2025 holdout was exposed to an untuned planning smoke test"
+  ]
+}

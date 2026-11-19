@@ -1,0 +1,53 @@
+[project]
+name = "amanshift"
+version = "1.0.0"
+description = "Crew-level heat-protection decision support (Abu Dhabi). Decision support, not authorization."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "fastapi>=0.165.0",
+    "httpx>=0.28.1",
+    "numpy>=2.5.5",
+    "pandas>=3.1.1",
+    "pvlib>=0.16.1",
+    "pydantic>=2.14.3",
+    "scipy>=1.18.1",
+    "thermofeel==2.3.0",
+    "uvicorn>=0.54.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["E501", "B023", "SIM108"]
+
+[tool.mypy]
+python_version = "3.12"
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["amanshift.engine.*", "amanshift_checker.*"]
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+markers = ["slow: long-running property tests"]
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.170.15",
+    "mypy>=2.4.1",
+    "pandas-stubs>=3.1.0.261029",
+    "pip-audit>=2.10.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
