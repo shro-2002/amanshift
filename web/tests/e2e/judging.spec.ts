@@ -123,7 +123,10 @@ test("NFR-05 320 px: no horizontal page scroll", async ({ page }) => {
 test("T-OFF-04 offline banner within 5 s and shell from service worker", async ({ page, context }) => {
   await page.goto("/app");
   await page.locator(".tiles").waitFor();
-  await page.waitForTimeout(1500); // service worker install + pack cached
+  await page.evaluate(async () => { await navigator.serviceWorker.ready; }); // shell precached
+  if (!(await page.evaluate(() => navigator.serviceWorker.controller !== null))) await page.reload(); // let the new worker take control
+  await page.locator(".tiles").waitFor();
+  await page.waitForTimeout(1500); // offline pack stored
   await context.setOffline(true);
   await expect(page.locator(".banner.hatch").first()).toContainText(/Offline|STOP-HOLD/, { timeout: 5000 });
   await page.reload();
