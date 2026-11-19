@@ -87,7 +87,7 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 
 ## Not done / human-only
 - Video upload (unlisted) and its link in README/SUBMISSION (user uploading).
-- Final submission on the dashboard. Deadline confirmed by the user: 2026-11-20 23:59 (stated as "tomorrow 11:59 p.m."; assumed IST, the user's time zone — submit well before 18:00 IST to stay safe under a GST reading too).
+- Final submission on the dashboard. Deadline confirmed by the user: 2026-11-20 23:59 (stated as "tomorrow 11:59 p.m."; assumed IST, the user's time zone; 23:59 IST is earlier than 23:59 GST, so IST is the conservative reading).
 - Done 2026-11-19: deck team, member, capability and conflict-of-interest slides filled (individual participant, no conflicts); ElevenLabs use confirmed permitted by the user.
 - P1 items not built: lexicographic MILP planner, S3 replay workspace, S7 plan comparison, mutmut code-mutation score, print-optimised A4 sheet (browser print of S9 works), audio clips.
 
