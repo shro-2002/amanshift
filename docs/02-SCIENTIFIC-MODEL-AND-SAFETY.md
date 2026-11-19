@@ -33,7 +33,7 @@ Every value carries `Provenance` (doc 03 §5).
 3. **Sun WBGT estimate:** `calculate_wbgt_liljegren(t2_k, rh, pressure, va, ssrd, fdir = direct/ssrd, cossza)`.
 4. **Shade WBGT estimate:** same call with `ssrd = ssrd − direct` (diffuse only) and `fdir = 0`. Shade blocks the direct beam, not diffuse sky radiation. This is a modelling assumption; real shade structures also change wind and longwave exchange.
 5. Wind floor 0.5 m/s before the call (Liljegren is unstable at calm; documented engineering choice).
-6. Add forecast margin δ (`forecast_margin_c`), selected on 2022–2024 only (doc 06 §3).
+6. Add forecast margin δ (`forecast_margin_c`), selected on the train years with complete inputs — 2024 only, see STATUS.md SC1 (doc 06 §3).
 
 Published accuracy: Liljegren et al. 2008 report agreement better than 1 °C against measured WBGT at US sites; no validation against measured WBGT in the Gulf was found, so ±1 °C is treated as optimistic. Kong & Huber 2022 show simplified WBGT approximations underestimate extreme heat in subtropical dry regions, which is why `calculate_wbgt_simple` is banned.
 
@@ -83,8 +83,8 @@ Confirmed verbatim:
 | `twl_zones` | low > 140; medium 115 < TWL ≤ 140; high ≤ 115 | ADOSH Tech. Guideline Table 1, confirmed; boundary rule conservative |
 | `twl_caps` | medium: light→level ≥ 2, heavy/moderate→f ≤ 0.75, unacclimatized/mixed→level 4, crew size 1→level 4; high: light→f ≤ 0.75, heavy/moderate→f ≤ 0.333, unacclimatized/mixed→4, size 1→4 | ADOSH Table 1; mapping of "moderate" to ADOSH "heavy" is a conservative design decision |
 | `midday_break` | 12:30–15:00, 06-15 to 09-15, direct-sun outdoor | MoHRE via secondary sources |
-| `forecast_margin_c` (δ) | chosen from {0, 0.5, 1.0, 1.5, 2.0} on 2022–2024 | AmanShift engineering parameter |
-| `clim_p99` | 99th percentile (≈ 90 samples per cell) of forecast-based estimates + δ, month × hour × {sun, shade}, 2022–2024 | AmanShift derived; called "seasonal 99th percentile" in UI, not "maximum" |
+| `forecast_margin_c` (δ) | chosen from {0, 0.5, 1.0, 1.5, 2.0} on 2024 (SC1) | AmanShift engineering parameter |
+| `clim_p99` | 99th percentile (≈ 31 samples per cell after SC1) of forecast-based estimates + δ, month × hour × {sun, shade}, 2024 | AmanShift derived; called "seasonal 99th percentile" in UI, not "maximum" |
 | `forecast_max_retrieval_age_h` / `forecast_max_issue_age_h` | 3 / 30 | engineering parameters |
 | `resource_confirmation_ttl_min` | 30 | engineering parameter |
 | `max_walk_min` | shade 5, cooled_rest 10, water 5 | engineering parameters, configurable per site |

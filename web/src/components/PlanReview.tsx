@@ -6,7 +6,7 @@ import { LevelBadge } from "./LevelBadge";
 
 const INSUFFICIENT = new Set(["PROTECTION_INSUFFICIENT", "NO_COVERAGE", "NO_REST_CAPACITY", "NO_WATER", "NO_WATER_CAPACITY"]);
 
-// Protection plan review: plan in words, independent policy check, human acceptance (doc 12 §6).
+// Protection plan review: plan in words, separately implemented policy check, human acceptance (doc 12 §6).
 export function PlanReview({ limit, showList = true }: { limit?: number; showList?: boolean }) {
   const { s, busy, run } = useSite();
   if (!s) return null;
@@ -59,7 +59,7 @@ export function PlanReview({ limit, showList = true }: { limit?: number; showLis
       <div className="body" style={{ paddingBlock: 0 }}>
         <details className="more">
           <summary>Policy check details</summary>
-          <p className="small muted">An independent checker — separate code from the planner, reading the same cited policy file — re-evaluates every action before a plan can be accepted. It confirms policy compliance; it is not a regulatory certification or permission to work.</p>
+          <p className="small muted">A separately implemented checker — separate code from the planner, reading the same cited policy file — re-evaluates every action before a plan can be accepted. It confirms policy compliance; it is not a regulatory certification or permission to work.</p>
           {plan.checker.violations.length > 0 && (
             <ul className="small" style={{ paddingInlineStart: 18 }}>
               {plan.checker.violations.map((v, i) => <li key={i}>{v.crew_id ? `${crewName(d, v.crew_id)}: ` : ""}{humanize(v.message, d)} <span className="muted">({v.citation})</span></li>)}

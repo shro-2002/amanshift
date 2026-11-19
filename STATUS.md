@@ -1,6 +1,6 @@
 # STATUS — AmanShift
 
-Updated: 2026-11-19 ~09:30 GST (implementation session). Phase: **M0–M7 engineering complete; human-only steps remain (public deploy account, video, dashboard requirements, submission form).**
+Updated: 2026-11-19 ~21:15 GST (submission remediation after independent review). Phase: **engineering, deploy, video and deck complete; human-only steps remain (team details and conflict-of-interest declaration in the deck/form, video upload link, dashboard requirements, final submission).**
 
 ## Verified facts (with date and source)
 
@@ -78,10 +78,17 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 
 - Redesign (doc 12, 2026-11-19): Playwright 6/6 on the new routes (judging moment via `/demo`, smoke + legacy redirects, worker RTL, axe 0 serious/critical on 7 pages, 320 px, offline); backend 98 tests; vitest 12. Screenshots in `docs/screenshots/` (v1-rc1 originals in `docs/screenshots/v1-rc1/` for comparison).
 
+## Submission remediation (2026-11-19 evening, after independent review scored 66/100)
+- **SC16 API input hardening.** `time_advance` accepted negative or huge `steps`: a clock rollback relaxed a STOP crew to level 2 (violates the invariant's "unchanged evaluation time" premise), and huge values or malformed meter values returned HTTP 500. Now: typed, bounded inputs (steps 1–8 per request, never past 18:00 local; meter values strict numbers within `policy.input_bounds`, known zone, `sun`/`shade`; targets must exist; extra keys rejected; unknown site 422); generic errors return an enveloped 500 without internals; security headers added; session cap raised 200 → 1,000. 27 regression tests in `backend/tests/integration/test_input_hardening.py`, including per-browser session isolation.
+- **SC17 Reporting.** `make eval` now also reports event prevalence, exact level agreement and STOP-level skill (report §3), and absolute cost of safety: nominal 60,984 person-hours, 28.4 % permitted with full information, midday break alone 11.0 % (report §7, `cost_of_safety.json`).
+- **SC18 Wording.** "Independent checker" → "separately implemented checker"; "checker mutation / code mutants" → "seeded unsafe plans"; removed unsupported claims (aggregate n < 5 suppression is a future requirement, supervisors cannot edit plans, "reassigns what it can"). Policy citations for δ and the seasonal bound now say 2024 only (SC1).
+- **Video** scene 6 narration re-generated (2:41.9, limit < 3 min confirmed on the submission page). **Deck** slides 3, 6, 7, 9, 12, 13, 14, 15 corrected; commercial case and pilot plan added; team and conflict-of-interest fields left for the team.
+- Verification at tag `v1.1-submission`: backend 125 passed, web vitest 21 passed, `make eval` reproduced, Playwright against the live deploy (see release notes).
+
 ## Not done / human-only
-- Public URL (Render/Fly) needs a hosting account → doc 08 §6 cut 6 applies until deployed: `make demo` + video. Image builds and passes E2E locally.
-- 2-minute video, submission form, reading dashboard requirements (B1 second half), deadline hour (B2).
+- Team name, size, members and age confirmation; capability background; conflict-of-interest declaration (deck slides 1–3, 14 and submission form).
+- Video upload (unlisted) and its link in README/SUBMISSION; dashboard requirements (B1 second half); deadline hour (B2).
 - P1 items not built: lexicographic MILP planner, S3 replay workspace, S7 plan comparison, mutmut code-mutation score, print-optimised A4 sheet (browser print of S9 works), audio clips.
 
 ## Current status
-CONDITIONAL GO conditions 3–5 met (M3 gate passed early; F19 verified; all UI numbers from eval/out). Remaining conditions are human steps (B1 dashboard read, B2 deadline hour).
+Public deploy https://amanshift.onrender.com (Render, auto-deploys `main`). All engineering P0/P1 review items addressed; remaining items are the human steps above.

@@ -43,14 +43,18 @@ Shade WBGT estimate vs REF-SHADE: MAE 0.855 °C, bias 0.277 °C, n = 1341.
 
 Primary profile vs baselines (event = level >= 3):
 
-| Method | POD | FAR | CSI | Under-warning |
-|---|---|---|---|---|
-| AmanShift (forecast + delta) | 99.0 % | 7.5 % | 91.6 % | 3.7 % |
-| B4_raw_forecast_delta0 | 97.4 % | 6.4 % | 91.3 % | 7.5 % |
-| B1_clock_rule | 15.5 % | 1.6 % | 15.5 % | 85.5 % |
-| B2_air_temperature | 94.2 % | 7.8 % | 87.2 % | 16.9 % |
-| B3_persistence | 92.0 % | 7.2 % | 85.9 % | 18.3 % |
-| B5_always_work_rest | 100.0 % | 12.0 % | 88.0 % | 28.9 % |
+Event prevalence (reference level >= 3): 1180/1341 work hours = 88.0 %.
+
+| Method | POD | FAR | CSI | Under-warning | Exact level agreement |
+|---|---|---|---|---|---|
+| AmanShift (forecast + delta) | 99.0 % | 7.5 % | 91.6 % | 3.7 % | 73.6 % |
+| B4_raw_forecast_delta0 | 97.4 % | 6.4 % | 91.3 % | 7.5 % | 77.8 % |
+| B1_clock_rule | 15.5 % | 1.6 % | 15.5 % | 85.5 % | 8.0 % |
+| B2_air_temperature | 94.2 % | 7.8 % | 87.2 % | 16.9 % | 45.5 % |
+| B3_persistence | 92.0 % | 7.2 % | 85.9 % | 18.3 % | 63.6 % |
+| B5_always_work_rest | 100.0 % | 12.0 % | 88.0 % | 28.9 % | 59.1 % |
+
+STOP events (reference level 4): 388/1341 work hours; POD 90.5 %, FAR 36.6 %, CSI 59.4 %.
 
 Bootstrap 95 % CI (1,000 day resamples, seed 20261119): pod [98.3 %, 99.5 %]; far [5.6 %, 9.6 %]; csi [89.7 %, 93.5 %]; under_warning_rate [2.3 %, 5.4 %]
 
@@ -68,14 +72,18 @@ Shade WBGT estimate vs REF-SHADE: MAE 1.358 °C, bias 1.117 °C, n = 1341.
 
 Primary profile vs baselines (event = level >= 3):
 
-| Method | POD | FAR | CSI | Under-warning |
-|---|---|---|---|---|
-| AmanShift (forecast + delta) | 99.9 % | 12.9 % | 87.0 % | 1.1 % |
-| B4_raw_forecast_delta0 | 99.3 % | 11.5 % | 88.0 % | 3.1 % |
-| B1_clock_rule | 15.7 % | 2.7 % | 15.6 % | 85.2 % |
-| B2_air_temperature | 93.2 % | 10.6 % | 84.0 % | 20.8 % |
-| B3_persistence | 91.7 % | 7.6 % | 85.2 % | 17.1 % |
-| B5_always_work_rest | 100.0 % | 14.1 % | 85.9 % | 19.9 % |
+Event prevalence (reference level >= 3): 1152/1341 work hours = 85.9 %.
+
+| Method | POD | FAR | CSI | Under-warning | Exact level agreement |
+|---|---|---|---|---|---|
+| AmanShift (forecast + delta) | 99.9 % | 12.9 % | 87.0 % | 1.1 % | 52.9 % |
+| B4_raw_forecast_delta0 | 99.3 % | 11.5 % | 88.0 % | 3.1 % | 61.4 % |
+| B1_clock_rule | 15.7 % | 2.7 % | 15.6 % | 85.2 % | 6.2 % |
+| B2_air_temperature | 93.2 % | 10.6 % | 84.0 % | 20.8 % | 53.6 % |
+| B3_persistence | 91.7 % | 7.6 % | 85.2 % | 17.1 % | 66.8 % |
+| B5_always_work_rest | 100.0 % | 14.1 % | 85.9 % | 19.9 % | 66.0 % |
+
+STOP events (reference level 4): 267/1341 work hours; POD 94.8 %, FAR 64.2 %, CSI 35.1 %.
 
 Bootstrap 95 % CI (1,000 day resamples, seed 20261119): pod [99.7 %, 100.0 %]; far [10.0 %, 16.2 %]; csi [83.8 %, 89.9 %]; under_warning_rate [0.4 %, 1.9 %]
 
@@ -93,14 +101,18 @@ Shade WBGT estimate vs REF-SHADE: MAE 0.965 °C, bias 0.546 °C, n = 1340.
 
 Primary profile vs baselines (event = level >= 3):
 
-| Method | POD | FAR | CSI | Under-warning |
-|---|---|---|---|---|
-| AmanShift (forecast + delta) | 99.8 % | 6.5 % | 93.3 % | 1.9 % |
-| B4_raw_forecast_delta0 | 99.1 % | 5.6 % | 93.6 % | 5.2 % |
-| B1_clock_rule | 15.3 % | 0.0 % | 15.3 % | 85.4 % |
-| B2_air_temperature | 93.8 % | 6.2 % | 88.3 % | 26.3 % |
-| B3_persistence | 93.6 % | 5.6 % | 88.7 % | 19.3 % |
-| B5_always_work_rest | 100.0 % | 9.0 % | 91.0 % | 37.5 % |
+Event prevalence (reference level >= 3): 1219/1340 work hours = 91.0 %.
+
+| Method | POD | FAR | CSI | Under-warning | Exact level agreement |
+|---|---|---|---|---|---|
+| AmanShift (forecast + delta) | 99.8 % | 6.5 % | 93.3 % | 1.9 % | 70.8 % |
+| B4_raw_forecast_delta0 | 99.1 % | 5.6 % | 93.6 % | 5.2 % | 75.9 % |
+| B1_clock_rule | 15.3 % | 0.0 % | 15.3 % | 85.4 % | 9.7 % |
+| B2_air_temperature | 93.8 % | 6.2 % | 88.3 % | 26.3 % | 49.4 % |
+| B3_persistence | 93.6 % | 5.6 % | 88.7 % | 19.3 % | 61.7 % |
+| B5_always_work_rest | 100.0 % | 9.0 % | 91.0 % | 37.5 % | 53.4 % |
+
+STOP events (reference level 4): 503/1340 work hours; POD 95.4 %, FAR 36.8 %, CSI 61.4 %.
 
 Bootstrap 95 % CI (1,000 day resamples, seed 20261119): pod [99.4 %, 100.0 %]; far [4.5 %, 8.4 %]; csi [91.4 %, 95.2 %]; under_warning_rate [1.1 %, 2.8 %]
 
@@ -145,27 +157,29 @@ Overall kill rate 100.0 %; safety-critical survivors 0. Measures rule coverage; 
 | 4 / 3 | amanshift_greedy | 155.085 | 3.43 | 0/200 |
 | 4 / 3 | naive_greedy | 161.925 | 3.41 | 0/200 |
 | 4 / 3 | no_replan | 162.43 | 2.665 | 177/200 |
-| 4 / 3 | runtime p50/p95 (ms) | 1.84 / 2.39 | | |
+| 4 / 3 | runtime p50/p95 (ms) | 1.49 / 1.87 | | |
 | 8 / 6 | amanshift_greedy | 121.115 | 5.58 | 0/200 |
 | 8 / 6 | naive_greedy | 148.785 | 5.345 | 0/200 |
 | 8 / 6 | no_replan | 142.39 | 4.705 | 183/200 |
-| 8 / 6 | runtime p50/p95 (ms) | 5.07 / 9.71 | | |
+| 8 / 6 | runtime p50/p95 (ms) | 3.75 / 5.31 | | |
 | 12 / 10 | amanshift_greedy | 79.485 | 7.015 | 0/200 |
 | 12 / 10 | naive_greedy | 115.11 | 6.745 | 0/200 |
 | 12 / 10 | no_replan | 105.32 | 6.13 | 187/200 |
-| 12 / 10 | runtime p50/p95 (ms) | 10.03 / 23.56 | | |
+| 12 / 10 | runtime p50/p95 (ms) | 8.07 / 10.91 | | |
 
 ## 7 Cost of safety (SIM-SITE + HIST-FCST, 2026 season)
 
-| Information state | Permitted work person-hours | Reduction |
-|---|---|---|
-| full_information | 17332.8 | 0.0 % |
-| stale_forecast | 1824.9 | 89.5 % |
-| forecast_missing | 1847.4 | 89.3 % |
-| offline_gt_1h | 0.0 | 100.0 % |
-| offline_gt_3h | 0.0 | 100.0 % |
+Nominal: 60984.0 person-hours (all workers, every hourly tick, 121 days); midday break alone removes 6696.0 (11.0 % of nominal).
 
-Includes the midday break and NIOSH conservatism; offline modes follow the client rule (worst case = forecast lost + all resources unconfirmed).
+| Information state | Permitted work person-hours | Share of nominal | Reduction vs full information |
+|---|---|---|---|
+| full_information | 17332.8 | 28.4 % | 0.0 % |
+| stale_forecast | 1824.9 | 3.0 % | 89.5 % |
+| forecast_missing | 1847.4 | 3.0 % | 89.3 % |
+| offline_gt_1h | 0.0 | 0.0 % | 100.0 % |
+| offline_gt_3h | 0.0 | 0.0 % | 100.0 % |
+
+Nominal = every worker on Demo Site A at every hourly tick 06:30-17:30 GST on season days with data. Permitted = sum of crew size x maximum permitted work fraction (NIOSH REL/RAL 1-h TWA, ADOSH TWL caps, midday break, resources). Offline modes follow the client rule (worst case = forecast lost + all resources unconfirmed).
 
 Demo scenario: 2026-07-01 at 10:30 GST, levels {'C1': 3, 'C2': 3, 'C3': 4, 'C4': 2, 'C5': 3, 'C6': 3}, rule 'strict'.
 

@@ -117,7 +117,7 @@
   },
   "forecast_margin_c": {
     "value": 0.5,
-    "citation": "AmanShift engineering parameter delta, chosen from candidates on 2022-2024 only (eval/out/delta_frozen.json)",
+    "citation": "AmanShift engineering parameter delta, chosen from candidates on 2024 only; 2022-2023 lack day-ahead humidity, wind and radiation (STATUS.md SC1; eval/out/delta_frozen.json)",
     "status": "engineering parameter",
     "candidates": [
       0.0,
@@ -762,7 +762,7 @@
         }
       }
     },
-    "citation": "AmanShift derived: 99th percentile of forecast-based estimated WBGT per month x hour(local) x {sun, shade}, 2022-2024; delta is added at run time. Called 'seasonal 99th percentile' in UI",
+    "citation": "AmanShift derived: 99th percentile of forecast-based estimated WBGT per month x hour(local) x {sun, shade}, train years listed in train_years (2024 only; STATUS.md SC1); delta is added at run time. Called 'seasonal 99th percentile' in UI",
     "status": "derived (backend/eval/build_climatology.py)",
     "train_years": [
       2024

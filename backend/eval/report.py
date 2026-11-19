@@ -33,13 +33,21 @@ def skill_table(split: dict[str, Any]) -> list[str]:
 
 def baseline_table(split: dict[str, Any]) -> list[str]:
     prim = next(iter(split.get("profiles", {}).values()), {})
-    lines = ["| Method | POD | FAR | CSI | Under-warning |", "|---|---|---|---|---|"]
     k = prim.get("k3", {})
+    hours, events = k.get("hours") or 0, k.get("events_ref") or 0
+    lines = [f"Event prevalence (reference level >= 3): {events}/{hours} work hours = "
+             f"{pct(events / hours if hours else None)}.", "",
+             "| Method | POD | FAR | CSI | Under-warning | Exact level agreement |", "|---|---|---|---|---|---|"]
     lines.append(f"| AmanShift (forecast + delta) | {pct(k.get('pod'))} | {pct(k.get('far'))} | "
-                 f"{pct(k.get('csi'))} | {pct(k.get('under_warning_rate'))} |")
+                 f"{pct(k.get('csi'))} | {pct(k.get('under_warning_rate'))} | "
+                 f"{pct(k.get('exact_level_agreement'))} |")
     for name, b in prim.get("baselines_k3", {}).items():
         lines.append(f"| {name} | {pct(b['pod'])} | {pct(b['far'])} | {pct(b['csi'])} | "
-                     f"{pct(b['under_warning_rate'])} |")
+                     f"{pct(b['under_warning_rate'])} | {pct(b.get('exact_level_agreement'))} |")
+    k4 = prim.get("k4")
+    if k4:
+        lines += ["", f"STOP events (reference level 4): {k4['events_ref']}/{k4['hours']} work hours; "
+                  f"POD {pct(k4['pod'])}, FAR {pct(k4['far'])}, CSI {pct(k4['csi'])}."]
     ci = prim.get("bootstrap95_k3")
     if ci:
         lines.append("")
@@ -99,10 +107,15 @@ def main() -> int:
                      f"{e['mean_crews_stopped']} | {e['sites_with_checker_violations']}/{t['sites']} |")
         L.append(f"| {t['crews']} / {t['resources']} | runtime p50/p95 (ms) | "
                  f"{t['amanshift_greedy']['runtime_ms_p50']} / {t['amanshift_greedy']['runtime_ms_p95']} | | |")
-    L += ["", "## 7 Cost of safety (SIM-SITE + HIST-FCST, 2026 season)", "", "| Information state | Permitted work person-hours | Reduction |",
-          "|---|---|---|"]
+    share = cost.get("permitted_share_of_nominal_pct", {})
+    L += ["", "## 7 Cost of safety (SIM-SITE + HIST-FCST, 2026 season)", "",
+          f"Nominal: {cost.get('nominal_person_hours')} person-hours (all workers, every hourly tick, "
+          f"{cost.get('days')} days); midday break alone removes {cost.get('midday_break_person_hours')} "
+          f"({cost.get('midday_break_share_of_nominal_pct')} % of nominal).", "",
+          "| Information state | Permitted work person-hours | Share of nominal | Reduction vs full information |",
+          "|---|---|---|---|"]
     for m, v in cost.get("permitted_work_person_hours", {}).items():
-        L.append(f"| {m} | {v} | {cost['reduction_vs_full_pct'][m]} % |")
+        L.append(f"| {m} | {v} | {share.get(m)} % | {cost['reduction_vs_full_pct'][m]} % |")
     L += ["", f"{cost.get('note', '')}", ""]
     s = sel.get("selection", {})
     L += [f"Demo scenario: {s.get('date')} at 10:30 GST, levels {s.get('levels')}, rule '{s.get('rule')}'.", ""]

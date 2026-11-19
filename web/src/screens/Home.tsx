@@ -46,7 +46,7 @@ const FEATURES: Feature[] = [
       </div>
     ), wide: true },
   { id: "respond", eyebrow: "Respond when systems fail", title: "When information disappears, protection only tightens.",
-    body: "A stale forecast, a broken cooling cabin or a dropped network never relaxes a recommendation. The supervisor sees exactly which crews are affected, and an independent policy check rejects any plan that no longer fits the conditions.",
+    body: "A stale forecast, a broken cooling cabin or a dropped network never relaxes a recommendation. The supervisor sees exactly which crews are affected, and a separately implemented policy check rejects any plan that no longer fits the conditions.",
     points: ["Stale forecast falls back to a conservative seasonal bound", "Affected crews identified the moment a resource fails", "Offline devices tighten on their own, then STOP-HOLD"],
     media: <RespondFragment /> },
   { id: "privacy", eyebrow: "Protect without surveillance", title: "Built to protect crews, not to watch people.",

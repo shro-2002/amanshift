@@ -6,14 +6,16 @@ import json
 import os
 import secrets
 import uuid
+from datetime import timedelta
 from pathlib import Path
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 from fastapi import FastAPI, Request, Response
+from fastapi import Path as PathParam
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictFloat, StrictInt, model_validator
 
 import amanshift_checker as chk
 from amanshift.api import offline, views
@@ -30,11 +32,26 @@ COOKIE = "amanshift_sid"
 NOTICE = ("Decision support, not diagnosis or work authorization. No disciplinary or employment use. "
           "Synthetic site, real Abu Dhabi weather.")
 SITE = "demo-site-a"
+Site = Literal["demo-site-a"]  # unknown site ids are rejected with 422
+ResourceId = Annotated[str, PathParam(pattern=ID_PATTERN)]
 
 app = FastAPI(title="AmanShift API", version="1.0.0", description=NOTICE)
 POL = load_policy()
 LOG = EventLog(os.environ.get("AMANSHIFT_DB", ":memory:"))
 SESSIONS = ss.Sessions()
+SECURITY_HEADERS = {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+}
+
+
+@app.middleware("http")
+async def _security_headers(request: Request, call_next: Any) -> Response:
+    response: Response = await call_next(request)
+    response.headers.update(SECURITY_HEADERS)
+    return response
 
 
 def envelope(data: Any, snapshot_id: str | None = None, status: int = 200,
@@ -53,6 +70,12 @@ def fail(status: int, code: str, message: str) -> JSONResponse:
 async def _invalid(_: Request, exc: RequestValidationError) -> JSONResponse:
     return envelope(None, status=422, error={"code": "VALIDATION_ERROR", "message": "invalid input",
                                              "details": json.loads(json.dumps(exc.errors(), default=str))})
+
+
+@app.exception_handler(Exception)
+async def _unexpected(_: Request, exc: Exception) -> JSONResponse:  # noqa: ARG001
+    return envelope(None, status=500, error={"code": "INTERNAL_ERROR",
+                                             "message": "unexpected server error", "details": []})
 
 
 def valid_sid(sid: str | None) -> bool:
@@ -145,28 +168,82 @@ def load(scenario_id: str, request: Request, response: Response) -> JSONResponse
 
 
 @app.get("/api/v1/sites/{site}/state")
-def state(site: str, request: Request, response: Response) -> JSONResponse:
+def state(site: Site, request: Request, response: Response) -> JSONResponse:
     if role(request) == "worker":
         return fail(403, "FORBIDDEN", "worker role can read crew cards only")
     return respond(sess(request, response), request, response)
 
 
+MAX_ADVANCE_STEPS = 8  # one request may move the demo clock at most 2 h forward
+
+
+class MeterValue(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    zone: str = Field(pattern=ID_PATTERN)
+    location: Literal["sun", "shade"] = "sun"
+    wbgt: StrictFloat | StrictInt | None = None
+    twl: StrictFloat | StrictInt | None = None
+
+    @model_validator(mode="after")
+    def _in_bounds(self) -> MeterValue:
+        if self.wbgt is None and self.twl is None:
+            raise ValueError("meter reading needs wbgt or twl")
+        for name, value, bound_key in (("wbgt", self.wbgt, "wbgt_c"), ("twl", self.twl, "twl_wm2")):
+            low, high = POL.input_bounds[bound_key]
+            if value is not None and not low <= value <= high:
+                raise ValueError(f"{name} out of range")
+        return self
+
+
+class AdvanceValue(BaseModel):
+    """Time only moves forward: a rollback would let dwell and confirmation expiry be undone."""
+    model_config = ConfigDict(extra="forbid")
+    steps: StrictInt = Field(default=1, ge=1, le=MAX_ADVANCE_STEPS)
+
+
+VALUE_MODELS: dict[str, type[BaseModel]] = {"meter_reading": MeterValue, "time_advance": AdvanceValue}
+TARGETED = ("resource_down", "resource_repaired")
+
+
 class FailureIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
     type: Literal["resource_down", "forecast_stale", "forecast_lost", "network_offline",
                   "meter_reading", "restore_all", "resource_repaired", "time_advance"]
     target: str | None = Field(default=None, pattern=ID_PATTERN)
     value: dict[str, Any] = Field(default_factory=dict)
 
+    @model_validator(mode="after")
+    def _typed_value(self) -> FailureIn:
+        model = VALUE_MODELS.get(self.type)
+        if model is not None:
+            self.value = model.model_validate(self.value).model_dump()
+        elif self.value:
+            raise ValueError(f"{self.type} takes no value")
+        if self.type in TARGETED and self.target is None:
+            raise ValueError(f"{self.type} needs a target resource")
+        return self
+
+
+def validate_failure(s: ss.Session, body: FailureIn) -> str | None:
+    """Site-dependent checks; returns an error message or None."""
+    config = ss.sc.site_config()
+    if body.type in TARGETED and body.target not in {r["resource_id"] for r in config["resources"]}:
+        return f"unknown resource {body.target}"
+    if body.type == "meter_reading" and body.value["zone"] not in config["zones"]:
+        return f"unknown zone {body.value['zone']}"
+    if body.type == "time_advance":
+        end = ss.sc.local_time(s.state.day, POL.work_hours_local.end, 0, POL)
+        if s.state.eval_time + timedelta(minutes=POL.tick_min * body.value["steps"]) > end:
+            return "cannot advance past the end of the scenario work day"
+    return None
+
 
 @app.post("/api/v1/sites/{site}/failures")
-def failures(site: str, body: FailureIn, request: Request, response: Response) -> JSONResponse:
+def failures(site: Site, body: FailureIn, request: Request, response: Response) -> JSONResponse:
     s = sess(request, response)
-    if body.type == "meter_reading":
-        w, t = body.value.get("wbgt"), body.value.get("twl")
-        b = POL.input_bounds
-        if (w is not None and not b["wbgt_c"][0] <= float(w) <= b["wbgt_c"][1]) or (
-                t is not None and not b["twl_wm2"][0] <= float(t) <= b["twl_wm2"][1]):
-            return fail(422, "VALIDATION_ERROR", "meter value out of range")
+    problem = validate_failure(s, body)
+    if problem:
+        return fail(422, "VALIDATION_ERROR", problem)
     try:
         text = ss.inject(s, body.type, body.target, body.value, POL)
     except ValueError as exc:
@@ -178,7 +255,7 @@ def failures(site: str, body: FailureIn, request: Request, response: Response) -
 
 
 @app.post("/api/v1/sites/{site}/resources/{rid}/confirm")
-def confirm(site: str, rid: str, request: Request, response: Response) -> JSONResponse:
+def confirm(site: Site, rid: ResourceId, request: Request, response: Response) -> JSONResponse:
     s = sess(request, response)
     try:
         text = ss.confirm(s, rid)
@@ -193,7 +270,7 @@ def confirm(site: str, rid: str, request: Request, response: Response) -> JSONRe
 
 
 @app.post("/api/v1/sites/{site}/plans")
-def make_plan(site: str, request: Request, response: Response) -> JSONResponse:
+def make_plan(site: Site, request: Request, response: Response) -> JSONResponse:
     s = sess(request, response)
     snap, dec = s.evaluate(POL)
     p = planner.plan(dec, POL, previous=s.approved)
@@ -212,7 +289,7 @@ class CheckIn(BaseModel):
 
 
 @app.post("/api/v1/sites/{site}/plans/check")
-def check_plan(site: str, body: CheckIn, request: Request, response: Response) -> JSONResponse:
+def check_plan(site: Site, body: CheckIn, request: Request, response: Response) -> JSONResponse:
     """Check an arbitrary plan. template=keep_previous re-submits the last approved actions
     ("keep working as scheduled") bound to the CURRENT snapshot, so violations are substantive."""
     s = sess(request, response)
@@ -236,7 +313,7 @@ def check_plan(site: str, body: CheckIn, request: Request, response: Response) -
 
 
 @app.post("/api/v1/sites/{site}/plans/{plan_id}/approve")
-def approve(site: str, plan_id: str, request: Request, response: Response) -> JSONResponse:
+def approve(site: Site, plan_id: str, request: Request, response: Response) -> JSONResponse:
     s = sess(request, response)
     if role(request) == "worker":
         return fail(403, "FORBIDDEN", "only supervisors approve plans")
@@ -256,7 +333,7 @@ class EscalationIn(BaseModel):
 
 
 @app.post("/api/v1/sites/{site}/escalations")
-def escalation(site: str, body: EscalationIn, request: Request, response: Response) -> JSONResponse:
+def escalation(site: Site, body: EscalationIn, request: Request, response: Response) -> JSONResponse:
     s = sess(request, response)
     if body.crew_id not in {c["crew_id"] for c in ss.sc.site_config()["crews"]}:
         return fail(404, "NOT_FOUND", "unknown crew")
@@ -271,13 +348,13 @@ def escalation(site: str, body: EscalationIn, request: Request, response: Respon
 
 
 @app.get("/api/v1/sites/{site}/offline-pack")
-def offline_pack(site: str, request: Request, response: Response) -> JSONResponse:
+def offline_pack(site: Site, request: Request, response: Response) -> JSONResponse:
     s = sess(request, response)
     return envelope(offline.build_pack(s, POL))
 
 
 @app.get("/api/v1/sites/{site}/cards")
-def cards(site: str, request: Request, response: Response) -> JSONResponse:
+def cards(site: Site, request: Request, response: Response) -> JSONResponse:
     s = sess(request, response)
     return envelope(offline.cards(s, POL))
 

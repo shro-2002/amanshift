@@ -14,7 +14,7 @@ export function Method() {
       <p>A work/rest cycle only helps if the rest area exists. Shade, cooled rest and water are graph nodes with capacity. A crew can use a resource only if it is confirmed up within the last 30 minutes and within walking limits (shade 5, cooled rest 10, water 5 minutes). Work below a full hour needs an assigned rest resource; all work needs water.</p>
       <h2>The fail-safe property</h2>
       <p>For the same task, policy and evaluation time, losing information or protective resources must never enlarge the set of permitted actions: if s′ is a degradation of s, then A<sub>c</sub>(s′) ⊆ A<sub>c</sub>(s) for every crew. Stale or lost forecasts keep their cached value <i>and</i> add a seasonal 99th-percentile bound; lost resources remove edges; floors only add. Relaxation needs fresh data, physical reconfirmation of repaired resources, and two 15-minute ticks of the lower level. Offline devices never re-plan: they only show the maximum of server-computed planned and worst-case levels, and STOP-HOLD after 3 hours. This is tested on thousands of generated degradations (see Evidence).</p>
-      <h2>Independent checker — and its limit</h2>
+      <h2>Separately implemented checker — and its limit</h2>
       <p>Every plan is checked by a separate package with no shared code that re-derives limits, bounds and coverage from the policy file and evaluates ten declarative rules with citations. Only approved plans can be applied; no override exists. Residual common-mode risk remains: same developer, same policy file, same specification.</p>
       <h2>What is synthetic, what is real</h2>
       <ul><li><b>Real:</b> Abu Dhabi weather — archived day-ahead forecasts (Open-Meteo Previous Runs, CC BY 4.0) and airport observations (IEM ASOS, OMAA).</li>
@@ -23,7 +23,7 @@ export function Method() {
       <h2>Not validated</h2>
       <p>Policy correctness (the software applies the cited rules and never loosens them on failure) is tested. Occupational safety — whether workers are actually protected — is not shown and needs a field pilot with onsite meters. Liljegren has not been validated against Gulf measurements; the airport is not a construction site; there is no reflected heat from concrete or steel; metabolic rates are category assumptions; translations are pending native review; the midday-break 2026 dates come from secondary sources.</p>
       <h2>Governance</h2>
-      <p>No names, employee IDs, phone numbers, photos, biometrics or locations exist in the system. The crew is the smallest unit. Plans, verdicts, overrides and escalations go to a hash-chained, append-only log; escalation payloads are purgeable without breaking the chain. Supervisors can make plans stricter, never looser than the checker allows.</p>
+      <p>No names, employee IDs, phone numbers, photos, biometrics or locations exist in the system. The crew is the smallest unit. Plans, verdicts, overrides and escalations go to a hash-chained, append-only log; escalation payloads are purgeable without breaking the chain. Supervisors acknowledge checked plans; they cannot edit a plan or override a checker rejection.</p>
     </div></div>
   );
 }

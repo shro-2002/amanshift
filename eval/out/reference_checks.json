@@ -52,6 +52,6 @@
     "expected": 0.99985,
     "tolerance": 0.01
   },
-  "policy_sha256": "225c57bc0db723078335c59f5be82dcd39fe5c4ee59636f32772e90c3856a309",
+  "policy_sha256": "6fcf37c4ad0826e35959e0df2be50656fbe8843d7147089a4b1793c09bfd5fdd",
   "all_pass": true
 }

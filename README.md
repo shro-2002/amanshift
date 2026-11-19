@@ -6,6 +6,22 @@ Crew-level heat-protection decision support for outdoor workers in Abu Dhabi —
 
 AmanShift combines real day-ahead weather forecasts, onsite WBGT/TWL meter readings, crew workload, clothing and acclimatization, and the actual availability of shade, cooled rest and water. It produces four graded levels with one action each, in English, Arabic, Hindi, Urdu and Bengali. Its defining property is tested: when forecasts go stale, cooling fails or the network drops, recommendations can only become stricter. A separately implemented rule checker rejects unsafe plans. It collects no personal, biometric or location data. **It is decision support, not diagnosis or work authorization.**
 
+**Try it now (no login):** [Live demo](https://amanshift.onrender.com) · [Judge tour, about 2 min](https://amanshift.onrender.com/tour) · [Technical validation](https://amanshift.onrender.com/help/validation) · Demo video (2:42): VIDEO LINK PENDING UPLOAD · [Submission summary](SUBMISSION.md) · [Evaluation report](eval/out/report.md) · [Limitations](LIMITATIONS.md)
+
+The free Render instance sleeps when idle; the first load can take 30–60 s.
+
+## Key results
+
+| Result | Value | Type |
+|---|---|---|
+| Day-ahead warning skill, clean 2026 holdout (event = level ≥ 3; prevalence 88.0 % of 1,341 work hours) | detection 99.0 %, false-alarm ratio 7.5 %, under-warning 3.7 % (air-temperature rule 16.9 %, always-warn 28.9 %) | historical forecasts vs airport observations |
+| Fail-safe property tests | 19,000 generated cases, 0 failures | synthetic |
+| Seeded unsafe plans rejected by the checker | 100 % of non-equivalent mutants, 0 safety-critical survivors | synthetic |
+| Permitted work, simulated site, 2026 summer | 28.4 % of nominal person-hours with full information; 3.0 % with a stale forecast; 0 % offline > 1 h | simulated cost of safety |
+| Health outcomes | not measured — needs a field pilot | not validated |
+
+Personalisation is crew-level (workload, clothing, acclimatization, exposure), not individual. Full context in [SUBMISSION.md](SUBMISSION.md).
+
 ## Quick start
 
 Requirements: Docker — or Python 3.12 + [uv](https://docs.astral.sh/uv/) and Node 22+.

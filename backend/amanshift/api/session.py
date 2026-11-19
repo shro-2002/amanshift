@@ -15,7 +15,7 @@ from amanshift.engine.models import EnvEvidence, Plan, PrevEval, Provenance, Sna
 from amanshift.policy.loader import Policy
 from amanshift.store.log import EventLog
 
-MAX_SESSIONS = 200
+MAX_SESSIONS = 1000  # per-judge isolation; LRU eviction only past this many browsers
 STALE_BACKDATE = timedelta(hours=4)
 
 

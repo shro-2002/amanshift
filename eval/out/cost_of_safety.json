@@ -16,6 +16,16 @@
     "offline_gt_1h": 0.0,
     "offline_gt_3h": 0.0
   },
+  "nominal_person_hours": 60984.0,
+  "midday_break_person_hours": 6696.0,
+  "permitted_share_of_nominal_pct": {
+    "full_information": 28.4,
+    "stale_forecast": 3.0,
+    "forecast_missing": 3.0,
+    "offline_gt_1h": 0.0,
+    "offline_gt_3h": 0.0
+  },
+  "midday_break_share_of_nominal_pct": 11.0,
   "reduction_vs_full_pct": {
     "full_information": 0.0,
     "stale_forecast": 89.5,
@@ -23,5 +33,5 @@
     "offline_gt_1h": 100.0,
     "offline_gt_3h": 100.0
   },
-  "note": "Includes the midday break and NIOSH conservatism; offline modes follow the client rule (worst case = forecast lost + all resources unconfirmed)."
+  "note": "Nominal = every worker on Demo Site A at every hourly tick 06:30-17:30 GST on season days with data. Permitted = sum of crew size x maximum permitted work fraction (NIOSH REL/RAL 1-h TWA, ADOSH TWL caps, midday break, resources). Offline modes follow the client rule (worst case = forecast lost + all resources unconfirmed)."
 }

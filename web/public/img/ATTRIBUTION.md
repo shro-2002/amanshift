@@ -1,6 +1,6 @@
 # Photo attribution
 
-Photographs used on the public homepage (`/`). Photographer names were read from each photo's
+Photographs used on the public homepage (`/`) and, as labelled illustrative photography, in the opening and closing of the demo video. Photographer names were read from each photo's
 Pexels page on 2026-11-19. Both are published under the Pexels License (https://www.pexels.com/license/).
 
 | File | Original | Photographer | Licence | Modifications |

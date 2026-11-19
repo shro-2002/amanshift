@@ -21,6 +21,7 @@ Status: FROZEN v1.0. Update the "Evidence" column with artifact paths as they ar
 | FR-RISK-02/03 | T2.1 | unit: meter max rule, TWL zones; T-KER-05 |
 | FR-RISK-04/05/06 | T0.2, T2.1 | T-REF-02/03, worked examples doc 05 §10 |
 | FR-RISK-07 | T2.1 | unit: ban window boundaries (12:29/12:30/14:59/15:00; 14 Jun/15 Jun/15 Sep/16 Sep) |
+| T-SEC-01 (SC16) | T6 | `tests/integration/test_input_hardening.py` |
 | FR-RISK-08 | T5.1 | T-EVAL-LEAK-01 |
 | FR-COV-01..04 | T2.2, T3.1 | unit coverage; state-machine tests |
 | FR-KER-01..05 | T3.1 | T-KER-01..06 |
@@ -51,12 +52,12 @@ Status: FROZEN v1.0. Update the "Evidence" column with artifact paths as they ar
 - [x] Registration confirmed on hack2skill dashboard (user, 2026-11-19); [ ] dashboard requirements read and added to STATUS.md (human)
 - [ ] Exact deadline hour confirmed (or submit by 2026-11-20 12:00 GST)
 - [x] `make test` green; `make eval` regenerated; `make e2e` green
-- [ ] Public URL live and T-E2E-06 passed against it (human: hosting account); [x] Docker image built and T-E2E-06 passed against it
+- [x] Public URL live (https://amanshift.onrender.com) and T-E2E-06 passed against it; [x] Docker image built and T-E2E-06 passed against it
 - [x] README judge guide; LIMITATIONS.md; data/SOURCES.md with licences; MIT LICENSE
-- [ ] Screenshots 1–7 captured
-- [ ] 2-minute video recorded and link tested logged-out
-- [ ] Submission text from doc 09 §1/§12 with real numbers from report.md
-- [ ] Repo tagged `v1.0-submission`; STATUS.md final
+- [x] Screenshots captured (`docs/screenshots/`)
+- [x] Video recorded (2:41.9; limit < 3 min); [ ] upload link tested logged-out (human)
+- [x] Submission text (`SUBMISSION.md`) with real numbers from report.md
+- [x] Repo tagged `v1.0-submission`, then `v1.1-submission` after review remediation (SC16–SC18); STATUS.md final
 - [x] Grep for banned wording and for "TODO" in UI strings
 
 ## 5. Evidence (implementation, 2026-11-19)
@@ -67,6 +68,7 @@ Status: FROZEN v1.0. Update the "Evidence" column with artifact paths as they ar
 | FR-RISK-02/03 | `engine/risk.py` `upper_bound`, `twl_zone` | `tests/unit/test_boundaries.py`, T-KER-05 | `eval/out/property_tests.json` |
 | FR-RISK-04/05/06 | `engine/risk.py`, `policy/abudhabi-heat-v1.json` | T-REF-02/03, `tests/unit/test_worked_examples.py` | `eval/out/reference_checks.json` |
 | FR-RISK-07 | `engine/risk.py` `midday_active` | `test_boundaries.py` (12:29/12:30/14:59/15:00; 14 Jun/15 Jun/15 Sep/16 Sep) | — |
+| T-SEC-01 (SC16) | `backend/amanshift/api/app.py` `FailureIn`, `validate_failure` | `tests/integration/test_input_hardening.py` | — |
 | FR-RISK-08 | `backend/eval/forecast_eval.py` | T-EVAL-LEAK-01 (`LeakageError` guard) | `eval/out/delta_frozen.json`, `forecast_eval.json` |
 | FR-COV-01..04 | `engine/coverage.py`, `api/session.py` | `test_boundaries.py` (TTL), `tests/integration/test_api.py` | — |
 | FR-KER-01..05 | `engine/kernel.py` | `tests/property/test_kernel_props.py` (T-KER-01..07) | `eval/out/property_tests.json` |

@@ -37,17 +37,27 @@ Official deliverable (FAQ: "assumptions, dependencies, limitations"). Sources: d
 
 - The fail-safe property and the checker establish **policy correctness** (the software applies the cited rules and never loosens them on failure). They do not establish **occupational safety**; only a field pilot can.
 - The checker is a separate package with no shared code, but the same developer wrote both from the same specification and policy file: common-mode errors remain possible.
-- Degraded information is costly by design: a stale or missing forecast falls back to a seasonal 99th-percentile bound, and offline devices tighten to worst case after 30–60 minutes and STOP-HOLD after 3 hours. The measured cost is in `eval/out/cost_of_safety.json`.
+- Degraded information is costly by design: a stale or missing forecast falls back to a seasonal 99th-percentile bound, and offline devices tighten to worst case after 30–60 minutes and STOP-HOLD after 3 hours. On the simulated site in summer 2026 the policy permits 28.4 % of nominal person-hours with full information (the midday break alone removes 11.0 %), 3.0 % with a stale or missing forecast and 0 % offline beyond an hour (`eval/out/cost_of_safety.json`). An employer may find this unworkable; changing it is an occupational-health policy decision, not a software default.
 - Offline devices cannot see new failures; they compensate only by tightening.
+
+## Challenge requirements not (fully) met
+
+- **Individual personalisation:** none. Levels are per crew (workload, clothing, acclimatization, exposure). Voluntary, device-local, tighten-only individual input is a roadmap item that needs occupational-health and ethics review first.
+- **Consented worker or physiological signals:** not used (no wearables, no biometrics).
+- **Dust and battery conditions:** dust is not modelled; nothing is worn, so battery applies only to supervisor and crew phones, with a printable card as fallback.
+- **Adherence, symptoms, incidents, compliance:** not measurable without a field deployment; escalations are logged.
 
 ## Product and governance limitations
 
 - The demo site is synthetic; no real worksite, crew or health data exist.
 - Arabic, Hindi, Urdu and Bengali strings are pending native-speaker review; worker comprehension is untested.
-- Authentication is a role-stub demo (supervisor / worker / medic headers), not production identity management. Demo state is kept per browser session in memory.
+- Authentication is a role-stub demo (supervisor / worker / medic headers), not production identity management: any client can claim the medic role in the demo. Demo state is kept per browser session in memory.
+- There is no aggregate or regulator view yet, so the small-cell suppression rule (n < 5) in doc 07 is a design requirement for that future view, not an implemented feature.
+- Supervisors cannot edit a plan; they can generate a new plan and acknowledge a checked plan. There is no override of a checker rejection.
 - Small crews can make a crew-level escalation identifying on site; crew size is shown only to the site supervisor view.
 - The planner is a deterministic greedy heuristic; the lexicographic MILP planner is a P1 item and was not built. Greedy is not optimal on every site (see `eval/out/planner_bench.json`).
-- Public deployment requires a hosting account; the reproducible path is `make demo`.
+- The public demo runs on a free Render instance (sleeps when idle; one shared process, per-browser in-memory sessions, at most 1,000 concurrent browser sessions before the oldest is evicted). `make demo` reproduces it locally.
+- The demo API accepts only bounded, typed inputs (the clock only moves forward, at most 2 h per request and not past 18:00; meter values within policy bounds); this is demo hardening, not a production security review.
 
 ## Not validated
 
