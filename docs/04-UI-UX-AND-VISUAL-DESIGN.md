@@ -1,5 +1,7 @@
 # 04 — UI/UX and Visual Design
 
+> **2026-11-19:** screen inventory and navigation (§3–§6) superseded by [doc 12](12-PRODUCT-EXPERIENCE-REDESIGN.md). Severity tokens, accessibility rules, banned words and worker-card rules below remain binding.
+
 Status: FROZEN v1.0. The implementation session builds exactly this. Where time runs out, follow the cut order in §8.
 
 ## 1. Design direction

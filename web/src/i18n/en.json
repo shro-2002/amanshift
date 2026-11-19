@@ -19,5 +19,15 @@
  "offline_expired": "Offline plan expired — STOP-HOLD: shade, water, contact supervisor.",
  "notice": "Decision support, not diagnosis or work authorization. No disciplinary or employment use.",
  "report_symptoms": "Report symptoms in this crew",
- "card_stop_any": "Stop work. Go to the nearest shade."
+ "card_stop_any": "Stop work. Go to the nearest shade.",
+ "language": "Language",
+ "your_crew": "Your crew",
+ "other_crews": "Other crews",
+ "water_at": "Water: {res}",
+ "unwell_title": "Feeling unwell?",
+ "unwell_body": "Stop. Cool down. Do not stay alone. Tell your supervisor.",
+ "emergency": "Emergency",
+ "conservative": "Conservative level — data degraded",
+ "loading": "Loading crew cards…",
+ "no_cards": "No crew card available. Tell your supervisor."
 }

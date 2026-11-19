@@ -39,20 +39,22 @@ Real-weather scenario replay; crew levels with computation trace; coverage graph
 
 T-E2E-06 automates these steps and asserts structure (verdicts, which crews are uncovered, monotone levels), never hard-coded numbers.
 
-## 7. Two-minute video storyboard
+## 7. Two-minute video storyboard (revised for doc 12)
 
 | Time | Shot | Voice-over (draft) |
 |---|---|---|
-| 0:00–0:12 | S1 headline | "Heat warnings tell supervisors to rest crews in cool areas. What if the cool area is broken?" |
-| 0:12–0:30 | S2 at 13:30, real Abu Dhabi day | "AmanShift screens each crew from forecasts, workload, clothing and acclimatization, using NIOSH limits, Abu Dhabi ADOSH TWL rules and the midday break." |
-| 0:30–0:50 | Step 2–3 | "The cooling cabin fails. Two crews lose protection. The planner fixes one and stops the other — it says when protection is impossible." |
-| 0:50–1:05 | Step 4 | "A separate checker, implemented as its own package with no shared code, rejects the unsafe plan and cites the rule." |
-| 1:05–1:25 | Step 5 + Bengali card | "The network drops. Cached instructions stay, in five languages, and only get stricter." |
-| 1:25–1:45 | S11 | "We test that property on thousands of generated failures, and we score day-ahead warnings against real airport observations from held-out summers." |
-| 1:45–2:00 | S12 + footer | "No tracking, no biometrics, no disciplinary use. Decision support, ready for a field pilot." |
+| 0:00–0:12 | Website hero `/` | "Every worker deserves to return home safely. Heat warnings tell supervisors to rest crews in cool areas. What if the cool area is broken?" |
+| 0:12–0:30 | Overview `/app` after step 1 | "AmanShift turns yesterday's forecast, crew workload, clothing and acclimatization, and the shade and cooling actually available, into one action per crew — using NIOSH limits, Abu Dhabi's TWL rules and the midday break." |
+| 0:30–0:50 | `/demo` step 2 → worksite map | "The central cooling cabin fails. Fourteen workers in two crews now have no rest area. The map shows who is affected and why." |
+| 0:50–1:05 | `/demo` steps 3–4 | "The planner stops what it cannot protect and says so. A separately implemented policy checker rejects the old schedule and cites the rules it breaks." |
+| 1:05–1:25 | `/demo` step 5 + worker app in Arabic/Bengali | "The network drops. Each worker sees one instruction, in their language — and it only gets stricter." |
+| 1:25–1:45 | `/help/validation` | "We test that property on thousands of generated failures and score day-ahead warnings against real airport observations from held-out summers." |
+| 1:45–2:00 | Website privacy section | "No names, no tracking, no biometrics, no disciplinary use. Decision support, ready for a field pilot." |
+
+Spoken figures must match `eval/out` and the live state on the day of recording.
 
 ## 8. Screenshots for submission
-1 S2 normal; 2 S2 after R2 failure with banner; 3 S8 rejection with citations; 4 S9 Bengali and Arabic cards side by side; 5 S10 offline banner; 6 S11 evidence; 7 S12 limitations.
+`docs/screenshots/`: 01 website hero; 02 overview; 03 worksite map with cooling failure; 04 demonstration — new plan and rejected old schedule; 05 alerts & actions; 06 worker app (en/ar/bn); 07 offline demonstration; 08 technical validation. v1-rc1 originals kept in `docs/screenshots/v1-rc1/`.
 
 ## 9. Required technical documentation (in repo)
 README (quick start + judge guide); `docs/00–11`; `LIMITATIONS.md` (assumptions, dependencies, limitations — official requirement, generated from doc 02 §8 + doc 07 §10 + STATUS uncertainties); `data/SOURCES.md` (all datasets + licences); `eval/out/report.md`.

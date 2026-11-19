@@ -38,12 +38,15 @@ export interface Timeline {
   provenance: { source: string; kind: string; label: string };
 }
 export interface SiteState {
-  site: { site_id: string; label: string; synthetic: boolean }; scenario_date: string; eval_time: string;
+  site: { site_id: string; label: string; synthetic: boolean; display?: SiteDisplay }; scenario_date: string; eval_time: string;
   eval_time_local: string; connectivity: string; policy_version: string; snapshot_id: string;
   forecast: { source: string; kind?: string; issued_at?: string; retrieved_at?: string; age_min?: number; tier: string; label?: string };
   level_counts: Record<string, number>; crews: CrewView[]; coverage: Coverage; plan: Plan | null;
   approved_plan_id: string | null; unsafe_check: { plan: Plan; checker: Verdict } | null; timeline: Timeline;
   log: { at: string; text: string; kind: string }[]; chain_ok: boolean; banners: { kind: string; text: string }[];
+}
+export interface SiteDisplay {
+  zones?: Record<string, string>; crews?: Record<string, string>; resources?: Record<string, string>;
 }
 export interface Card {
   crew_id: string; level: number; key: "standard" | "increased" | "work_rest" | "stop" | "escalation";
@@ -78,7 +81,7 @@ export const api = {
   checkUnsafe: () => call<SiteState>("POST", `${SITE}/plans/check`, { template: "keep_previous" }),
   approve: (id: string) => call<SiteState>("POST", `${SITE}/plans/${id}/approve`),
   escalate: (crew_id: string) => call<SiteState>("POST", `${SITE}/escalations`, { crew_id, confirm: true }),
-  cards: () => call<{ cards: Card[]; plan_id: string | null; emergency_number: string }>("GET", `${SITE}/cards`),
+  cards: () => call<{ cards: Card[]; plan_id: string | null; emergency_number: string; display?: SiteDisplay }>("GET", `${SITE}/cards`),
   pack: () => call<import("../offline/degrader").OfflinePack & { cards: Card[] }>("GET", `${SITE}/offline-pack`),
   evaluation: () => call<Record<string, unknown>>("GET", "/api/v1/evaluation"),
 };

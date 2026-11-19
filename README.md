@@ -26,20 +26,30 @@ make setup
 make serve
 ```
 
+## Product map
+
+| Where | For | What |
+|---|---|---|
+| `/` | everyone | Product website: the problem, how it works, failure resilience, privacy |
+| `/app` | site supervisor | Safety Command Center: overview, worksite map, crew protection, safety resources, alerts & actions, safety activity |
+| `/worker` | crews | Mobile worker app: one protective action, pictograms first, five languages, offline |
+| `/demo` | judges | Live failure-resilience demonstration with scenario controls |
+| `/help` | judges, auditors | Method, limitations and the technical validation report (`eval/out`) |
+
 ## Judge guide (about 2 minutes)
 
-Open **`/command?judge=1`**. A numbered rail runs the judging moment; each "Do step" button performs one step.
+Open **`/demo`** (the old `/command?judge=1` redirects there). Each guided step calls the real engine, planner, policy checker and offline logic.
 
 | Step | What you do | What you should see |
 |---|---|---|
-| 1 | Load scenario | Real Abu Dhabi morning, 1 July 2026, 10:30 GST; three different levels; midday break hatched ahead; plan approved by the checker |
-| 2 | Cooling R2 fails | Crews C2 and C5 lose their only rest area; red dashed edges; banner "No reachable rest resource" |
-| 3 | Re-plan | The planner stops what it cannot protect (`protection insufficient`); checker approves (10 rules) |
-| 4 | Submit unsafe plan | The old plan, re-submitted unchanged, is rejected with cited rules (C4 resource down, C2, C6) |
-| 5 | Network offline | Offline banner and countdown to STOP-HOLD; levels never drop. Open **Crew cards**, pick বাংলা or العربية |
-| 6 | Open evidence | Property tests, checker mutation, forecast skill vs baselines, planner benchmark, cost of safety — all loaded from `eval/out/*.json` |
+| 1 | Load scenario | Real Abu Dhabi morning, 1 July 2026, 10:30 GST; crews at different levels; plan passes the policy check (10 safety rules) |
+| 2 | Cooling cabin fails | "Central cooled rest cabin unavailable — 14 workers in 2 crews (Concrete Pour, Site Logistics) now have no rest area"; lost protection drawn red on the map |
+| 3 | Generate plan | The planner stops what it cannot protect: "No adequate protection arrangement exists for Concrete Pour, Site Logistics"; policy check passes |
+| 4 | Submit old schedule | The earlier plan, re-submitted unchanged, is rejected by the policy check with plain-language reasons and rule references |
+| 5 | Go offline | Offline banner and countdown to STOP-HOLD; levels never drop. Open **Worker app**, pick বাংলা or العربية |
+| 6 | Open technical validation | Property tests, checker mutation, forecast skill vs baselines, planner benchmark, cost of safety — all loaded from `eval/out/*.json` |
 
-Click any crew row for the computation trace (estimated WBGT → clothing adjustment → NIOSH limit → work fraction → level) and the two-step "Report symptoms" escalation. The demo drawer has more failures (forecast stale/lost, meter entry, restore + physical confirmation, 15-minute dwell tick).
+Select any crew for the plain-language reasoning, the full computation trace ("How this was determined") and the two-step symptom report. Select any resource on the worksite map for capacity, last on-site confirmation, dependants and the consequence of losing it. More scenario controls: forecast stale/lost, onsite meter entry, repair + physical confirmation, 15-minute dwell tick, reset.
 
 ## What is real and what is synthetic
 
@@ -78,6 +88,7 @@ Python (FastAPI) is the single source of truth: `amanshift/screening` (thermofee
 | [LIMITATIONS.md](LIMITATIONS.md) | Assumptions, dependencies, limitations (official deliverable) |
 | [data/SOURCES.md](data/SOURCES.md) | Datasets and licences |
 | [STATUS.md](STATUS.md) | Facts, results, spec changes |
+| [docs/12](docs/12-PRODUCT-EXPERIENCE-REDESIGN.md) | Product experience redesign: information architecture, design system, workflows |
 | [docs/00–11](docs/) | Charter, requirements, science & safety, architecture, UI, decision engine, validation, responsible design, plan, demo, traceability, audit |
 | [AGENTS.md](AGENTS.md) | Binding instructions for coding agents |
 

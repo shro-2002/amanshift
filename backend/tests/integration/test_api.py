@@ -67,6 +67,17 @@ def test_restore_requires_confirmation_and_dwell(c: TestClient) -> None:
     assert next(x for x in d["crews"] if x["crew_id"] == "C2")["level"] <= 4
 
 
+def test_single_resource_repair_needs_confirmation(c: TestClient) -> None:
+    data(c.post(f"{SITE}/failures", json={"type": "resource_down", "target": "R2"}))
+    assert c.post(f"{SITE}/resources/R2/confirm").status_code == 409  # down cannot jump to up
+    d = data(c.post(f"{SITE}/failures", json={"type": "resource_repaired", "target": "R2"}))
+    r2 = next(r for r in d["coverage"]["resources"] if r["resource_id"] == "R2")
+    assert r2["state"] == "unconfirmed" and not r2["trusted"]
+    assert not next(x for x in d["crews"] if x["crew_id"] == "C2")["rest_edges"]
+    d = data(c.post(f"{SITE}/resources/R2/confirm"))
+    assert next(x for x in d["crews"] if x["crew_id"] == "C2")["rest_edges"] == ["R2"]
+
+
 def test_t_sec_01_validation(c: TestClient) -> None:
     assert c.post(f"{SITE}/failures", json={"type": "drop_table"}).status_code == 422
     assert c.post(f"{SITE}/failures", json={"type": "resource_down", "target": "R2;--"}).status_code == 422

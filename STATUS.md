@@ -55,6 +55,10 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 - **SC5 Forecast issue time** for `previous_day1` values is modelled as the D-1 12:00 UTC run (16:00 GST D-1); replay retrieval age is 30 min. Documented in `amanshift/scenario.py`.
 - **SC6 Dwell in the demo API**: `prev_eval` = worst raw evaluation of the previous tick *and* earlier evaluations at the current tick, so restoring a resource within the same tick cannot relax levels; relaxation needs two 15-min ticks (time-advance control).
 - **SC7 Unsafe-plan demo** re-submits the last approved actions bound to the *current* snapshot hash, so the rejection cites substantive rules (C4, C2, C6) rather than only C8.
+- **SC8 Product experience redesign (doc 12) supersedes doc 04 §3–§6 screen inventory and navigation.** Website `/`, Safety Command Center `/app/*`, worker app `/worker`, demonstration `/demo`, Help & technical validation `/help/*`. Engine, checker, policy, offline degrader and evaluation unchanged. Legacy routes redirect. Doc 04 severity tokens, accessibility rules and worker-card rules still bind.
+- **SC9 Site display names and emergency number in the site file.** `data/scenarios/demo-site-a.json` gains `display` (zone/crew/resource names; ids stay the keys) and `emergency` (998, UAE ambulance). The v1 cards said "999 (UAE ambulance)"; 999 is the UAE police number, 998 is ambulance. Must be replaced with the site emergency-plan number before any pilot.
+- **SC10 Per-resource repair report.** New failure type `resource_repaired` moves one resource down → unconfirmed (same two-step rule as `restore_all`: it protects no one until physically confirmed). Integration test added.
+- **SC11 Worker symptom guidance** adds "Do not stay alone" (en/ar/hi/ur/bn, pending native review). The worker app has no symptom-report submission; escalation stays a supervisor/medic flow.
 - Node 26 used instead of Node 22 LTS (installed toolchain); Vite 8 / TypeScript 7.
 
 ## Implementation results (all from `make eval`, see eval/out/report.md)
@@ -68,8 +72,11 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 - UI (M6): S1, S2 (+S4 coverage, S5 trace drawer, S6 demo drawer, S8 checker), S9 cards (en/ar/hi/ur/bn, RTL), S10 offline banners, S11 evidence, S12 methodology. Judge mode `/command?judge=1`.
 - Verification (M7): `make test` green (backend 97 tests incl. property suite; web vitest 6 incl. fast-check T-OFF-01..03); Playwright 6/6 (T-E2E-06 judging moment, T-UI-01 smoke, T-UI-02 RTL, T-UI-03 axe 0 serious/critical, 320 px no overflow, T-OFF-04) against local server and the Docker image `amanshift:1.0`; pip-audit and npm audit: 0 known vulnerabilities; banned-wording grep clean.
 
+- Redesign (doc 12, 2026-11-19): Playwright 6/6 on the new routes (judging moment via `/demo`, smoke + legacy redirects, worker RTL, axe 0 serious/critical on 7 pages, 320 px, offline); backend 98 tests; vitest 12. Screenshots in `docs/screenshots/` (v1-rc1 originals in `docs/screenshots/v1-rc1/` for comparison).
+
 ## Not done / human-only
 - Public URL (Render/Fly) needs a hosting account → doc 08 §6 cut 6 applies until deployed: `make demo` + video. Image builds and passes E2E locally.
+- Hero photography: the website uses an illustrated SVG worksite; licensed Gulf construction photography can replace it (needs a licensed image).
 - 2-minute video, submission form, reading dashboard requirements (B1 second half), deadline hour (B2).
 - P1 items not built: lexicographic MILP planner, S3 replay workspace, S7 plan comparison, mutmut code-mutation score, print-optimised A4 sheet (browser print of S9 works), audio clips.
 

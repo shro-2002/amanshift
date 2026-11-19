@@ -5,6 +5,7 @@ export interface PackStep { offset_min: number; planned: Record<string, number>;
 export interface OfflinePack {
   pack_issued_at: string; stale_after_min: number; expires_after_min: number;
   confirmations_expire_after_min: number; tick_min: number; steps: PackStep[];
+  display?: import("../api/client").SiteDisplay; emergency_number?: string;
 }
 export interface ClockState { maxElapsedMin: number; lastWallMs: number }
 export type Mode = "cached" | "conservative" | "expired";

@@ -1,37 +1,59 @@
-/* Design tokens — doc 04 §2 (frozen). Severity colours are used only for severity. */
+/* Design tokens — doc 12 §4 (supersedes doc 04 §2 palette; severity tokens unchanged).
+   Severity colours are used only for severity and always paired with a word and a shape. */
 :root {
-  --bg:#F6F4EF; --surface:#FFFFFF; --surface-2:#EFECE4; --line:#D9D4C7;
-  --ink:#1B1F23; --ink-2:#4A5159; --ink-3:#5F6670;
-  --brand:#0F5257; --brand-ink:#FFFFFF; --focus:#1D4ED8;
-  --sev-1:#1F7A4D; --sev-1-ink:#FFFFFF;
-  --sev-2:#E3B341; --sev-2-ink:#1B1F23;
-  --sev-3:#C2410C; --sev-3-ink:#FFFFFF;
-  --sev-4:#B42318; --sev-4-ink:#FFFFFF;
-  --sev-4-text:#B42318;
-  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(27,31,35,.18) 6px 8px);
+  --navy-950:#07131F; --navy-900:#0B1B2B; --navy-800:#10263A; --navy-700:#13314A; --navy-500:#2A4C68;
+  --teal-700:#0B5558; --teal-600:#0F6A6E; --teal-500:#178388; --teal-100:#D7ECEA;
+  --sand-50:#F5F1E8; --sand-100:#ECE5D6; --sand-200:#DED4C0; --sand-400:#B8A98C;
+
+  --bg:var(--sand-50); --surface:#FFFFFF; --surface-2:var(--sand-100); --line:#DCD3C2; --line-strong:#C3B79F;
+  --ink:#14202B; --ink-2:#435161; --ink-3:#5B6775;
+  --brand:var(--teal-600); --brand-strong:var(--teal-700); --brand-ink:#FFFFFF; --brand-soft:var(--teal-100);
+  --chrome:var(--navy-900); --chrome-2:var(--navy-800); --chrome-ink:#E8EEF2; --chrome-ink-2:#A9B8C5;
+  --focus:#2563EB;
+
+  --sev-1:#1F7A4D; --sev-1-ink:#FFFFFF; --sev-1-soft:#E3F1E9;
+  --sev-2:#E3B341; --sev-2-ink:#1B1F23; --sev-2-soft:#FBF1D6;
+  --sev-3:#C2410C; --sev-3-ink:#FFFFFF; --sev-3-soft:#FBE6DA;
+  --sev-4:#B42318; --sev-4-ink:#FFFFFF; --sev-4-soft:#FBE4E1;
+  --sev-4-text:#B42318; --warn-text:#8A5A00;
+  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(20,32,43,.16) 6px 8px);
+
   --font-latin:"IBM Plex Sans",system-ui,sans-serif;
   --font-ar:"IBM Plex Sans Arabic","Noto Naskh Arabic",sans-serif;
   --font-ur:"Noto Naskh Arabic",sans-serif;
   --font-hi:"Noto Sans Devanagari","IBM Plex Sans",sans-serif;
   --font-bn:"Noto Sans Bengali","IBM Plex Sans",sans-serif;
   --font-mono:"IBM Plex Mono",ui-monospace,monospace;
-  --t-12:.75rem; --t-14:.875rem; --t-16:1rem; --t-20:1.25rem; --t-24:1.5rem; --t-32:2rem; --t-44:2.75rem;
-  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-6:24px; --s-8:32px; --s-12:48px;
-  --radius-sm:4px; --radius-md:8px;
+
+  --t-12:.75rem; --t-14:.875rem; --t-16:1rem; --t-18:1.125rem; --t-20:1.25rem; --t-24:1.5rem;
+  --t-32:2rem; --t-44:2.75rem; --t-60:3.75rem;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px; --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-24:96px;
+  --radius-sm:6px; --radius-md:10px; --radius-lg:16px;
+  --shadow-1:0 1px 2px rgba(11,27,43,.06), 0 1px 1px rgba(11,27,43,.04);
+  --shadow-2:0 8px 24px rgba(11,27,43,.10), 0 2px 6px rgba(11,27,43,.06);
+  --ease:cubic-bezier(.2,.7,.2,1);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg:#111416; --surface:#181C1F; --surface-2:#20262A; --line:#2E363B;
-  --ink:#ECEAE4; --ink-2:#B6BCC2; --ink-3:#9AA2A9; --brand:#5FB3B3; --brand-ink:#0B1214;
-  --sev-1:#3FA370; --sev-2:#E8C25B; --sev-3:#E8692E; --sev-4:#E5484D; --sev-4-text:#F0767A;
+  --bg:#0F1519; --surface:#151C21; --surface-2:#1A2228; --line:#28333B; --line-strong:#38454F;
+  --ink:#E9E5DC; --ink-2:#B5BEC6; --ink-3:#98A3AD;
+  --brand:#4FB3B0; --brand-strong:#6CC7C3; --brand-ink:#061114; --brand-soft:#16343A;
+  --chrome:var(--navy-950); --chrome-2:#0C1C2B;
+  --sev-1:#3FA370; --sev-2:#E8C25B; --sev-3:#E8692E; --sev-4:#E5484D; --sev-4-text:#F0767A; --warn-text:#E8C25B;
   --sev-1-ink:#0B1214; --sev-2-ink:#0B1214; --sev-3-ink:#0B1214; --sev-4-ink:#0B1214;
-  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(236,234,228,.16) 6px 8px);
+  --sev-1-soft:#15291F; --sev-2-soft:#2D2715; --sev-3-soft:#2E1C13; --sev-4-soft:#311719;
+  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(233,229,220,.14) 6px 8px);
+  --shadow-1:0 1px 2px rgba(0,0,0,.4); --shadow-2:0 8px 24px rgba(0,0,0,.45);
   color-scheme: dark; } }
 :root[data-theme="dark"] {
-  --bg:#111416; --surface:#181C1F; --surface-2:#20262A; --line:#2E363B;
-  --ink:#ECEAE4; --ink-2:#B6BCC2; --ink-3:#9AA2A9; --brand:#5FB3B3; --brand-ink:#0B1214;
-  --sev-1:#3FA370; --sev-2:#E8C25B; --sev-3:#E8692E; --sev-4:#E5484D; --sev-4-text:#F0767A;
+  --bg:#0F1519; --surface:#151C21; --surface-2:#1A2228; --line:#28333B; --line-strong:#38454F;
+  --ink:#E9E5DC; --ink-2:#B5BEC6; --ink-3:#98A3AD;
+  --brand:#4FB3B0; --brand-strong:#6CC7C3; --brand-ink:#061114; --brand-soft:#16343A;
+  --chrome:var(--navy-950); --chrome-2:#0C1C2B;
+  --sev-1:#3FA370; --sev-2:#E8C25B; --sev-3:#E8692E; --sev-4:#E5484D; --sev-4-text:#F0767A; --warn-text:#E8C25B;
   --sev-1-ink:#0B1214; --sev-2-ink:#0B1214; --sev-3-ink:#0B1214; --sev-4-ink:#0B1214;
-  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(236,234,228,.16) 6px 8px);
+  --sev-1-soft:#15291F; --sev-2-soft:#2D2715; --sev-3-soft:#2E1C13; --sev-4-soft:#311719;
+  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(233,229,220,.14) 6px 8px);
+  --shadow-1:0 1px 2px rgba(0,0,0,.4); --shadow-2:0 8px 24px rgba(0,0,0,.45);
   color-scheme: dark;
 }

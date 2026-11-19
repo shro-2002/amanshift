@@ -136,6 +136,9 @@ def inject(s: Session, ftype: str, target: str | None, value: dict[str, Any], po
     if ftype == "resource_down" and target in st.resource_state:
         s.state = replace(st, resource_state={**st.resource_state, target: "down"})
         return f"{target} reported DOWN (simulated failure)"
+    if ftype == "resource_repaired" and st.resource_state.get(target or "") == "down":
+        s.state = replace(st, resource_state={**st.resource_state, target: "unconfirmed"})
+        return f"{target} reported repaired — not used until physically confirmed"
     if ftype == "forecast_stale":
         s.state = replace(st, forecast_backdate=STALE_BACKDATE)
         return "Forecast feed stale: last retrieval 4 h 30 min ago (simulated)"

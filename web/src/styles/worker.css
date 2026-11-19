@@ -1,0 +1,79 @@
+/* Worker protection app (doc 12 §5.8): field use in bright sun — large type, high contrast, 56 px targets.
+   Logical properties only so ar/ur mirror correctly. Severity colours appear only next to the level word + shape. */
+.wk { --wk-target: 56px; min-block-size: 100vh; background: var(--bg); color: var(--ink); font-size: var(--t-18); line-height: 1.45; }
+.wk :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.wk [lang="ar"] { font-family: var(--font-ar); }
+.wk [lang="ur"] { font-family: var(--font-ur); }
+.wk [lang="hi"] { font-family: var(--font-hi); }
+.wk [lang="bn"] { font-family: var(--font-bn); }
+.wk [lang="en"] { font-family: var(--font-latin); }
+
+.wk-wrap { inline-size: 100%; max-inline-size: 560px; margin-inline: auto; padding-inline: var(--s-4); }
+
+/* Header */
+.wk-top { background: var(--chrome); color: var(--chrome-ink); padding-block: var(--s-3) var(--s-4); }
+.wk-top .wk-wrap { display: grid; gap: var(--s-3); }
+.wk-brand { font-size: var(--t-20); font-weight: 700; letter-spacing: .01em; }
+.wk-langs { display: grid; grid-template-columns: repeat(auto-fit, minmax(5.25rem, 1fr)); gap: var(--s-2); }
+.wk-langs button { min-block-size: var(--wk-target); min-inline-size: var(--wk-target); padding-inline: var(--s-2); font-size: var(--t-16); font-weight: 600;
+  background: transparent; color: var(--chrome-ink); border: 2px solid var(--chrome-ink-2); border-radius: var(--radius-md); }
+.wk-langs button:hover:not(:disabled) { border-color: var(--chrome-ink); color: var(--chrome-ink); }
+.wk-langs button[aria-pressed="true"] { background: var(--sand-50); color: var(--navy-900); border-color: var(--sand-50); }
+
+/* Main column */
+.wk-main { display: grid; gap: var(--s-5); padding-block: var(--s-5) var(--s-6); }
+.wk-main > * { min-inline-size: 0; }
+.wk-err, .wk-empty { padding: var(--s-4); border: 2px solid var(--line-strong); border-radius: var(--radius-md); background: var(--surface); }
+
+.wk-crew { display: grid; gap: var(--s-2); font-weight: 600; }
+.wk-crew select { min-block-size: var(--wk-target); inline-size: 100%; font-size: var(--t-20); font-weight: 600; padding-inline: var(--s-3);
+  border: 2px solid var(--ink); border-radius: var(--radius-md); background: var(--surface); color: var(--ink); }
+
+/* Offline / STOP-HOLD banner (component from components/OfflineBanner) */
+.wk .banner { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-3); padding: var(--s-4);
+  border: 2px solid var(--ink); border-radius: var(--radius-md); background-color: var(--surface); font-size: var(--t-16); }
+.wk .banner.hatch { background-image: var(--degraded-hatch); }
+.wk .banner[role="alert"] { border-color: var(--sev-4); border-inline-start-width: 10px; font-size: var(--t-18); }
+.wk .banner strong { font-size: var(--t-18); }
+
+/* The protective-action card */
+.wk-card { --lvl: var(--line-strong); display: grid; gap: var(--s-3); padding: var(--s-5); background: var(--surface);
+  border: 2px solid var(--lvl); border-block-start-width: 14px; border-radius: var(--radius-lg); box-shadow: var(--shadow-2); }
+.wk-card.lvl-1 { --lvl: var(--sev-1); }
+.wk-card.lvl-2 { --lvl: var(--sev-2); }
+.wk-card.lvl-3 { --lvl: var(--sev-3); }
+.wk-card.lvl-4 { --lvl: var(--sev-4); }
+.wk-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3); }
+.wk-card-head h2 { font-size: var(--t-24); font-weight: 700; overflow-wrap: anywhere; }
+.wk-card .badge.lg { font-size: var(--t-20); padding: var(--s-2) var(--s-4); }
+.wk-picto { display: flex; flex-wrap: wrap; gap: var(--s-4); padding-block: var(--s-2); color: var(--ink); }
+.wk-picto svg { flex: none; }
+.wk-line1 { font-size: clamp(1.75rem, 1.5rem + 1.2vw, 2.25rem); font-weight: 700; line-height: 1.25; color: var(--ink); overflow-wrap: anywhere; }
+.wk-line2 { font-size: var(--t-18); color: var(--ink-2); overflow-wrap: anywhere; }
+.wk-water { display: flex; align-items: center; gap: var(--s-2); font-weight: 600; overflow-wrap: anywhere; }
+.wk-water svg { flex: none; }
+.wk-meta { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-3); padding-block-start: var(--s-3); border-block-start: 1px solid var(--line);
+  font-size: var(--t-14); color: var(--ink-2); }
+.wk-conservative { color: var(--warn-text); }
+
+/* Feeling unwell — always visible */
+.wk-unwell { display: grid; gap: var(--s-3); padding: var(--s-5); background: var(--surface-2); border: 2px solid var(--ink); border-radius: var(--radius-lg); }
+.wk-unwell h2 { display: flex; align-items: center; gap: var(--s-2); font-size: var(--t-24); font-weight: 700; }
+.wk-unwell h2 svg { flex: none; }
+.wk-unwell-body { font-size: var(--t-20); font-weight: 600; }
+.wk-call { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-3); min-block-size: var(--wk-target); padding: var(--s-2) var(--s-4);
+  background: var(--chrome); color: var(--chrome-ink); border-radius: var(--radius-md); font-size: var(--t-20); font-weight: 700; text-decoration: none; }
+.wk-call:hover { background: var(--chrome-2); color: var(--chrome-ink); }
+.wk-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Other crews (collapsed by default) */
+.wk-others { border: 2px solid var(--line-strong); border-radius: var(--radius-md); background: var(--surface); }
+.wk-others summary { display: flex; align-items: center; min-block-size: var(--wk-target); padding-inline: var(--s-4); font-weight: 600; cursor: pointer; }
+.wk-others ul { list-style: none; margin: 0; padding: 0 var(--s-3) var(--s-3); display: grid; gap: var(--s-2); }
+.wk-others button { inline-size: 100%; min-block-size: var(--wk-target); justify-content: space-between; flex-wrap: wrap; font-size: var(--t-18); text-align: start; }
+
+.wk-foot { padding-block: var(--s-4) var(--s-8); font-size: var(--t-14); color: var(--ink-2); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .wk-langs button, .wk-call, .wk-others button { transition: background-color .15s var(--ease), border-color .15s var(--ease); }
+}

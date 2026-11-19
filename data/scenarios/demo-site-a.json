@@ -106,5 +106,34 @@
       "zone_id": "Z3",
       "capacity": 30
     }
-  ]
+  ],
+  "display": {
+    "note": "Operational display names for the synthetic site. Stable ids (C1, Z1, R1) remain the keys everywhere.",
+    "zones": {
+      "Z1": "West Frame",
+      "Z2": "Central Podium",
+      "Z3": "East Plant Yard"
+    },
+    "crews": {
+      "C1": "Formwork & Rebar",
+      "C2": "Concrete Pour",
+      "C3": "Steel Erection",
+      "C4": "Material Handling",
+      "C5": "Site Logistics",
+      "C6": "MEP Fit-out"
+    },
+    "resources": {
+      "R1": "West shade canopy",
+      "R2": "Central cooled rest cabin",
+      "R3": "East shade canopy",
+      "W1": "West water station",
+      "W2": "Central water station",
+      "W3": "East water station"
+    }
+  },
+  "emergency": {
+    "number": "998",
+    "label": "UAE ambulance",
+    "note": "Replace with the site emergency plan number before any pilot."
+  }
 }

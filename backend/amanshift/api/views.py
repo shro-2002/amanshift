@@ -139,7 +139,8 @@ def state_view(state: sc.SiteState, snap: Snapshot, dec: kernel.SiteDecision, pl
     crews.sort(key=lambda c: (-c["display_level"], c["crew_id"]))
     counts = {str(k): sum(1 for c in crews if c["display_level"] == k) for k in (1, 2, 3, 4)}
     return {
-        "site": {"site_id": snap.site_id, "label": sc.site_config()["label"], "synthetic": True},
+        "site": {"site_id": snap.site_id, "label": sc.site_config()["label"], "synthetic": True,
+                 "display": sc.site_config().get("display", {})},
         "scenario_date": state.day.isoformat(), "eval_time": snap.eval_time,
         "eval_time_local": hhmm(snap.eval_time, pol), "connectivity": snap.connectivity,
         "policy_version": pol.version, "snapshot_id": snapshot_id(snap),

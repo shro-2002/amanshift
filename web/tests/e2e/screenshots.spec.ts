@@ -1,37 +1,54 @@
-// Captures doc 09 §8 screenshots into docs/screenshots (run: npx tsx or node via playwright test runner below).
-import { test } from "@playwright/test";
+// Captures submission screenshots (doc 09 §8, doc 12) into docs/screenshots. v1-rc1 originals are kept in docs/screenshots/v1-rc1.
+import { test, type Page } from "@playwright/test";
 
 const OUT = "../docs/screenshots";
+const shot = (page: Page, name: string, fullPage = true) => page.screenshot({ path: `${OUT}/${name}.png`, fullPage });
+const step = (page: Page, name: string) => page.getByRole("button", { name, exact: true }).click();
+
 test("capture submission screenshots", async ({ page }) => {
   test.skip(!process.env.AMANSHIFT_SCREENSHOTS, "set AMANSHIFT_SCREENSHOTS=1 to capture");
-  const step = (n: number) => page.getByRole("button", { name: `Do step ${n}` }).click();
-  await page.goto("/command?judge=1");
-  await page.addStyleTag({ content: ".planbar{position:static!important}" });
-  await step(1);
-  await page.locator(".planbar").getByText("APPROVED").waitFor();
-  await page.locator("#crews-h").scrollIntoViewIfNeeded();
-  await page.screenshot({ path: `${OUT}/1-s2-normal.png`, fullPage: true });
-  await step(2);
-  await page.getByText("No reachable rest resource").waitFor();
-  await page.screenshot({ path: `${OUT}/2-s2-r2-failure.png`, fullPage: true });
-  await step(3);
-  await step(4);
-  await page.locator(".verdict-no[role=status]").waitFor();
-  await page.locator("#chk-h").scrollIntoViewIfNeeded();
-  await page.locator("section[aria-labelledby=chk-h]").screenshot({ path: `${OUT}/3-s8-rejection.png` });
-  await step(5);
-  await page.locator(".banner.hatch").first().waitFor();
-  await page.locator(".banners").screenshot({ path: `${OUT}/5-s10-offline.png` });
-  for (const lang of ["bn", "ar"]) {
-    await page.goto("/cards");
-    await page.locator("header select").selectOption(lang);
-    await page.locator(".wcard").first().waitFor();
-    await page.screenshot({ path: `${OUT}/4-s9-cards-${lang}.png`, fullPage: true });
+  test.setTimeout(120_000);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await page.waitForTimeout(500);
+  await shot(page, "01-home", false);
+  await page.goto("/demo");
+  await step(page, "Load scenario");
+  await page.getByText("Policy check passed · 10 safety rules").first().waitFor();
+  await page.goto("/app");
+  await page.locator(".tiles").waitFor();
+  await shot(page, "02-overview", false);
+  await page.goto("/demo");
+  await step(page, "Cooling cabin fails");
+  await page.locator(".attention").getByText("Central cooled rest cabin unavailable").waitFor();
+  await page.goto("/app/worksite?sel=resource:R2");
+  await page.locator(".map-detail h3").waitFor();
+  await shot(page, "03-worksite-cooling-failure", false);
+  await page.goto("/demo");
+  await step(page, "Generate plan");
+  await step(page, "Submit old schedule");
+  await page.locator("#us-h").waitFor();
+  await page.waitForTimeout(400);
+  await shot(page, "04-demo-plan-and-rejection");
+  await page.goto("/app/alerts");
+  await page.waitForTimeout(500);
+  await shot(page, "05-alerts-actions", false);
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const [lang, name] of [["English", "en"], ["العربية", "ar"], ["বাংলা", "bn"]]) {
+    await page.goto("/worker");
+    await page.getByRole("button", { name: lang, exact: true }).click();
+    await page.locator(".wk-card").waitFor();
+    await page.mouse.move(0, 0);
+    await page.waitForTimeout(400);
+    await shot(page, `06-worker-${name}`, false);
   }
-  await page.locator("header select").selectOption("en");
-  await page.goto("/evidence");
+  await page.getByRole("button", { name: "English", exact: true }).click();
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/demo");
+  await step(page, "Go offline");
+  await page.locator(".banner.hatch").first().waitFor();
+  await shot(page, "07-demo-offline", false);
+  await page.goto("/help/validation");
   await page.getByText("Fail-safe property tests").waitFor();
-  await page.screenshot({ path: `${OUT}/6-s11-evidence.png`, fullPage: true });
-  await page.goto("/method");
-  await page.screenshot({ path: `${OUT}/7-s12-limitations.png`, fullPage: true });
+  await shot(page, "08-technical-validation", false);
 });

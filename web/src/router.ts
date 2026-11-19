@@ -1,8 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
-export function navigate(to: string): void {
-  window.history.pushState({}, "", to);
+export function navigate(to: string, replace = false): void {
+  if (replace) window.history.replaceState({}, "", to);
+  else window.history.pushState({}, "", to);
   window.dispatchEvent(new PopStateEvent("popstate"));
+  if (!replace) window.scrollTo(0, 0);
+}
+
+/** v1.0-rc1 routes kept working (README, video, tests) — doc 12 §3. */
+export function legacyRedirect(path: string, search: URLSearchParams): string | null {
+  if (path.startsWith("/command")) return search.get("judge") === "1" ? "/demo" : "/app";
+  if (path.startsWith("/cards") || path.startsWith("/offline")) return "/worker";
+  if (path.startsWith("/evidence")) return "/help/validation";
+  if (path.startsWith("/method")) return "/help/method";
+  return null;
 }
 
 export function usePath(): { path: string; search: URLSearchParams } {
@@ -14,3 +25,10 @@ export function usePath(): { path: string; search: URLSearchParams } {
   }, []);
   return { path: loc.path, search: new URLSearchParams(loc.search) };
 }
+
+/** Internal link handler: keeps SPA navigation, lets modified clicks open new tabs. */
+export const linkTo = (to: string) => (e: MouseEvent) => {
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+  e.preventDefault();
+  navigate(to);
+};

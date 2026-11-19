@@ -60,6 +60,8 @@ def build_pack(s: ss.Session, pol: Policy) -> dict[str, Any]:
         "tick_min": pol.tick_min, "steps": steps, "cards": cards(s, pol)["cards"],
         "resources": {k: v for k, v in s.state.resource_state.items()},
         "policy_version": pol.version,
+        "display": sc.site_config().get("display", {}),
+        "emergency_number": _emergency(),
     }
 
 
@@ -95,4 +97,10 @@ def cards(s: ss.Session, pol: Policy) -> dict[str, Any]:
                     "provenance": "estimated WBGT (forecast-derived)"})
     out.sort(key=lambda c: (-c["level"], c["crew_id"]))
     return {"cards": out, "plan_id": plan.plan_id if plan else None,
-            "emergency_number": "999 (UAE ambulance)", "pending_native_review": True}
+            "emergency_number": _emergency(), "display": sc.site_config().get("display", {}),
+            "pending_native_review": True}
+
+
+def _emergency() -> str:
+    em = sc.site_config()["emergency"]
+    return f'{em["number"]} ({em["label"]})'

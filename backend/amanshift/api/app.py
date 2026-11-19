@@ -153,7 +153,7 @@ def state(site: str, request: Request, response: Response) -> JSONResponse:
 
 class FailureIn(BaseModel):
     type: Literal["resource_down", "forecast_stale", "forecast_lost", "network_offline",
-                  "meter_reading", "restore_all", "time_advance"]
+                  "meter_reading", "restore_all", "resource_repaired", "time_advance"]
     target: str | None = Field(default=None, pattern=ID_PATTERN)
     value: dict[str, Any] = Field(default_factory=dict)
 

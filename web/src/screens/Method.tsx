@@ -1,8 +1,7 @@
 // S12 Methodology & limitations — plain language, ≤ 1,200 words (doc 04 §6).
 export function Method() {
   return (
-    <main className="prose">
-      <h1 style={{ fontSize: "var(--t-24)" }}>Methodology &amp; limitations</h1>
+    <div className="prose card"><div className="body">
       <h2>What AmanShift is — and is not</h2>
       <p>AmanShift is crew-level decision support for supervisors of outdoor work in Abu Dhabi. It says what protection a crew needs now. It does not diagnose anyone, does not authorize work, and does not replace the employer's competent person or emergency procedures. Data may not be used to rank, discipline, hire, fire or pay workers.</p>
       <h2>Estimated versus measured WBGT</h2>
@@ -25,6 +24,6 @@ export function Method() {
       <p>Policy correctness (the software applies the cited rules and never loosens them on failure) is tested. Occupational safety — whether workers are actually protected — is not shown and needs a field pilot with onsite meters. Liljegren has not been validated against Gulf measurements; the airport is not a construction site; there is no reflected heat from concrete or steel; metabolic rates are category assumptions; translations are pending native review; the midday-break 2026 dates come from secondary sources.</p>
       <h2>Governance</h2>
       <p>No names, employee IDs, phone numbers, photos, biometrics or locations exist in the system. The crew is the smallest unit. Plans, verdicts, overrides and escalations go to a hash-chained, append-only log; escalation payloads are purgeable without breaking the chain. Supervisors can make plans stricter, never looser than the checker allows.</p>
-    </main>
+    </div></div>
   );
 }

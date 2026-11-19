@@ -19,3 +19,4 @@ web/playwright-report/
 *.docx
 KULYA*.md
 deep-research-report.md
+*.tsbuildinfo
