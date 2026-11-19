@@ -55,13 +55,17 @@ async def _invalid(_: Request, exc: RequestValidationError) -> JSONResponse:
                                              "details": json.loads(json.dumps(exc.errors(), default=str))})
 
 
+def valid_sid(sid: str | None) -> bool:
+    return bool(sid) and len(sid or "") == 32 and all(ch in "0123456789abcdef" for ch in sid or "")
+
+
 def sess(request: Request, response: Response) -> ss.Session:
     sid = request.cookies.get(COOKIE)
-    if not sid or len(sid) != 32:
+    if not valid_sid(sid):
         sid = secrets.token_hex(16)
         response.set_cookie(COOKIE, sid, httponly=True, samesite="strict", max_age=86400)
         request.state.new_sid = sid
-    return SESSIONS.get(sid, POL, LOG)
+    return SESSIONS.get(str(sid), POL, LOG)
 
 
 def role(request: Request) -> str:
@@ -133,10 +137,10 @@ def load(scenario_id: str, request: Request, response: Response) -> JSONResponse
     if scenario_id != ss.scenario_meta()["scenario_id"]:
         return fail(404, "NOT_FOUND", "unknown scenario")
     sid = request.cookies.get(COOKIE)
-    if not sid or len(sid) != 32:
+    if not valid_sid(sid):
         sid = secrets.token_hex(16)
         request.state.new_sid = sid
-    s = SESSIONS.reset(sid, POL, LOG)
+    s = SESSIONS.reset(str(sid), POL, LOG)
     return respond(s, request, response)
 
 

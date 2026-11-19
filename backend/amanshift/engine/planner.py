@@ -51,14 +51,19 @@ def _choose(d: CrewDecision, size: int, cap: dict[str, int]) -> tuple[PlanAction
                       reason_codes=[lvl, code, "PROTECTION_INSUFFICIENT"]), True
 
 
-def plan(decision: SiteDecision, pol: Policy, previous: Plan | None = None) -> Plan:
+def plan(decision: SiteDecision, pol: Policy, previous: Plan | None = None,
+         by_priority: bool = True) -> Plan:
+    """by_priority=False serves crews in id order (benchmark baseline only)."""
     snap = decision.snapshot
     sizes = {c.crew_id: c.size for c in snap.crews}
     zones = {c.crew_id: c.zone_id for c in snap.crews}
     res = coverage.resource_index(snap)
     cap = {r.resource_id: r.capacity for r in snap.resources}
-    order = sorted(decision.crews.values(),
-                   key=lambda d: (-d.effective_level, -sizes[d.crew_id], d.crew_id))
+    if by_priority:
+        order = sorted(decision.crews.values(),
+                       key=lambda d: (-d.effective_level, -sizes[d.crew_id], d.crew_id))
+    else:
+        order = sorted(decision.crews.values(), key=lambda d: d.crew_id)
     prev_actions = {a.crew_id: a for a in previous.actions} if previous else {}
     actions: list[PlanAction] = []
     insufficient = False

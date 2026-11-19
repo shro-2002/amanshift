@@ -140,6 +140,8 @@ def bootstrap(df: pd.DataFrame, fl: np.ndarray, rl: np.ndarray, k: int) -> dict[
 
 def baseline_levels(df: pd.DataFrame, name: str, pol: Policy, thr: dict[int, float],
                     ref_levels: np.ndarray) -> np.ndarray:
+    if name == "B5_always_work_rest":
+        return np.full(len(df), 3)
     if name == "B1_clock_rule":
         lt = df["time_utc"] + pd.Timedelta(hours=4)
         ban = [risk.midday_active(t.to_pydatetime() - pd.Timedelta(hours=4), "direct_sun", pol)
@@ -199,7 +201,7 @@ def evaluate_split(years: tuple[int, ...], pol: Policy, thr: dict[int, float]) -
             entry["bootstrap95_k3"] = bootstrap(df, fl, rl, 3)
             fl0, _ = levels(df, p, 0.0, pol)
             entry["baselines_k3"] = {"B4_raw_forecast_delta0": scores(fl0, rl, 3)}
-            for b in ("B1_clock_rule", "B2_air_temperature", "B3_persistence"):
+            for b in ("B1_clock_rule", "B2_air_temperature", "B3_persistence", "B5_always_work_rest"):
                 entry["baselines_k3"][b] = scores(baseline_levels(df, b, pol, thr, rl), rl, 3)
         out["profiles"][p.key] = entry
     return out
@@ -233,7 +235,9 @@ def main() -> int:
         "limitations": ["airport is not a construction site", "METAR lacks radiation and globe "
                         "temperature; reference radiation comes from the forecast",
                         "Liljegren is a model of WBGT, not a measurement", "one grid point",
-                        "no surface heat (asphalt, steel)", "2025 holdout was exposed to an untuned "
+                        "no surface heat (asphalt, steel)",
+                        "events (level >= 3) cover most work hours, so POD is easy; compare against "
+                        "B5_always_work_rest and read FAR, exact agreement and under-warning", "2025 holdout was exposed to an untuned "
                         "planning smoke test"],
     }
     OUT.mkdir(parents=True, exist_ok=True)

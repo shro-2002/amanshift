@@ -1,0 +1,85 @@
+{
+  "data_type": "SYNTH-TEST",
+  "seed": 20261119,
+  "tiers": [
+    {
+      "crews": 4,
+      "resources": 3,
+      "sites": 200,
+      "amanshift_greedy": {
+        "mean_priority_weighted_unprotected": 155.085,
+        "mean_crews_stopped": 3.43,
+        "sites_with_checker_violations": 0,
+        "total_checker_violations": 0,
+        "runtime_ms_p50": 1.59,
+        "runtime_ms_p95": 2.2
+      },
+      "naive_greedy": {
+        "mean_priority_weighted_unprotected": 161.925,
+        "mean_crews_stopped": 3.41,
+        "sites_with_checker_violations": 0,
+        "total_checker_violations": 0
+      },
+      "no_replan": {
+        "mean_priority_weighted_unprotected": 162.43,
+        "mean_crews_stopped": 2.665,
+        "sites_with_checker_violations": 177,
+        "total_checker_violations": 674
+      },
+      "amanshift_le_naive_sites": 196
+    },
+    {
+      "crews": 8,
+      "resources": 6,
+      "sites": 200,
+      "amanshift_greedy": {
+        "mean_priority_weighted_unprotected": 121.115,
+        "mean_crews_stopped": 5.58,
+        "sites_with_checker_violations": 0,
+        "total_checker_violations": 0,
+        "runtime_ms_p50": 3.77,
+        "runtime_ms_p95": 5.33
+      },
+      "naive_greedy": {
+        "mean_priority_weighted_unprotected": 148.785,
+        "mean_crews_stopped": 5.345,
+        "sites_with_checker_violations": 0,
+        "total_checker_violations": 0
+      },
+      "no_replan": {
+        "mean_priority_weighted_unprotected": 142.39,
+        "mean_crews_stopped": 4.705,
+        "sites_with_checker_violations": 183,
+        "total_checker_violations": 600
+      },
+      "amanshift_le_naive_sites": 193
+    },
+    {
+      "crews": 12,
+      "resources": 10,
+      "sites": 200,
+      "amanshift_greedy": {
+        "mean_priority_weighted_unprotected": 79.485,
+        "mean_crews_stopped": 7.015,
+        "sites_with_checker_violations": 0,
+        "total_checker_violations": 0,
+        "runtime_ms_p50": 8.23,
+        "runtime_ms_p95": 11.24
+      },
+      "naive_greedy": {
+        "mean_priority_weighted_unprotected": 115.11,
+        "mean_crews_stopped": 6.745,
+        "sites_with_checker_violations": 0,
+        "total_checker_violations": 0
+      },
+      "no_replan": {
+        "mean_priority_weighted_unprotected": 105.32,
+        "mean_crews_stopped": 6.13,
+        "sites_with_checker_violations": 187,
+        "total_checker_violations": 520
+      },
+      "amanshift_le_naive_sites": 185
+    }
+  ],
+  "note": "runtime = kernel decide + plan (incl. defer search), single core; MILP planner is P1 and not built"
+}

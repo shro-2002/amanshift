@@ -127,3 +127,13 @@ def test_log_payload_purge_keeps_chain() -> None:
     log._db.execute("UPDATE events SET payload_sha256 = 'x' WHERE kind = 'plan_approved'")
     assert not log.verify("s")
     assert LOG is not None
+
+
+def test_session_store_is_bounded() -> None:
+    from amanshift.api import session as ss
+    from amanshift.api.app import POL
+    store = ss.Sessions()
+    log = LOG
+    for i in range(ss.MAX_SESSIONS + 5):
+        store.reset(f"{i:032x}", POL, log)
+    assert len(store) == ss.MAX_SESSIONS

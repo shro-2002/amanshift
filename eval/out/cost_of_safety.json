@@ -1,0 +1,27 @@
+{
+  "data_types": [
+    "SIM-SITE",
+    "HIST-FCST"
+  ],
+  "season": [
+    "2026-06-01",
+    "2026-09-30"
+  ],
+  "days": 121,
+  "ticks_per_day": 12,
+  "permitted_work_person_hours": {
+    "full_information": 17332.8,
+    "stale_forecast": 1824.9,
+    "forecast_missing": 1847.4,
+    "offline_gt_1h": 0.0,
+    "offline_gt_3h": 0.0
+  },
+  "reduction_vs_full_pct": {
+    "full_information": 0.0,
+    "stale_forecast": 89.5,
+    "forecast_missing": 89.3,
+    "offline_gt_1h": 100.0,
+    "offline_gt_3h": 100.0
+  },
+  "note": "Includes the midday break and NIOSH conservatism; offline modes follow the client rule (worst case = forecast lost + all resources unconfirmed)."
+}

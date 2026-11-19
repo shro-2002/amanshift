@@ -78,22 +78,26 @@ class Sessions:
         self._items: OrderedDict[str, Session] = OrderedDict()
         self._lock = threading.Lock()
 
+    def _store(self, s: Session) -> Session:
+        self._items[s.sid] = s
+        self._items.move_to_end(s.sid)
+        while len(self._items) > MAX_SESSIONS:
+            self._items.popitem(last=False)
+        return s
+
     def get(self, sid: str, pol: Policy, log: EventLog) -> Session:
         with self._lock:
             if sid in self._items:
                 self._items.move_to_end(sid)
                 return self._items[sid]
-            s = new_session(sid, pol, log)
-            self._items[sid] = s
-            while len(self._items) > MAX_SESSIONS:
-                self._items.popitem(last=False)
-            return s
+            return self._store(new_session(sid, pol, log))
 
     def reset(self, sid: str, pol: Policy, log: EventLog) -> Session:
         with self._lock:
-            s = new_session(sid, pol, log)
-            self._items[sid] = s
-            return s
+            return self._store(new_session(sid, pol, log))
+
+    def __len__(self) -> int:
+        return len(self._items)
 
 
 def scenario_start(pol: Policy) -> tuple[date, datetime]:

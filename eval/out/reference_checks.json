@@ -1,0 +1,57 @@
+{
+  "data_type": "reference values",
+  "t_ref_01_liljegren": {
+    "vectors": 50,
+    "max_abs_error_c": 0.0,
+    "tolerance_c": 0.05,
+    "source": "thermofeel 2.3.0 shipped test vectors"
+  },
+  "t_ref_02_niosh": {
+    "rows": [
+      {
+        "M_w": 105,
+        "rel_expected": 33.46,
+        "rel_computed": 33.456,
+        "ral_expected": 31.4,
+        "ral_computed": 31.401
+      },
+      {
+        "M_w": 208.8,
+        "rel_expected": 30.02,
+        "rel_computed": 30.023,
+        "ral_expected": 27.19,
+        "ral_computed": 27.192
+      },
+      {
+        "M_w": 348.9,
+        "rel_expected": 27.46,
+        "rel_computed": 27.459,
+        "ral_expected": 24.05,
+        "ral_computed": 24.048
+      },
+      {
+        "M_w": 481.4,
+        "rel_expected": 25.85,
+        "rel_computed": 25.851,
+        "ral_expected": 22.08,
+        "ral_computed": 22.077
+      },
+      {
+        "M_w": 603.2,
+        "rel_expected": 24.72,
+        "rel_computed": 24.725,
+        "ral_expected": 20.7,
+        "ral_computed": 20.695
+      }
+    ],
+    "tolerance_c": 0.05,
+    "note": "NIOSH reads 27.8 degC off Figure 8-2 for 348.9 W; equation gives 27.46"
+  },
+  "t_ref_04_solar": {
+    "max_cos_zenith_21jun": 0.99985,
+    "expected": 0.99985,
+    "tolerance": 0.01
+  },
+  "policy_sha256": "225c57bc0db723078335c59f5be82dcd39fe5c4ee59636f32772e90c3856a309",
+  "all_pass": true
+}

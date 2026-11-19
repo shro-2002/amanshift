@@ -1,0 +1,111 @@
+{
+  "data_type": "SYNTH-TEST",
+  "snapshots": 500,
+  "approved_base_plans": 500,
+  "operators": {
+    "raise_fraction": {
+      "generated": 21,
+      "equivalent": 0,
+      "killed": 21,
+      "survivors": [],
+      "non_equivalent": 21,
+      "kill_rate": 1.0,
+      "safety_rule": "C2"
+    },
+    "assign_down_resource": {
+      "generated": 2313,
+      "equivalent": 0,
+      "killed": 2313,
+      "survivors": [],
+      "non_equivalent": 2313,
+      "kill_rate": 1.0,
+      "safety_rule": "C4"
+    },
+    "exceed_capacity": {
+      "generated": 500,
+      "equivalent": 6,
+      "killed": 494,
+      "survivors": [],
+      "non_equivalent": 494,
+      "kill_rate": 1.0,
+      "safety_rule": "C4"
+    },
+    "exceed_walk": {
+      "generated": 1630,
+      "equivalent": 0,
+      "killed": 1630,
+      "survivors": [],
+      "non_equivalent": 1630,
+      "kill_rate": 1.0,
+      "safety_rule": "C4"
+    },
+    "remove_crew": {
+      "generated": 500,
+      "equivalent": 0,
+      "killed": 500,
+      "survivors": [],
+      "non_equivalent": 500,
+      "kill_rate": 1.0,
+      "safety_rule": null
+    },
+    "duplicate_crew": {
+      "generated": 500,
+      "equivalent": 0,
+      "killed": 500,
+      "survivors": [],
+      "non_equivalent": 500,
+      "kill_rate": 1.0,
+      "safety_rule": null
+    },
+    "drop_stop_to_work": {
+      "generated": 3023,
+      "equivalent": 0,
+      "killed": 3023,
+      "survivors": [],
+      "non_equivalent": 3023,
+      "kill_rate": 1.0,
+      "safety_rule": "C6"
+    },
+    "ignore_midday": {
+      "generated": 314,
+      "equivalent": 0,
+      "killed": 314,
+      "survivors": [],
+      "non_equivalent": 314,
+      "kill_rate": 1.0,
+      "safety_rule": "C3"
+    },
+    "ignore_escalation": {
+      "generated": 144,
+      "equivalent": 0,
+      "killed": 144,
+      "survivors": [],
+      "non_equivalent": 144,
+      "kill_rate": 1.0,
+      "safety_rule": "C10"
+    },
+    "mismatch_snapshot": {
+      "generated": 500,
+      "equivalent": 0,
+      "killed": 500,
+      "survivors": [],
+      "non_equivalent": 500,
+      "kill_rate": 1.0,
+      "safety_rule": null
+    },
+    "rel_instead_of_ral": {
+      "generated": 0,
+      "equivalent": 0,
+      "killed": 0,
+      "survivors": [],
+      "non_equivalent": 0,
+      "kill_rate": null,
+      "safety_rule": "C2"
+    }
+  },
+  "non_equivalent_total": 9439,
+  "killed_total": 9439,
+  "kill_rate_total": 1.0,
+  "safety_critical_survivors": 0,
+  "note": "Measures rule coverage; independence evidence is T-CHK-DIFF and hand cases."
+}

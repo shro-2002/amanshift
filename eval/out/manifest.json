@@ -1,0 +1,88 @@
+{
+  "datasets": {
+    "iem_omaa_2022": {
+      "file": "data/cache/iem_omaa_2022.csv",
+      "retrieved_at": "2026-11-19T04:50:41+00:00",
+      "rows": 3041,
+      "sha256": "11abf3f54cc302b2db39ac09c6bbf9e159e0ed1dc33a824294bc712fbb4839b4",
+      "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=OMAA&data=tmpf&data=dwpf&data=relh&data=sknt&year1=2022&month1=6&day1=1&year2=2022&month2=10&day2=1&tz=Etc/UTC&format=onlycomma&latlon=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "url_hash": "3bb1912a1a360de9"
+    },
+    "iem_omaa_2023": {
+      "file": "data/cache/iem_omaa_2023.csv",
+      "retrieved_at": "2026-11-19T04:50:53+00:00",
+      "rows": 3009,
+      "sha256": "c17930ae0b50fe27b0526d6ac2d6fac731992a7ef7f1e56e946632fe5d664869",
+      "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=OMAA&data=tmpf&data=dwpf&data=relh&data=sknt&year1=2023&month1=6&day1=1&year2=2023&month2=10&day2=1&tz=Etc/UTC&format=onlycomma&latlon=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "url_hash": "4473ac91eff002ee"
+    },
+    "iem_omaa_2024": {
+      "file": "data/cache/iem_omaa_2024.csv",
+      "retrieved_at": "2026-11-19T04:51:08+00:00",
+      "rows": 3017,
+      "sha256": "d073502267711ba728c42c73f5b6abe2d2d9583a3d9748bc3e5c5289f45570a0",
+      "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=OMAA&data=tmpf&data=dwpf&data=relh&data=sknt&year1=2024&month1=6&day1=1&year2=2024&month2=10&day2=1&tz=Etc/UTC&format=onlycomma&latlon=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "url_hash": "31bae5fe9acbbd6f"
+    },
+    "iem_omaa_2025": {
+      "file": "data/cache/iem_omaa_2025.csv",
+      "retrieved_at": "2026-11-19T04:51:21+00:00",
+      "rows": 3035,
+      "sha256": "d798052af465f6213e51f23c1ddcdf83e6208e27acfead43a6a6716ea2886ce4",
+      "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=OMAA&data=tmpf&data=dwpf&data=relh&data=sknt&year1=2025&month1=6&day1=1&year2=2025&month2=10&day2=1&tz=Etc/UTC&format=onlycomma&latlon=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "url_hash": "99e005f22e11ad8d"
+    },
+    "iem_omaa_2026": {
+      "file": "data/cache/iem_omaa_2026.csv",
+      "retrieved_at": "2026-11-19T04:51:34+00:00",
+      "rows": 5911,
+      "sha256": "23782c1800964ec0535e890b94cc5162f27e4ed9887799993566b517337ded0b",
+      "url": "https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py?station=OMAA&data=tmpf&data=dwpf&data=relh&data=sknt&year1=2026&month1=6&day1=1&year2=2026&month2=10&day2=1&tz=Etc/UTC&format=onlycomma&latlon=no&missing=M&trace=T&direct=no&report_type=3&report_type=4",
+      "url_hash": "33fa3d64dfe4012d"
+    },
+    "openmeteo_prev_day1_2022": {
+      "file": "data/cache/openmeteo_prev_day1_2022.csv",
+      "retrieved_at": "2026-11-19T04:50:38+00:00",
+      "rows": 2928,
+      "sha256": "093dd3d82628476dd5eab898d362e013461a77e1451b089ff0562ddf61795635",
+      "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=24.433&longitude=54.651&hourly=temperature_2m_previous_day1,relative_humidity_2m_previous_day1,surface_pressure_previous_day1,wind_speed_10m_previous_day1,shortwave_radiation_instant_previous_day1,direct_radiation_instant_previous_day1&start_date=2022-06-01&end_date=2022-09-30&wind_speed_unit=ms&timezone=UTC",
+      "url_hash": "da9b931b69dcb67c"
+    },
+    "openmeteo_prev_day1_2023": {
+      "file": "data/cache/openmeteo_prev_day1_2023.csv",
+      "retrieved_at": "2026-11-19T04:50:52+00:00",
+      "rows": 2928,
+      "sha256": "6c447c7b8d74d64b5dae5eb737d0f2cf7875e1d43422b255b354f219c4819d23",
+      "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=24.433&longitude=54.651&hourly=temperature_2m_previous_day1,relative_humidity_2m_previous_day1,surface_pressure_previous_day1,wind_speed_10m_previous_day1,shortwave_radiation_instant_previous_day1,direct_radiation_instant_previous_day1&start_date=2023-06-01&end_date=2023-09-30&wind_speed_unit=ms&timezone=UTC",
+      "url_hash": "77b323814fef5d0a"
+    },
+    "openmeteo_prev_day1_2024": {
+      "file": "data/cache/openmeteo_prev_day1_2024.csv",
+      "retrieved_at": "2026-11-19T04:51:06+00:00",
+      "rows": 2928,
+      "sha256": "49dd9ed26c90a907de7de2647ac9587e34d5eacdc4d75a97c991681ca1a7c356",
+      "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=24.433&longitude=54.651&hourly=temperature_2m_previous_day1,relative_humidity_2m_previous_day1,surface_pressure_previous_day1,wind_speed_10m_previous_day1,shortwave_radiation_instant_previous_day1,direct_radiation_instant_previous_day1&start_date=2024-06-01&end_date=2024-09-30&wind_speed_unit=ms&timezone=UTC",
+      "url_hash": "fe58cce3f37afe7f"
+    },
+    "openmeteo_prev_day1_2025": {
+      "file": "data/cache/openmeteo_prev_day1_2025.csv",
+      "retrieved_at": "2026-11-19T04:51:19+00:00",
+      "rows": 2928,
+      "sha256": "0d43f1ccb6e8de259999719c017a87fd37e109a888c7481b25e0fc8db65bc684",
+      "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=24.433&longitude=54.651&hourly=temperature_2m_previous_day1,relative_humidity_2m_previous_day1,surface_pressure_previous_day1,wind_speed_10m_previous_day1,shortwave_radiation_instant_previous_day1,direct_radiation_instant_previous_day1&start_date=2025-06-01&end_date=2025-09-30&wind_speed_unit=ms&timezone=UTC",
+      "url_hash": "f1ef0364f202a0c3"
+    },
+    "openmeteo_prev_day1_2026": {
+      "file": "data/cache/openmeteo_prev_day1_2026.csv",
+      "retrieved_at": "2026-11-19T04:51:31+00:00",
+      "rows": 2928,
+      "sha256": "2048045d1658b903b98d49777eccd3cffd8def23215505e1beca9f35fd156cba",
+      "url": "https://previous-runs-api.open-meteo.com/v1/forecast?latitude=24.433&longitude=54.651&hourly=temperature_2m_previous_day1,relative_humidity_2m_previous_day1,surface_pressure_previous_day1,wind_speed_10m_previous_day1,shortwave_radiation_instant_previous_day1,direct_radiation_instant_previous_day1&start_date=2026-06-01&end_date=2026-09-30&wind_speed_unit=ms&timezone=UTC",
+      "url_hash": "54ea440aff051026"
+    }
+  },
+  "licences": {
+    "iem": "Iowa Environmental Mesonet ASOS archive, public; cite IEM",
+    "open-meteo": "CC BY 4.0 (data); free API, non-commercial"
+  }
+}

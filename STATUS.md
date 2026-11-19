@@ -1,6 +1,6 @@
 # STATUS — AmanShift
 
-Updated: 2026-11-19 (planning session). Phase: **Specification frozen; implementation not started.**
+Updated: 2026-11-19 ~09:30 GST (implementation session). Phase: **M0–M5 done (backend, evaluation); M6 UI in progress.**
 
 ## Verified facts (with date and source)
 
@@ -48,6 +48,22 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 
 ## Spec changes
 - 2026-11-19 pre-implementation audit amendments A1–A13 applied (doc 11 §4). Record every later deviation here with reason.
+- **SC1 Train years = 2024 only (not 2022–2024).** Open-Meteo Previous Runs returns null `*_previous_day1` RH, pressure, wind and radiation for 2022–2023 (only T exists; verified by direct query). Per T-DQ (≥ 90 % paired) those years are excluded and reported. δ and `clim_p99_raw` are derived from 2024 only (≈ 31 samples per month×hour cell, so p99 ≈ cell maximum — more conservative, not less). Holdouts unchanged: 2025 exposed, 2026 clean.
+- **SC2 `day_evidence` merged into `env`.** The snapshot's `env` list carries the whole local day of forecast evidence plus meter readings; kernel and checker both read future hours from it for t*. Same information, one list.
+- **SC3 Demo Site A has three water points (W1–W3), not two,** so every zone has water within the 5-min limit; crews sized 6–10 so the healthy plan fits capacity; the coveralls crew is the heavy direct-sun crew. Site designed before running the selection rule; selection then picked 2026-07-01 under the strict rule (levels 2/3/4; C2 and C5 rest only via R2).
+- **SC4 Permitted work fractions are set-based** (a fraction is permitted iff it is feasible for that rest option and ≤ caps), which equals "f ≤ f_max" whenever feasibility is downward-closed and is safer otherwise. Checker C2 uses the same definition.
+- **SC5 Forecast issue time** for `previous_day1` values is modelled as the D-1 12:00 UTC run (16:00 GST D-1); replay retrieval age is 30 min. Documented in `amanshift/scenario.py`.
+- **SC6 Dwell in the demo API**: `prev_eval` = worst raw evaluation of the previous tick *and* earlier evaluations at the current tick, so restoring a resource within the same tick cannot relax levels; relaxation needs two 15-min ticks (time-advance control).
+- **SC7 Unsafe-plan demo** re-submits the last approved actions bound to the *current* snapshot hash, so the rejection cites substantive rules (C4, C2, C6) rather than only C8.
+- Node 26 used instead of Node 22 LTS (installed toolchain); Vite 8 / TypeScript 7.
+
+## Implementation results (all from `make eval`, see eval/out/report.md)
+- F19 verified: metabolic category bounds 180/300/415/520 kcal/h appear verbatim in docs/sources text (ACGIH, quoted by NIOSH); the 415–520 gap is in the source. Note: NIOSH Table 5-1 own column gives light < 200 kcal/h (233 W); policy keeps 208.8 W per frozen spec — flagged for OH review (U4).
+- M3 gate passed 2026-11-19 ~09:15 GST: 10,000-case T-KER-01/02 + 2,000-case T-KER-03..06 + T-KER-07 + T-CHK-DIFF, 0 failures (eval/out/property_tests.json).
+- δ = 0.5 °C (train 2024). Clean holdout 2026, primary profile (REF-SHADE, level ≥ 3): numbers in eval/out/forecast_eval.json and report.md. Events cover most work hours, so an "always work/rest" baseline is reported alongside.
+- Checker plan-mutation: 0 safety-critical survivors (eval/out/checker_mutation.json).
+- Planner bench: 0 checker violations for AmanShift greedy over 600 synthetic sites (eval/out/planner_bench.json).
+- Cost of safety large under degraded information (eval/out/cost_of_safety.json) — disclosed, by design.
 
 ## Current status
-CONDITIONAL GO (see doc 11). Next task: T0.1 (doc 08).
+CONDITIONAL GO (see doc 11). M0–M5 complete; next: M6 interface (T6.1–T6.5).

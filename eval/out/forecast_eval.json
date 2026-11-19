@@ -139,6 +139,20 @@
             "bias_ratio": 0.9918,
             "exact_level_agreement": 0.6172,
             "under_warning_rate": 0.1933
+          },
+          "B5_always_work_rest": {
+            "k": 3,
+            "hours": 1340,
+            "events_ref": 1219,
+            "tp": 1219,
+            "fp": 121,
+            "fn": 0,
+            "pod": 1.0,
+            "far": 0.0903,
+            "csi": 0.9097,
+            "bias_ratio": 1.0993,
+            "exact_level_agreement": 0.5343,
+            "under_warning_rate": 0.3754
           }
         }
       },
@@ -413,6 +427,20 @@
             "bias_ratio": 0.9922,
             "exact_level_agreement": 0.6682,
             "under_warning_rate": 0.1708
+          },
+          "B5_always_work_rest": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1152,
+            "tp": 1152,
+            "fp": 189,
+            "fn": 0,
+            "pod": 1.0,
+            "far": 0.1409,
+            "csi": 0.8591,
+            "bias_ratio": 1.1641,
+            "exact_level_agreement": 0.66,
+            "under_warning_rate": 0.1991
           }
         }
       },
@@ -687,6 +715,20 @@
             "bias_ratio": 0.9915,
             "exact_level_agreement": 0.6361,
             "under_warning_rate": 0.1834
+          },
+          "B5_always_work_rest": {
+            "k": 3,
+            "hours": 1341,
+            "events_ref": 1180,
+            "tp": 1180,
+            "fp": 161,
+            "fn": 0,
+            "pod": 1.0,
+            "far": 0.1201,
+            "csi": 0.8799,
+            "bias_ratio": 1.1364,
+            "exact_level_agreement": 0.5906,
+            "under_warning_rate": 0.2893
           }
         }
       },
@@ -847,6 +889,7 @@
     "Liljegren is a model of WBGT, not a measurement",
     "one grid point",
     "no surface heat (asphalt, steel)",
+    "events (level >= 3) cover most work hours, so POD is easy; compare against B5_always_work_rest and read FAR, exact agreement and under-warning",
     "2025 holdout was exposed to an untuned planning smoke test"
   ]
 }
