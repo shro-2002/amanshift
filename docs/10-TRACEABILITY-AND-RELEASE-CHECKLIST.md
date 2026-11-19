@@ -55,7 +55,7 @@ Status: FROZEN v1.0. Update the "Evidence" column with artifact paths as they ar
 - [x] Public URL live (https://amanshift.onrender.com) and T-E2E-06 passed against it; [x] Docker image built and T-E2E-06 passed against it
 - [x] README judge guide; LIMITATIONS.md; data/SOURCES.md with licences; MIT LICENSE
 - [x] Screenshots captured (`docs/screenshots/`)
-- [x] Video recorded (2:41.9; limit < 3 min); [ ] upload link tested logged-out (human)
+- [x] Video recorded (2:41.9; limit < 3 min); [x] upload link tested logged-out (https://youtu.be/PX46sZLP68s)
 - [x] Submission text (`SUBMISSION.md`) with real numbers from report.md
 - [x] Repo tagged `v1.0-submission`, then `v1.1-submission` after review remediation (SC16–SC18); STATUS.md final
 - [x] Grep for banned wording and for "TODO" in UI strings

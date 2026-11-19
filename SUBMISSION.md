@@ -21,7 +21,7 @@ Excessive heat exposes at least 2.41 billion workers a year and is linked to an 
 | Release tag | `v1.1-submission` (earlier tags kept: `v1.0-rc1`, `v1.0-submission`, `v1.1-redesign-a`) |
 | Evaluation report | [`eval/out/report.md`](eval/out/report.md) |
 | Solution deck | Official 16-slide template, uploaded through the challenge dashboard (not stored in this repository) |
-| Demo video (2:42, under the 3-minute limit) | VIDEO LINK PENDING UPLOAD |
+| Demo video (2:42, under the 3-minute limit) | https://youtu.be/PX46sZLP68s |
 
 ## What is real, what is simulated, what is not validated
 

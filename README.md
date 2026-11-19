@@ -6,7 +6,7 @@ Crew-level heat-protection decision support for outdoor workers in Abu Dhabi —
 
 AmanShift combines real day-ahead weather forecasts, onsite WBGT/TWL meter readings, crew workload, clothing and acclimatization, and the actual availability of shade, cooled rest and water. It produces four graded levels with one action each, in English, Arabic, Hindi, Urdu and Bengali. Its defining property is tested: when forecasts go stale, cooling fails or the network drops, recommendations can only become stricter. A separately implemented rule checker rejects unsafe plans. It collects no personal, biometric or location data. **It is decision support, not diagnosis or work authorization.**
 
-**Try it now (no login):** [Live demo](https://amanshift.onrender.com) · [Judge tour, about 2 min](https://amanshift.onrender.com/tour) · [Technical validation](https://amanshift.onrender.com/help/validation) · Demo video (2:42): VIDEO LINK PENDING UPLOAD · [Submission summary](SUBMISSION.md) · [Evaluation report](eval/out/report.md) · [Limitations](LIMITATIONS.md)
+**Try it now (no login):** [Live demo](https://amanshift.onrender.com) · [Judge tour, about 2 min](https://amanshift.onrender.com/tour) · [Technical validation](https://amanshift.onrender.com/help/validation) · [Demo video (2:42)](https://youtu.be/PX46sZLP68s) · [Submission summary](SUBMISSION.md) · [Evaluation report](eval/out/report.md) · [Limitations](LIMITATIONS.md)
 
 The free Render instance sleeps when idle; the first load can take 30–60 s.
 
