@@ -118,8 +118,9 @@ make setup && make test && make eval   # without Docker: Python 3.12 + uv, Node 
 - The checker is separate code but shares the policy file and developer with the planner, so common-mode errors remain possible.
 
 ## Declarations
-- Team details and the conflict-of-interest declaration are given in the official submission form and deck.
-- Development note: the software was built with the help of an AI coding assistant (Claude); the demo narration and music were generated with ElevenLabs. The running product contains no AI or machine-learning components.
+- Team: Team AmanShift — individual participant: Shroddha Ghosh (India), SDE1 software engineer; built every part of the submission. Team lead is over 18.
+- Conflict of interest: none — no employment, contract, funding, advisory or personal relationship with the organizers, co-creators, partners or judges.
+- Development note: the software was built with the help of an AI coding assistant (Claude); the demo narration and music were generated with ElevenLabs under a plan that permits this use. The running product contains no AI or machine-learning components.
 
 ## Documents
 `README.md` · `LIMITATIONS.md` · `data/SOURCES.md` · `eval/out/report.md` · `docs/DEMO-SCRIPT.md` · `docs/00–13` (charter, requirements, science & safety, architecture, UI, decision engine, validation, responsible design, plan, demo, traceability, audit, product redesign, visual system).

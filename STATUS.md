@@ -31,7 +31,7 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 
 ## Blockers (must clear before/at implementation start)
 - **B1** ~~Confirm registration~~ — user confirmed registered (2026-11-19 10:17 IST). Still to do: read the dashboard's full submission requirements and add them here.
-- **B2** Confirm submission hour/time zone (ask support+fhdic@hack2skill.com). Until confirmed: submission-ready 2026-11-20 08:00 GST, submit by 12:00 GST.
+- **B2** ~~Confirm submission hour~~ — user: 20 Nov 2026, 11:59 p.m. (time zone assumed IST).
 
 ## Outstanding decisions (defaults chosen; change only with reason)
 - D1 Public host: Render vs Fly.io → whichever deploys first.
@@ -86,8 +86,9 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 - Verification at tag `v1.1-submission`: backend 125 passed, web vitest 21 passed, `make eval` reproduced, Playwright against the live deploy (see release notes).
 
 ## Not done / human-only
-- Team name, size, members and age confirmation; capability background; conflict-of-interest declaration (deck slides 1–3, 14 and submission form).
-- Video upload (unlisted) and its link in README/SUBMISSION; dashboard requirements (B1 second half); deadline hour (B2).
+- Video upload (unlisted) and its link in README/SUBMISSION (user uploading).
+- Final submission on the dashboard. Deadline confirmed by the user: 2026-11-20 23:59 (stated as "tomorrow 11:59 p.m."; assumed IST, the user's time zone — submit well before 18:00 IST to stay safe under a GST reading too).
+- Done 2026-11-19: deck team, member, capability and conflict-of-interest slides filled (individual participant, no conflicts); ElevenLabs use confirmed permitted by the user.
 - P1 items not built: lexicographic MILP planner, S3 replay workspace, S7 plan comparison, mutmut code-mutation score, print-optimised A4 sheet (browser print of S9 works), audio clips.
 
 ## Current status
