@@ -87,9 +87,9 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 
 ## Not done / human-only
 - Video uploaded: https://youtu.be/PX46sZLP68s (public, 2:42; checked logged out 2026-11-19).
-- Final submission on the dashboard. Deadline confirmed by the user: 2026-11-20 23:59 (stated as "tomorrow 11:59 p.m."; assumed IST, the user's time zone; 23:59 IST is earlier than 23:59 GST, so IST is the conservative reading).
+- **Submitted on the dashboard 2026-11-19 ~23:35 IST** (user). Deadline confirmed by the user: 2026-11-20 23:59 (stated as "tomorrow 11:59 p.m."; assumed IST, the user's time zone; 23:59 IST is earlier than 23:59 GST, so IST is the conservative reading).
 - Done 2026-11-19: deck team, member, capability and conflict-of-interest slides filled (individual participant, no conflicts); ElevenLabs use confirmed permitted by the user.
 - P1 items not built: lexicographic MILP planner, S3 replay workspace, S7 plan comparison, mutmut code-mutation score, print-optimised A4 sheet (browser print of S9 works), audio clips.
 
 ## Current status
-Public deploy https://amanshift.onrender.com (Render, auto-deploys `main`). All engineering P0/P1 review items addressed; remaining items are the human steps above.
+**Submitted 2026-11-19.** Public deploy https://amanshift.onrender.com (Render; auto-deploy on push is not firing, deploys are triggered manually). Evaluation runs 20–30 Nov: keep `main` and the live demo unchanged unless something breaks; `v1.1-submission` is the reference tag.
