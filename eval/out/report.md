@@ -145,15 +145,15 @@ Overall kill rate 100.0 %; safety-critical survivors 0. Measures rule coverage; 
 | 4 / 3 | amanshift_greedy | 155.085 | 3.43 | 0/200 |
 | 4 / 3 | naive_greedy | 161.925 | 3.41 | 0/200 |
 | 4 / 3 | no_replan | 162.43 | 2.665 | 177/200 |
-| 4 / 3 | runtime p50/p95 (ms) | 1.59 / 2.2 | | |
+| 4 / 3 | runtime p50/p95 (ms) | 1.84 / 2.39 | | |
 | 8 / 6 | amanshift_greedy | 121.115 | 5.58 | 0/200 |
 | 8 / 6 | naive_greedy | 148.785 | 5.345 | 0/200 |
 | 8 / 6 | no_replan | 142.39 | 4.705 | 183/200 |
-| 8 / 6 | runtime p50/p95 (ms) | 3.77 / 5.33 | | |
+| 8 / 6 | runtime p50/p95 (ms) | 5.07 / 9.71 | | |
 | 12 / 10 | amanshift_greedy | 79.485 | 7.015 | 0/200 |
 | 12 / 10 | naive_greedy | 115.11 | 6.745 | 0/200 |
 | 12 / 10 | no_replan | 105.32 | 6.13 | 187/200 |
-| 12 / 10 | runtime p50/p95 (ms) | 8.23 / 11.24 | | |
+| 12 / 10 | runtime p50/p95 (ms) | 10.03 / 23.56 | | |
 
 ## 7 Cost of safety (SIM-SITE + HIST-FCST, 2026 season)
 

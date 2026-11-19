@@ -152,3 +152,6 @@ dialog::backdrop { background: rgba(17,20,22,.45); }
 .claims { padding-inline-start: 1.2em; font-size: var(--t-16); display: grid; gap: var(--s-2); }
 .skeleton { height: 320px; background: var(--surface-2); border-radius: var(--radius-md); }
 .scroll-x { overflow-x: auto; }
+.wcard { min-width: 0; }
+.badge.lg { white-space: normal; flex-wrap: wrap; }
+@media (max-width: 400px) { .badge.lg { font-size: var(--t-24); } }

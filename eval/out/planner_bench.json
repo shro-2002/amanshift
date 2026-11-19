@@ -11,8 +11,8 @@
         "mean_crews_stopped": 3.43,
         "sites_with_checker_violations": 0,
         "total_checker_violations": 0,
-        "runtime_ms_p50": 1.59,
-        "runtime_ms_p95": 2.2
+        "runtime_ms_p50": 1.84,
+        "runtime_ms_p95": 2.39
       },
       "naive_greedy": {
         "mean_priority_weighted_unprotected": 161.925,
@@ -37,8 +37,8 @@
         "mean_crews_stopped": 5.58,
         "sites_with_checker_violations": 0,
         "total_checker_violations": 0,
-        "runtime_ms_p50": 3.77,
-        "runtime_ms_p95": 5.33
+        "runtime_ms_p50": 5.07,
+        "runtime_ms_p95": 9.71
       },
       "naive_greedy": {
         "mean_priority_weighted_unprotected": 148.785,
@@ -63,8 +63,8 @@
         "mean_crews_stopped": 7.015,
         "sites_with_checker_violations": 0,
         "total_checker_violations": 0,
-        "runtime_ms_p50": 8.23,
-        "runtime_ms_p95": 11.24
+        "runtime_ms_p50": 10.03,
+        "runtime_ms_p95": 23.56
       },
       "naive_greedy": {
         "mean_priority_weighted_unprotected": 115.11,

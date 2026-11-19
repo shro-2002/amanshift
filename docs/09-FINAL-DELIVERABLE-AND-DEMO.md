@@ -2,6 +2,8 @@
 
 Status: FROZEN v1.0.
 
+> Implementation note (2026-11-19, STATUS SC3): Demo Site A uses three water points (W1–W3) so every zone has water within 5 min; crew sizes 6–10. Selected day: 2026-07-01 (strict rule).
+
 ## 1. Final product description (submission text, ≤ 120 words)
 
 AmanShift is a crew-level heat-protection decision-support system for outdoor workers in Abu Dhabi. It combines day-ahead forecasts, onsite WBGT/TWL readings, crew workload, clothing and acclimatization, and the real availability of shade, cooled rest and water. It produces four graded levels with one action each, in English, Arabic, Hindi, Urdu and Bengali. Its defining property is tested: when forecasts go stale, cooling fails or the network drops, recommendations can only become stricter. An independent rule checker rejects unsafe plans. It collects no personal, biometric or location data. It is decision support, not diagnosis or work authorization.

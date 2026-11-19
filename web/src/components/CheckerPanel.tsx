@@ -15,6 +15,7 @@ export function CheckerPanel({ plan, unsafe, snapshotId, policy }: Props) {
           {v.verdict === "approved" ? "✓ APPROVED" : "✗ REJECTED"} {v.checker_version} ({v.rules_evaluated - new Set(v.violations.map((x) => x.rule)).size}/{v.rules_evaluated} rules pass)
         </span>
       </header>
+      {!unsafe && plan?.stale && <p className="banner info small" role="status">This verdict applies to the snapshot the plan was made for. Conditions have changed since — re-plan to check against the current state.</p>}
       <RuleList verdict={v} />
       <p className="small muted">Snapshot <span className="mono">{snapshotId.slice(0, 19)}…</span> · policy {policy}</p>
       <details className="small"><summary>Why independent?</summary>

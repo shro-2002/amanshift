@@ -47,8 +47,8 @@ export function CrewTable({ crews, override, onOpen }: Props) {
           const degraded = c.degraded || lvl > c.display_level;
           return (
             <tr key={c.crew_id} className={`row ${degraded ? "degraded" : ""}`} onClick={() => onOpen(c.crew_id)}>
-              <td><button className="btn-quiet" onClick={(e) => { e.stopPropagation(); onOpen(c.crew_id); }}
-                aria-label={`Open crew ${c.crew_id} detail`}><b>{c.crew_id}</b>&nbsp;<span className="muted">×{c.size}</span></button></td>
+              <td><button className="btn-quiet" onClick={(e) => { e.stopPropagation(); onOpen(c.crew_id); }}>
+                <b>{c.crew_id}</b>&nbsp;<span className="muted">×{c.size}</span><span className="sr-only"> open detail</span></button></td>
               <td><LevelBadge level={lvl} degraded={degraded} english />{degraded && <> <span className="tag-conservative">CONSERVATIVE — data degraded</span></>}</td>
               <td>{nowText(c)}</td>
               <td className={covered ? "cover-ok" : "cover-no"}>{covered ? `✓ ${c.action?.rest_resource}` : "✗ none"}</td>

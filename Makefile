@@ -35,7 +35,7 @@ serve: build     ## local API + built PWA on http://localhost:8080
 	$(PY) uvicorn amanshift.api.app:app --host 0.0.0.0 --port 8080
 
 e2e:             ## playwright against the local container/server
-	cd $(WEB) && npx playwright test
+	cd $(WEB) && AMANSHIFT_URL=$(or $(AMANSHIFT_URL),http://localhost:8080) npx playwright test
 
 demo:            ## docker compose up -> http://localhost:8080 (works offline from cached data)
 	docker compose up --build

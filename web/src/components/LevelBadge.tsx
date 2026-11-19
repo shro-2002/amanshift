@@ -13,7 +13,7 @@ export function LevelBadge({ level, degraded = false, size = "sm", english = fal
   const key = `level_${level}` as Key;
   const word = english ? ["", "STANDARD", "INCREASED CARE", "WORK / REST", "STOP"][level] : t(key);
   return (
-    <span className={`badge sev-${level} ${size === "lg" ? "lg" : ""} ${degraded ? "degraded" : ""}`}
+    <span role="img" className={`badge sev-${level} ${size === "lg" ? "lg" : ""} ${degraded ? "degraded" : ""}`}
       aria-label={`Level ${level} ${word}${degraded ? ", conservative because data degraded" : ""}`}>
       <span aria-hidden="true">{SHAPES[level].glyph}</span>
       <span className="num" aria-hidden="true">{level}</span>

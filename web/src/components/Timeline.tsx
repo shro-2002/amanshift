@@ -1,6 +1,6 @@
 import type { Timeline as T } from "../api/client";
 
-const W = 640, H = 170, X0 = 36, X1 = 624, Y0 = 16, Y1 = 118;
+const W = 1100, H = 170, X0 = 36, X1 = 1084, Y0 = 16, Y1 = 118;
 const SHAPE = ["", "●", "▲", "◆", "⬢"];
 const hm = (s: string) => { const [h, m] = s.split(":").map(Number); return h + m / 60; };
 

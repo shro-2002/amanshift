@@ -1,6 +1,6 @@
 # STATUS — AmanShift
 
-Updated: 2026-11-19 ~09:30 GST (implementation session). Phase: **M0–M5 done (backend, evaluation); M6 UI in progress.**
+Updated: 2026-11-19 ~09:30 GST (implementation session). Phase: **M0–M7 engineering complete; human-only steps remain (public deploy account, video, dashboard requirements, submission form).**
 
 ## Verified facts (with date and source)
 
@@ -65,5 +65,13 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 - Planner bench: 0 checker violations for AmanShift greedy over 600 synthetic sites (eval/out/planner_bench.json).
 - Cost of safety large under degraded information (eval/out/cost_of_safety.json) — disclosed, by design.
 
+- UI (M6): S1, S2 (+S4 coverage, S5 trace drawer, S6 demo drawer, S8 checker), S9 cards (en/ar/hi/ur/bn, RTL), S10 offline banners, S11 evidence, S12 methodology. Judge mode `/command?judge=1`.
+- Verification (M7): `make test` green (backend 97 tests incl. property suite; web vitest 6 incl. fast-check T-OFF-01..03); Playwright 6/6 (T-E2E-06 judging moment, T-UI-01 smoke, T-UI-02 RTL, T-UI-03 axe 0 serious/critical, 320 px no overflow, T-OFF-04) against local server and the Docker image `amanshift:1.0`; pip-audit and npm audit: 0 known vulnerabilities; banned-wording grep clean.
+
+## Not done / human-only
+- Public URL (Render/Fly) needs a hosting account → doc 08 §6 cut 6 applies until deployed: `make demo` + video. Image builds and passes E2E locally.
+- 2-minute video, submission form, reading dashboard requirements (B1 second half), deadline hour (B2).
+- P1 items not built: lexicographic MILP planner, S3 replay workspace, S7 plan comparison, mutmut code-mutation score, print-optimised A4 sheet (browser print of S9 works), audio clips.
+
 ## Current status
-CONDITIONAL GO (see doc 11). M0–M5 complete; next: M6 interface (T6.1–T6.5).
+CONDITIONAL GO conditions 3–5 met (M3 gate passed early; F19 verified; all UI numbers from eval/out). Remaining conditions are human steps (B1 dashboard read, B2 deadline hour).

@@ -26,7 +26,7 @@ export function App() {
   return (
     <>
       <header className="top">
-        <a href="/" className="brand" onClick={link("/")} aria-label="AmanShift home">
+        <a href="/" className="brand" onClick={link("/")}>
           <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 4 8 12v18c0 15 10 26 24 30 14-4 24-15 24-30V12Z" fill="none" stroke="var(--brand)" strokeWidth="4" /><rect x="18" y="40" width="7" height="8" fill="var(--brand)" /><rect x="27" y="36" width="7" height="12" fill="var(--brand)" /><rect x="36" y="32" width="7" height="16" fill="var(--brand)" /></svg>
           <span><b>AmanShift</b><span className="ar" lang="ar">أمان</span></span>
         </a>

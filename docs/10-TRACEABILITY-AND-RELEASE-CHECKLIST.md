@@ -48,13 +48,36 @@ Status: FROZEN v1.0. Update the "Evidence" column with artifact paths as they ar
 
 ## 4. Final submission checklist
 
-- [ ] Registration confirmed on hack2skill dashboard; dashboard requirements read and added to STATUS.md
+- [x] Registration confirmed on hack2skill dashboard (user, 2026-11-19); [ ] dashboard requirements read and added to STATUS.md (human)
 - [ ] Exact deadline hour confirmed (or submit by 2026-11-20 12:00 GST)
-- [ ] `make test` green; `make eval` regenerated; `make e2e` green
-- [ ] Public URL live and T-E2E-06 passed against it; local `make demo` verified from clean clone
-- [ ] README judge guide; LIMITATIONS.md; data/SOURCES.md with licences; MIT LICENSE
+- [x] `make test` green; `make eval` regenerated; `make e2e` green
+- [ ] Public URL live and T-E2E-06 passed against it (human: hosting account); [x] Docker image built and T-E2E-06 passed against it
+- [x] README judge guide; LIMITATIONS.md; data/SOURCES.md with licences; MIT LICENSE
 - [ ] Screenshots 1–7 captured
 - [ ] 2-minute video recorded and link tested logged-out
 - [ ] Submission text from doc 09 §1/§12 with real numbers from report.md
 - [ ] Repo tagged `v1.0-submission`; STATUS.md final
-- [ ] Grep for banned wording and for "TODO" in UI strings
+- [x] Grep for banned wording and for "TODO" in UI strings
+
+## 5. Evidence (implementation, 2026-11-19)
+
+| Req | Code | Tests | Artifact |
+|---|---|---|---|
+| FR-RISK-01 | `backend/amanshift/screening/wbgt.py` | `tests/golden/test_reference.py` (T-REF-01, T-REF-04) | `eval/out/reference_checks.json` |
+| FR-RISK-02/03 | `engine/risk.py` `upper_bound`, `twl_zone` | `tests/unit/test_boundaries.py`, T-KER-05 | `eval/out/property_tests.json` |
+| FR-RISK-04/05/06 | `engine/risk.py`, `policy/abudhabi-heat-v1.json` | T-REF-02/03, `tests/unit/test_worked_examples.py` | `eval/out/reference_checks.json` |
+| FR-RISK-07 | `engine/risk.py` `midday_active` | `test_boundaries.py` (12:29/12:30/14:59/15:00; 14 Jun/15 Jun/15 Sep/16 Sep) | — |
+| FR-RISK-08 | `backend/eval/forecast_eval.py` | T-EVAL-LEAK-01 (`LeakageError` guard) | `eval/out/delta_frozen.json`, `forecast_eval.json` |
+| FR-COV-01..04 | `engine/coverage.py`, `api/session.py` | `test_boundaries.py` (TTL), `tests/integration/test_api.py` | — |
+| FR-KER-01..05 | `engine/kernel.py` | `tests/property/test_kernel_props.py` (T-KER-01..07) | `eval/out/property_tests.json` |
+| FR-PLN-01/02 | `engine/planner.py` (greedy; MILP P1 not built) | T-KER-04, T-KER-07 | `eval/out/planner_bench.json` |
+| FR-CHK-01..03 | `backend/amanshift_checker/` | `tests/unit/test_checker_rules.py` (per rule, T-IND-01), `tests/golden/test_checker_cases.py`, T-CHK-DIFF | `eval/out/checker_mutation.json` |
+| FR-UI-01/02 | `web/src/screens/*`, `web/src/components/*` | `web/tests/e2e/judging.spec.ts` (T-UI-01, T-UI-03) | — |
+| FR-OFF-01..03 | `web/src/offline/degrader.ts`, `api/offline.py` | `web/tests/unit/degrader.test.ts` (T-OFF-01..03), e2e T-OFF-04 | — |
+| FR-I18N-01 | `web/src/i18n/*.json` | `degrader.test.ts` (key completeness), e2e T-UI-02 | — |
+| FR-ESC-01 | `api/app.py` `/escalations`, `CrewDrawer.tsx` | `test_api.py` (two-step, medic close) | — |
+| FR-GOV-01..03 | `engine/models.py`, `store/log.py`, footer | `tests/unit/test_governance.py`, `test_api.py` (T-SEC-01/02/04/06) | `LIMITATIONS.md` |
+| FR-EVAL-01/02 | `backend/eval/run_all.py`, `store/log.py` event kinds | `make eval` clean run | `eval/out/report.md` |
+| T-E2E-06 | judge rail in `screens/Command.tsx` | `web/tests/e2e/judging.spec.ts` | passes locally and against the Docker image |
+
+Release-blocking status (2026-11-19): RB1 clear (golden tests pass); RB2 clear (0 property violations; T-OFF tests pass); RB3 clear (0 safety-critical surviving mutants); RB4 clear (AST test); RB5 — UI numbers load from `eval/out` or the API; README and LIMITATIONS contain only cited policy values; RB6 clear (schema test); RB7 clear (grep + tests); RB8 — passes on local URL and Docker image; public URL needs a hosting account (human step, doc 08 §6 cut 6 applies until then); RB9 clear (`LIMITATIONS.md`).

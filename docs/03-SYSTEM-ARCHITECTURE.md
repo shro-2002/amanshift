@@ -2,6 +2,8 @@
 
 Status: FROZEN for implementation (v1.0, 2026-11-19). Design target: one developer, ~20 engineering hours, deadline 20 Nov 2026.
 
+> Implementation note (2026-11-19, STATUS SC2): `day_evidence` is merged into `env`; `env` carries the whole local day of forecast evidence plus meter readings.
+
 ## 1. Architectural stance
 
 - **Python is the source of truth** for screening, risk, coverage, kernel, planner and checker.

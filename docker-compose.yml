@@ -1,0 +1,8 @@
+services:
+  amanshift:
+    build: .
+    ports: ["8080:8080"]
+    volumes: ["amanshift-data:/data"]
+    restart: unless-stopped
+volumes:
+  amanshift-data: {}

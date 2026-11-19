@@ -7,53 +7,53 @@
       "examples": 10000,
       "violations": 0,
       "status": "passed",
-      "seconds": 77.955
+      "seconds": 152.2
     },
     {
       "test": "test_t_ker_03_composition",
       "examples": 2000,
       "violations": 0,
       "status": "passed",
-      "seconds": 21.506
+      "seconds": 35.62
     },
     {
       "test": "test_t_ker_04_planner_output_on_degraded_state_is_approved",
       "examples": 2000,
       "violations": 0,
       "status": "passed",
-      "seconds": 29.447
+      "seconds": 36.99
     },
     {
       "test": "test_t_ker_05_meter_reading_never_lowers_level",
       "examples": 2000,
       "violations": 0,
       "status": "passed",
-      "seconds": 22.006
+      "seconds": 28.58
     },
     {
       "test": "test_t_ker_06_no_relaxation_before_dwell_or_confirmation",
       "examples": 2000,
       "violations": 0,
       "status": "passed",
-      "seconds": 15.502
+      "seconds": 25.97
     },
     {
       "test": "test_t_ker_07_determinism_and_canonical_roundtrip",
       "examples": 500,
       "violations": 0,
       "status": "passed",
-      "seconds": 5.067
+      "seconds": 9.03
     },
     {
       "test": "test_t_chk_diff_checker_verdict_equals_kernel_membership",
       "examples": 500,
       "violations": 0,
       "status": "passed",
-      "seconds": 11.0
+      "seconds": 13.63
     }
   ],
   "total_examples": 19000,
   "failures": 0,
-  "elapsed_s": 183.6,
+  "elapsed_s": 302.9,
   "command": "make eval (backend/eval/property_report.py)"
 }
