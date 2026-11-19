@@ -1,0 +1,17 @@
+{
+  "version": "worker-guidance-v1",
+  "description": "Worker-facing guidance text values. Not decision thresholds (those live in abudhabi-heat-v1.json). Golden-tested against every card language.",
+  "hydration_cup_interval_min": {
+    "value": [
+      15,
+      20
+    ],
+    "status": "verified",
+    "citation": "NIOSH 2016-106, Executive Summary and Ch. 7: 'drinking 1 cup [8 oz.] of water or other fluids every 15–20 minutes'; Table 8-1 note: intake should not exceed 1.5 qt per hour."
+  },
+  "emergency_number": {
+    "value": "site-specific (demo: 998 UAE ambulance)",
+    "status": "replace-before-pilot",
+    "citation": "UAE emergency numbers: 998 ambulance, 999 police. The employer's site emergency plan number must replace the demo value."
+  }
+}

@@ -44,17 +44,17 @@ T-E2E-06 automates these steps and asserts structure (verdicts, which crews are 
 | Time | Shot | Voice-over (draft) |
 |---|---|---|
 | 0:00–0:12 | Website hero `/` | "Every worker deserves to return home safely. Heat warnings tell supervisors to rest crews in cool areas. What if the cool area is broken?" |
-| 0:12–0:30 | Overview `/app` after step 1 | "AmanShift turns yesterday's forecast, crew workload, clothing and acclimatization, and the shade and cooling actually available, into one action per crew — using NIOSH limits, Abu Dhabi's TWL rules and the midday break." |
-| 0:30–0:50 | `/demo` step 2 → worksite map | "The central cooling cabin fails. Fourteen workers in two crews now have no rest area. The map shows who is affected and why." |
-| 0:50–1:05 | `/demo` steps 3–4 | "The planner stops what it cannot protect and says so. A separately implemented policy checker rejects the old schedule and cites the rules it breaks." |
-| 1:05–1:25 | `/demo` step 5 + worker app in Arabic/Bengali | "The network drops. Each worker sees one instruction, in their language — and it only gets stricter." |
+| 0:12–0:30 | `/tour` chapter 1 (Overview with protection briefing) | "AmanShift turns yesterday's forecast, crew workload, clothing and acclimatization, and the shade and cooling actually available, into one action per crew — using NIOSH limits, Abu Dhabi's TWL rules and the midday break." |
+| 0:30–0:50 | `/tour` chapters 2–3 → site-plan drawer | "The central cooling cabin fails. Fourteen workers in two crews now have no rest area. The map shows who is affected and why." |
+| 0:50–1:05 | `/tour` chapters 4–5 | "The planner stops what it cannot protect and says so. A separately implemented policy checker rejects the old schedule and cites the rules it breaks." |
+| 1:05–1:25 | `/tour` chapter 6 + worker companion in Arabic/Bengali | "The network drops. Each worker sees one instruction, in their language — and it only gets stricter." |
 | 1:25–1:45 | `/help/validation` | "We test that property on thousands of generated failures and score day-ahead warnings against real airport observations from held-out summers." |
 | 1:45–2:00 | Website privacy section | "No names, no tracking, no biometrics, no disciplinary use. Decision support, ready for a field pilot." |
 
 Spoken figures must match `eval/out` and the live state on the day of recording.
 
 ## 8. Screenshots for submission
-`docs/screenshots/`: 01 website hero; 02 overview; 03 worksite map with cooling failure; 04 demonstration — new plan and rejected old schedule; 05 alerts & actions; 06 worker app (en/ar/bn); 07 offline demonstration; 08 technical validation. v1-rc1 originals kept in `docs/screenshots/v1-rc1/`.
+`docs/screenshots/`: 01 website; 02 overview (morning); 03 tour — cooling outage; 04 overview after outage; 05 worksite drawer; 06 protection — previous plan shown as historical; 07 tour — previous arrangement rejected; 08 protection — interventions; 09 worker companion (en/ar/bn); 10 overview on mobile; 11 technical validation. Earlier versions in `docs/screenshots/v1-rc1/` and `v1.1/`.
 
 ## 9. Required technical documentation (in repo)
 README (quick start + judge guide); `docs/00–11`; `LIMITATIONS.md` (assumptions, dependencies, limitations — official requirement, generated from doc 02 §8 + doc 07 §10 + STATUS uncertainties); `data/SOURCES.md` (all datasets + licences); `eval/out/report.md`.

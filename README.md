@@ -30,26 +30,26 @@ make serve
 
 | Where | For | What |
 |---|---|---|
-| `/` | everyone | Product website: the problem, how it works, failure resilience, privacy |
-| `/app` | site supervisor | Safety Command Center: overview, worksite map, crew protection, safety resources, alerts & actions, safety activity |
-| `/worker` | crews | Mobile worker app: one protective action, pictograms first, five languages, offline |
-| `/demo` | judges | Live failure-resilience demonstration with scenario controls |
+| `/` | everyone | Product website |
+| `/app` | site supervisor | Safety Command Center — **Overview** (protection briefing, 3 metrics, site plan, priority actions), **Worksite** (interactive site plan), **Protection** (interventions, current vs proposed plan, resources, crews), **Activity** (audit timeline) |
+| `/worker` | crews | Worker companion: one protective action, pictograms first, five languages, offline |
+| `/tour` | judges | Product tour: a live scenario, one chapter at a time, plus scenario controls |
 | `/help` | judges, auditors | Method, limitations and the technical validation report (`eval/out`) |
 
 ## Judge guide (about 2 minutes)
 
-Open **`/demo`** (the old `/command?judge=1` redirects there). Each guided step calls the real engine, planner, policy checker and offline logic.
+Open **`/tour`** (`/demo` and `/command?judge=1` redirect there). The bar at the bottom runs one chapter at a time against the real engine, planner, policy check and offline logic.
 
-| Step | What you do | What you should see |
-|---|---|---|
-| 1 | Load scenario | Real Abu Dhabi morning, 1 July 2026, 10:30 GST; crews at different levels; plan passes the policy check (10 safety rules) |
-| 2 | Cooling cabin fails | "Central cooled rest cabin unavailable — 14 workers in 2 crews (Concrete Pour, Site Logistics) now have no rest area"; lost protection drawn red on the map |
-| 3 | Generate plan | The planner stops what it cannot protect: "No adequate protection arrangement exists for Concrete Pour, Site Logistics"; policy check passes |
-| 4 | Submit old schedule | The earlier plan, re-submitted unchanged, is rejected by the policy check with plain-language reasons and rule references |
-| 5 | Go offline | Offline banner and countdown to STOP-HOLD; levels never drop. Open **Worker app**, pick বাংলা or العربية |
-| 6 | Open technical validation | Property tests, checker mutation, forecast skill vs baselines, planner benchmark, cost of safety — all loaded from `eval/out/*.json` |
+| Chapter | What you should see |
+|---|---|
+| 1 Morning protection outlook | 1 July 2026, 10:30 GST; crews at different levels; plan passes the policy check (10 safety rules) |
+| 2 Cooling facility outage | Briefing: "Central cooled rest cabin unavailable — 14 workers need alternative protection" (Concrete Pour, Site Logistics); the old plan is shown as *previous, not in effect* |
+| 3 Affected crews identified | Site-plan drawer for the cabin: impact now, crews that lost it |
+| 4 Revised protective action | "No adequate protection arrangement exists for Concrete Pour, Site Logistics"; policy check passes |
+| 5 Unsafe previous arrangement rejected | The earlier plan, re-submitted unchanged, is rejected with plain-language reasons and rule references |
+| 6 Connectivity failure | Offline banner and countdown to STOP-HOLD; levels never drop. Open **Worker companion**, pick বাংলা or العربية |
 
-Select any crew for the plain-language reasoning, the full computation trace ("How this was determined") and the two-step symptom report. Select any resource on the worksite map for capacity, last on-site confirmation, dependants and the consequence of losing it. More scenario controls: forecast stale/lost, onsite meter entry, repair + physical confirmation, 15-minute dwell tick, reset.
+Then **Open technical validation**. Select any crew for reasoning, the full trace and the two-step symptom report; select any resource for capacity, confirmation, dependants and impact. **Scenario controls** add forecast stale/lost, onsite meter, repair + on-site confirmation, 15-minute tick and reset.
 
 ## What is real and what is synthetic
 
@@ -88,7 +88,8 @@ Python (FastAPI) is the single source of truth: `amanshift/screening` (thermofee
 | [LIMITATIONS.md](LIMITATIONS.md) | Assumptions, dependencies, limitations (official deliverable) |
 | [data/SOURCES.md](data/SOURCES.md) | Datasets and licences |
 | [STATUS.md](STATUS.md) | Facts, results, spec changes |
-| [docs/12](docs/12-PRODUCT-EXPERIENCE-REDESIGN.md) | Product experience redesign: information architecture, design system, workflows |
+| [docs/12](docs/12-PRODUCT-EXPERIENCE-REDESIGN.md) | Product experience redesign: audiences, workflows |
+| [docs/13](docs/13-VISUAL-SYSTEM-V3.md) | Visual system v3, four-destination navigation, stale-plan safety fixes |
 | [docs/00–11](docs/) | Charter, requirements, science & safety, architecture, UI, decision engine, validation, responsible design, plan, demo, traceability, audit |
 | [AGENTS.md](AGENTS.md) | Binding instructions for coding agents |
 

@@ -59,6 +59,10 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 - **SC9 Site display names and emergency number in the site file.** `data/scenarios/demo-site-a.json` gains `display` (zone/crew/resource names; ids stay the keys) and `emergency` (998, UAE ambulance). The v1 cards said "999 (UAE ambulance)"; 999 is the UAE police number, 998 is ambulance. Must be replaced with the site emergency-plan number before any pilot.
 - **SC10 Per-resource repair report.** New failure type `resource_repaired` moves one resource down → unconfirmed (same two-step rule as `restore_all`: it protects no one until physically confirmed). Integration test added.
 - **SC11 Worker symptom guidance** adds "Do not stay alone" (en/ar/hi/ur/bn, pending native review). The worker app has no symptom-report submission; escalation stays a supervisor/medic flow.
+- **SC12 Visual system v3 and navigation (doc 13).** Light SaaS tokens (Inter, #F7F8FC / #4F46E5 / #0D9488), four primary destinations (Overview, Worksite, Protection, Activity); Alerts, Crews and Resources merged into Protection; `/demo` → `/tour` (one chapter at a time). Old URLs redirect.
+- **SC13 Stale-plan presentation fix (safety).** After a resource failure the previous plan is labelled historical, its instructions are collapsed and struck through, its policy-check result reads "checked against earlier conditions — not valid now", and it cannot be acknowledged. Offline worker cards stop naming rest/water after confirmations expire. Regression tests in `derive.test.ts`, `worker.test.ts`, `judging.spec.ts`.
+- **SC14 Hydration guidance corrected.** Worker cards said "drink water every hour"; NIOSH 2016-106 says 1 cup every 15–20 minutes. All five languages updated (pending native review); value and citation in `policy/worker-guidance-v1.json` with a golden test. "Accept plan" renamed "Acknowledge plan" (issues to crews; not permission to work).
+- **SC15 Licensed photography on the website** (Pexels License; `web/public/img/ATTRIBUTION.md`). Pictured people are not users or patients.
 - Node 26 used instead of Node 22 LTS (installed toolchain); Vite 8 / TypeScript 7.
 
 ## Implementation results (all from `make eval`, see eval/out/report.md)
@@ -76,7 +80,6 @@ Docs 00–11, AGENTS.md, CLAUDE.md, README.md, this file. Five-perspective audit
 
 ## Not done / human-only
 - Public URL (Render/Fly) needs a hosting account → doc 08 §6 cut 6 applies until deployed: `make demo` + video. Image builds and passes E2E locally.
-- Hero photography: the website uses an illustrated SVG worksite; licensed Gulf construction photography can replace it (needs a licensed image).
 - 2-minute video, submission form, reading dashboard requirements (B1 second half), deadline hour (B2).
 - P1 items not built: lexicographic MILP planner, S3 replay workspace, S7 plan comparison, mutmut code-mutation score, print-optimised A4 sheet (browser print of S9 works), audio clips.
 

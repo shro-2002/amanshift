@@ -10,51 +10,74 @@ const levels = async (page: Page): Promise<Record<string, number>> => {
 };
 const step = (page: Page, name: string) => page.getByRole("button", { name, exact: true }).click();
 
-test("T-E2E-06 judging moment in the demonstration environment", async ({ page }) => {
+test("T-E2E-06 judging moment in the product tour", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/command?judge=1");
-  await expect(page).toHaveURL(/\/demo$/);
+  await expect(page).toHaveURL(/\/tour$/);
+  const bar = page.locator(".tour-bar");
+  const next = async (cta: string) => { await bar.getByRole("button", { name: cta }).click(); };
 
-  await step(page, "Load scenario");
-  await expect(page.locator("#plan-h")).toBeVisible();
-  await expect(page.getByText("Policy check passed · 10 safety rules")).toBeVisible();
+  await next("Start the shift");
+  await expect(page.locator("section[aria-labelledby=plan-h]")).toContainText("Policy check passed · 10 safety rules");
   const before = await levels(page);
   expect(new Set(Object.values(before)).size).toBeGreaterThanOrEqual(3);
 
-  await step(page, "Cooling cabin fails");
-  await expect(page.locator(".attention")).toContainText("Central cooled rest cabin unavailable");
-  await expect(page.locator(".attention")).toContainText("Concrete Pour, Site Logistics");
+  await next("Next chapter");
+  await next("Report the outage");
+  await expect(page.locator(".briefing")).toContainText("Central cooled rest cabin unavailable");
+  await expect(page.locator(".briefing")).toContainText("Concrete Pour, Site Logistics");
   const after = await levels(page);
   for (const [k, v] of Object.entries(before)) expect(after[k]).toBeGreaterThanOrEqual(v);
+  // Regression: the invalidated plan must not look current anywhere.
+  await expect(page.locator("section[aria-labelledby=plan-h]")).toContainText("Previous plan");
+  await expect(page.locator("section[aria-labelledby=plan-h]")).not.toContainText("Policy check passed");
+  for (const crew of ["Concrete Pour", "Site Logistics"]) {
+    const row = page.locator(".priority li", { hasText: crew });
+    await expect(row).toContainText("Stop work");
+    await expect(row).not.toContainText("Central cooled rest cabin");
+  }
+  const cards = await (await page.request.get("/api/v1/sites/demo-site-a/cards")).json();
+  for (const c of cards.data.cards.filter((x: { crew_id: string }) => ["C2", "C5"].includes(x.crew_id))) {
+    expect(c.key).toBe("stop");
+    expect(c.rest).not.toBe("R2");
+  }
 
-  await step(page, "Generate plan");
+  await next("Next chapter");
+  await next("Inspect the outage");
+  await expect(page.locator(".drawer")).toContainText("Impact now");
+  await page.keyboard.press("Escape");
+
+  await next("Next chapter");
+  await next("Generate revised plan");
   await expect(page.getByText(/No adequate protection arrangement exists for/)).toBeVisible();
-  await expect(page.getByText("Policy check passed · 10 safety rules")).toBeVisible();
+  await expect(page.locator("section[aria-labelledby=plan-h]")).toContainText("Policy check passed · 10 safety rules");
 
-  await step(page, "Submit old schedule");
+  await next("Next chapter");
+  await next("Re-submit previous arrangement");
   await expect(page.locator("#us-h")).toBeVisible();
   await expect(page.getByText("Rejected by the policy check")).toBeVisible();
   await expect(page.getByText(/Central cooled rest cabin \(R2\) is unavailable/).first()).toBeVisible();
 
-  await step(page, "Go offline");
+  await next("Next chapter");
+  await next("Disconnect the network");
   await expect(page.locator(".banner.hatch").first()).toContainText("Offline", { timeout: 5000 });
   const offline = await levels(page);
   for (const [k, v] of Object.entries(after)) expect(offline[k]).toBeGreaterThanOrEqual(v);
 
-  await step(page, "Open technical validation");
+  await next("Open technical validation");
   await expect(page.getByText("Fail-safe property tests")).toBeVisible();
   await expect(page.getByText("Day-ahead warning skill")).toBeVisible();
   expect(errors).toEqual([]);
 });
 
 test("T-UI-01 smoke, legacy routes and no individual data", async ({ page }) => {
-  for (const path of ["/", "/app", "/app/worksite", "/app/crews", "/app/resources", "/app/alerts", "/app/activity", "/worker", "/help", "/help/method"]) {
+  for (const path of ["/", "/app", "/app/worksite", "/app/protection", "/app/protection?tab=plan", "/app/protection?tab=resources", "/app/protection?tab=crews", "/app/activity", "/tour", "/worker", "/help", "/help/method"]) {
     await page.goto(path);
     await expect(page.locator("main")).toBeVisible();
     await expect(page.locator("footer").last()).toContainText(/not diagnosis or work authorization/i);
   }
-  for (const [legacy, now] of [["/command", "/app"], ["/cards", "/worker"], ["/evidence", "/help/validation"], ["/method", "/help/method"]]) {
+  for (const [legacy, now] of [["/command", "/app"], ["/cards", "/worker"], ["/evidence", "/help/validation"], ["/method", "/help/method"], ["/demo", "/tour"], ["/app/alerts", "/app/protection"], ["/app/crews", "/app/protection\\?tab=crews"], ["/app/resources", "/app/protection\\?tab=resources"]]) {
     await page.goto(legacy);
     await expect(page).toHaveURL(new RegExp(`${now}$`));
   }
@@ -76,7 +99,7 @@ test("T-UI-02 worker app: language switch, RTL for Arabic and Urdu", async ({ pa
 });
 
 test("T-UI-03 axe: no serious/critical issues", async ({ page }) => {
-  for (const path of ["/", "/app", "/app/alerts", "/app/worksite", "/worker", "/demo", "/help/validation"]) {
+  for (const path of ["/", "/app", "/app/protection", "/app/protection?tab=plan", "/app/worksite", "/worker", "/tour", "/help/validation"]) {
     await page.goto(path);
     await page.locator("main").waitFor();
     await page.waitForTimeout(900);
@@ -88,7 +111,7 @@ test("T-UI-03 axe: no serious/critical issues", async ({ page }) => {
 
 test("NFR-05 320 px: no horizontal page scroll", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 800 });
-  for (const path of ["/", "/app", "/app/alerts", "/worker", "/demo", "/help/validation"]) {
+  for (const path of ["/", "/app", "/app/protection", "/app/worksite", "/worker", "/tour", "/help/validation"]) {
     await page.goto(path);
     await page.locator("main").waitFor();
     await page.waitForTimeout(700);

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SiteState } from "../../src/api/client";
-import { deriveAlerts, hhmm, soleDependants, strandedBy, tzOffsetMin } from "../../src/site/derive";
+import { actionText, deriveAlerts, hhmm, isPlanCurrent, soleDependants, strandedBy, tzOffsetMin } from "../../src/site/derive";
 
 const crew = (id: string, size: number, rest: string[], level = 3) => ({
   crew_id: id, size, rest_edges: rest, water_edges: ["W1"], display_level: level, escalated: false, action: null, action_valid: true,
@@ -29,5 +29,22 @@ describe("derive", () => {
     expect(down.persons).toBe(8);
     expect(down.detail).toContain("1 other crew lost an alternative");
     expect(deriveAlerts(s, false).some((a) => a.id === "uncovered")).toBe(false); // not reported twice
+  });
+});
+
+describe("invalidated plans never masquerade as current (regression)", () => {
+  const d = { resources: { R2: "Central cooled rest cabin" } };
+  const old = { crew_id: "C2", action: "work", work_fraction: 0.333, rest_resource: "R2", water_resource: "W2", defer_until: null, clinical_escalation: false, reason_codes: [] };
+  it("a crew whose accepted action is no longer allowed is told to stop, without naming the lost resource", () => {
+    const c = { ...crew("C2", 8, [], 4), action: old, action_valid: false } as unknown as SiteState["crews"][number];
+    const text = actionText(c, d);
+    expect(text).toMatch(/^Stop work/);
+    expect(text).not.toContain("Central cooled rest cabin");
+    expect(text).not.toContain("Work up to");
+  });
+  it("a stale plan is not current", () => {
+    expect(isPlanCurrent({ ...s, plan: { stale: true } } as unknown as SiteState)).toBe(false);
+    expect(isPlanCurrent({ ...s, plan: { stale: false } } as unknown as SiteState)).toBe(true);
+    expect(isPlanCurrent(s)).toBe(false);
   });
 });

@@ -6,8 +6,8 @@ import { Method } from "./Method";
 const CARDS: [string, IconName, string, string][] = [
   ["/help/validation", "shield", "Technical validation", "Measured results from the evaluation suite: forecast skill against baselines, fail-safe property tests, checker mutation testing, planner benchmark, cost of safety, reference reproduction."],
   ["/help/method", "help", "Method, assumptions & limitations", "How estimated heat stress, NIOSH limits, ADOSH TWL zones and the midday break combine — and what AmanShift does not do."],
-  ["/demo", "play", "Live demonstration", "Run the failure-resilience scenario: cooling failure, re-planning, rejected unsafe plan and offline degradation."],
-  ["/worker", "phone", "Worker app", "The field view a crew sees: one protective action, pictograms first, five languages, works offline."],
+  ["/tour", "play", "Product tour", "Live scenario: cooling outage, affected crews, revised plan, rejected previous arrangement, connectivity loss."],
+  ["/worker", "phone", "Worker companion", "The field view a crew sees: one protective action, pictograms first, five languages, works offline."],
 ];
 
 function Head({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {

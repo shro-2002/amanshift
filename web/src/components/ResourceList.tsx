@@ -6,16 +6,12 @@ import { useSite } from "../site/SiteContext";
 const ICON: Record<ResourceView["type"], IconName> = { shade: "shade", cooled_rest: "cabin", water: "water" };
 const ORDER: ResourceView["type"][] = ["cooled_rest", "shade", "water"];
 
-export function Resources() {
+export function ResourceList() {
   const { s, busy, run } = useSite();
   if (!s) return <div className="skeleton" aria-busy="true" />;
   const d = s.site.display;
   return (
-    <div className="page">
-      <div className="page-head">
-        <div><span className="eyebrow">Safety resources</span><h1>Shade, cooling and water</h1>
-          <p>A resource protects crews only while it is available and physically confirmed within the last 30 minutes. Restored resources stay unused until someone confirms them on site.</p></div>
-      </div>
+    <div className="stack" style={{ gap: "var(--s-4)" }}>
       {ORDER.map((type) => {
         const list = s.coverage.resources.filter((r) => r.type === type);
         if (!list.length) return null;

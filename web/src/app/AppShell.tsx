@@ -7,17 +7,16 @@ import { deriveAlerts } from "../site/derive";
 import { useSite } from "../site/SiteContext";
 
 const OPS: [string, string, IconName][] = [
-  ["/app", "Overview", "overview"], ["/app/worksite", "Worksite", "map"], ["/app/crews", "Crew protection", "crew"],
-  ["/app/resources", "Safety resources", "shade"], ["/app/alerts", "Alerts & actions", "alert"], ["/app/activity", "Safety activity", "activity"],
+  ["/app", "Overview", "overview"], ["/app/worksite", "Worksite", "map"], ["/app/protection", "Protection", "shield"], ["/app/activity", "Activity", "activity"],
 ];
-const MORE: [string, string, IconName][] = [["/demo", "Live demonstration", "play"], ["/help", "Help & resources", "help"], ["/worker", "Worker app", "phone"]];
+const MORE: [string, string, IconName][] = [["/worker", "Worker companion", "phone"], ["/tour", "Product tour", "play"], ["/help", "Help & documentation", "help"]];
 const THEME_KEY = "amanshift.theme";
 
 export function BrandMark({ size = 28 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
-      <path d="M32 4 8 12v18c0 15 10 26 24 30 14-4 24-15 24-30V12Z" fill="var(--teal-600)" />
-      <path d="M32 4 8 12v18c0 15 10 26 24 30" fill="var(--teal-700)" />
+      <defs><linearGradient id="bm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#6366F1" /><stop offset="1" stopColor="#0D9488" /></linearGradient></defs>
+      <path d="M32 4 8 12v18c0 15 10 26 24 30 14-4 24-15 24-30V12Z" fill="url(#bm)" />
       <rect x="19" y="38" width="6" height="10" rx="1" fill="#fff" /><rect x="29" y="31" width="6" height="17" rx="1" fill="#fff" />
       <rect x="39" y="24" width="6" height="24" rx="1" fill="#fff" />
     </svg>
@@ -48,7 +47,7 @@ export function AppShell({ path, children }: { path: string; children: ReactNode
   const item = ([to, label, icon]: [string, string, IconName]) => (
     <a key={to} href={to} className="nav-i" onClick={linkTo(to)} aria-current={isCurrent(path, to) ? "page" : undefined}>
       <Icon name={icon} size={18} />{label}
-      {to === "/app/alerts" && critical > 0 && <span className="count" aria-label={`${critical} critical`}>{critical}</span>}
+      {to === "/app/protection" && critical > 0 && <span className="count" aria-label={`${critical} critical`}>{critical}</span>}
     </a>
   );
   return (
@@ -68,10 +67,11 @@ export function AppShell({ path, children }: { path: string; children: ReactNode
           {s && (
             <div className="ctx">
               <b>{s.site.label.replace(/\s*\(SYNTHETIC\)/i, "")}</b>
-              <span className="pill">Synthetic site</span>
-              <span className="mono small">{new Date(`${s.scenario_date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" })} · {s.eval_time_local} GST</span>
-              <span className={`pill ${tier === "fresh" ? "ok" : "warn"}`}><Icon name="forecast" size={14} />Forecast {tier === "fresh" ? "current" : tier === "stale" ? "out of date" : "unavailable"}</span>
-              <span className={`pill ${isOffline ? "warn" : "ok"}`}><Icon name={isOffline ? "offline" : "online"} size={14} />{isOffline ? "Offline" : "Online"}</span>
+              <span className="pill hist">Synthetic site</span>
+              <span className="dot" />
+              <span className="num">{new Date(`${s.scenario_date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })} · {s.eval_time_local} GST</span>
+              <span className={`pill ${tier === "fresh" ? "ok" : "warn"}`}><span className="led" />Forecast {tier === "fresh" ? "current" : tier === "stale" ? "out of date" : "unavailable"}</span>
+              <span className={`pill ${isOffline ? "warn" : "ok"}`}><span className="led" />{isOffline ? "Offline" : "Online"}</span>
             </div>)}
           <span className="spacer" />
           <select value={lang} onChange={(e) => setLang(e.target.value as Lang)} aria-label="Language">
@@ -79,17 +79,13 @@ export function AppShell({ path, children }: { path: string; children: ReactNode
           </select>
           <button className="btn-ghost" aria-label="Toggle dark theme" aria-pressed={theme === "dark"} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><Icon name="sun" /></button>
         </header>
-        <div className="ribbon" role="note">
-          <Icon name="help" size={14} />
-          <span>Representative scenario: historical Abu Dhabi day-ahead weather replayed on a synthetic worksite. Not live site telemetry.</span>
-          {!path.startsWith("/demo") && <a href="/demo" onClick={linkTo("/demo")}>Open the live demonstration</a>}
-        </div>
         <main id="main" tabIndex={-1}>
           {err && <div className="page" style={{ paddingBlockEnd: 0 }}><div className="err" role="alert">{err}<button onClick={() => run("Reload", () => api.state())}>Retry</button></div></div>}
           {children}
         </main>
         <footer className="app-foot">
           <span>{t("notice")}</span>
+          <span>Representative scenario: historical Abu Dhabi day-ahead weather on a synthetic worksite — not live site telemetry.</span>
           <span>No names, biometrics or locations of individuals are collected.</span>
           <a href="/help/method" onClick={linkTo("/help/method")}>Method &amp; limitations</a>
           <a href="/help/validation" onClick={linkTo("/help/validation")}>Technical validation</a>

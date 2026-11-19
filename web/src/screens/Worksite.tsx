@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { MapDetail } from "../components/MapDetail";
-import { WorksiteMap, type Sel } from "../components/WorksiteMap";
+import { useCallback, useState } from "react";
+import { MapDrawer } from "../components/MapDrawer";
+import { WorksiteMap, type Layers, type Sel } from "../components/WorksiteMap";
 import { usePath } from "../router";
 import { useSite } from "../site/SiteContext";
 import { useCrewDrawer } from "../site/useCrewDrawer";
@@ -10,24 +10,30 @@ function parseSel(v: string | null): Sel {
   return m ? { kind: m[1] as NonNullable<Sel>["kind"], id: m[2] } : null;
 }
 
+const LAYER_LABEL: [keyof Layers, string][] = [["crews", "Crews"], ["resources", "Resources"], ["links", "Assigned links"]];
+
 export function Worksite() {
   const { s, override } = useSite();
   const { search } = usePath();
-  const [sel, setSel] = useState<Sel>(() => parseSel(search.get("sel")));
   const { openCrew, drawer } = useCrewDrawer();
+  const initial = parseSel(search.get("sel"));
+  const [sel, setSel] = useState<Sel>(initial?.kind === "crew" ? null : initial);
+  const [layers, setLayers] = useState<Layers>({ crews: true, resources: true, links: false });
+  const select = useCallback((next: Sel) => { if (next?.kind === "crew") openCrew(next.id); else setSel(next); }, [openCrew]);
   if (!s) return <div className="skeleton" aria-busy="true" />;
   return (
     <div className="page">
       <div className="page-head">
-        <div><span className="eyebrow">Worksite</span><h1>Protection map</h1>
-          <p>Zones, protective resources and crews. Select anything to see availability, capacity, dependants and what happens if it fails.</p></div>
+        <div><h1>Worksite</h1><p>Zones, shade, cooling and water, and where each crew works. Select anything for availability, dependants and what happens if it fails.</p></div>
+        <div className="map-toolbar" role="group" aria-label="Map layers">
+          {LAYER_LABEL.map(([k, label]) => (
+            <label key={k} className="toggle"><input type="checkbox" checked={layers[k]} onChange={(e) => setLayers({ ...layers, [k]: e.target.checked })} />{label}</label>))}
+        </div>
       </div>
-      <div className="ws-layout">
-        <section className="card" aria-label="Worksite map"><div className="body"><div className="map-scroll">
-          <WorksiteMap s={s} override={override} sel={sel} onSelect={setSel} />
-        </div></div></section>
-        <aside aria-label="Selection detail"><MapDetail s={s} sel={sel} onSelect={setSel} onOpenCrew={openCrew} /></aside>
-      </div>
+      <section className="card map-card" aria-label="Worksite plan">
+        <div className="map-scroll"><WorksiteMap s={s} override={override} sel={sel} onSelect={select} layers={layers} /></div>
+      </section>
+      <MapDrawer s={s} sel={sel} onSelect={setSel} onOpenCrew={openCrew} />
       {drawer}
     </div>
   );

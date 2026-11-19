@@ -29,7 +29,7 @@ describe("lines", () => {
     expect(lines("en", base, "998", { R2: "Central cooled rest cabin" })[0]).toBe("Work 45 min, rest 15 min in Central cooled rest cabin.");
   });
   it("names no resource when the backend gave none", () => {
-    expect(lines("en", { ...base, key: "stop", rest: null }, "998")).toEqual(["Stop work. Go to the nearest shade.", "Drink water. Tell supervisor if unwell."]);
+    expect(lines("en", { ...base, key: "stop", rest: null }, "998")).toEqual(["Stop work. Go to the nearest shade.", "Water every 15–20 min. Tell supervisor if unwell."]);
   });
 });
 

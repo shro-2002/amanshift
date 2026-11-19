@@ -9,7 +9,11 @@ export function navigate(to: string, replace = false): void {
 
 /** v1.0-rc1 routes kept working (README, video, tests) — doc 12 §3. */
 export function legacyRedirect(path: string, search: URLSearchParams): string | null {
-  if (path.startsWith("/command")) return search.get("judge") === "1" ? "/demo" : "/app";
+  if (path.startsWith("/command")) return search.get("judge") === "1" ? "/tour" : "/app";
+  if (path.startsWith("/demo")) return "/tour";
+  if (path.startsWith("/app/alerts")) return "/app/protection";
+  if (path.startsWith("/app/crews")) return "/app/protection?tab=crews";
+  if (path.startsWith("/app/resources")) return "/app/protection?tab=resources";
   if (path.startsWith("/cards") || path.startsWith("/offline")) return "/worker";
   if (path.startsWith("/evidence")) return "/help/validation";
   if (path.startsWith("/method")) return "/help/method";
