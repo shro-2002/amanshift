@@ -1,0 +1,37 @@
+/* Design tokens — doc 04 §2 (frozen). Severity colours are used only for severity. */
+:root {
+  --bg:#F6F4EF; --surface:#FFFFFF; --surface-2:#EFECE4; --line:#D9D4C7;
+  --ink:#1B1F23; --ink-2:#4A5159; --ink-3:#5F6670;
+  --brand:#0F5257; --brand-ink:#FFFFFF; --focus:#1D4ED8;
+  --sev-1:#1F7A4D; --sev-1-ink:#FFFFFF;
+  --sev-2:#E3B341; --sev-2-ink:#1B1F23;
+  --sev-3:#C2410C; --sev-3-ink:#FFFFFF;
+  --sev-4:#B42318; --sev-4-ink:#FFFFFF;
+  --sev-4-text:#B42318;
+  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(27,31,35,.18) 6px 8px);
+  --font-latin:"IBM Plex Sans",system-ui,sans-serif;
+  --font-ar:"IBM Plex Sans Arabic","Noto Naskh Arabic",sans-serif;
+  --font-ur:"Noto Naskh Arabic",sans-serif;
+  --font-hi:"Noto Sans Devanagari","IBM Plex Sans",sans-serif;
+  --font-bn:"Noto Sans Bengali","IBM Plex Sans",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+  --t-12:.75rem; --t-14:.875rem; --t-16:1rem; --t-20:1.25rem; --t-24:1.5rem; --t-32:2rem; --t-44:2.75rem;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-6:24px; --s-8:32px; --s-12:48px;
+  --radius-sm:4px; --radius-md:8px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#111416; --surface:#181C1F; --surface-2:#20262A; --line:#2E363B;
+  --ink:#ECEAE4; --ink-2:#B6BCC2; --ink-3:#9AA2A9; --brand:#5FB3B3; --brand-ink:#0B1214;
+  --sev-1:#3FA370; --sev-2:#E8C25B; --sev-3:#E8692E; --sev-4:#E5484D; --sev-4-text:#F0767A;
+  --sev-1-ink:#0B1214; --sev-2-ink:#0B1214; --sev-3-ink:#0B1214; --sev-4-ink:#0B1214;
+  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(236,234,228,.16) 6px 8px);
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg:#111416; --surface:#181C1F; --surface-2:#20262A; --line:#2E363B;
+  --ink:#ECEAE4; --ink-2:#B6BCC2; --ink-3:#9AA2A9; --brand:#5FB3B3; --brand-ink:#0B1214;
+  --sev-1:#3FA370; --sev-2:#E8C25B; --sev-3:#E8692E; --sev-4:#E5484D; --sev-4-text:#F0767A;
+  --sev-1-ink:#0B1214; --sev-2-ink:#0B1214; --sev-3-ink:#0B1214; --sev-4-ink:#0B1214;
+  --degraded-hatch: repeating-linear-gradient(135deg, transparent 0 6px, rgba(236,234,228,.16) 6px 8px);
+  color-scheme: dark;
+}

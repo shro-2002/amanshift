@@ -7,7 +7,7 @@ from typing import Any
 
 from amanshift import scenario as sc
 from amanshift.engine import coverage, kernel, risk
-from amanshift.engine.models import Plan, Snapshot, snapshot_id
+from amanshift.engine.models import Plan, PlanAction, Snapshot, snapshot_id
 from amanshift.policy.loader import Policy
 
 LEVEL_NAMES = {1: "STANDARD", 2: "INCREASED CARE", 3: "WORK / REST", 4: "STOP"}
@@ -63,16 +63,20 @@ def crew_view(snap: Snapshot, d: kernel.CrewDecision, action: dict[str, Any] | N
         "defer_earliest": hhmm(datetime.fromisoformat(d.defer_earliest.replace("Z", "+00:00")), pol)
         if d.defer_earliest else None,
         "action": action,
+        "action_valid": action is not None and d.allows(PlanAction(**action)),
     }
 
 
 def coverage_view(snap: Snapshot, dec: kernel.SiteDecision, plan: Plan | None,
                   pol: Policy) -> dict[str, Any]:
+    """Only actions still permitted under the current snapshot count as coverage."""
     assigned = set()
     covered_people = 0
     covered = []
     if plan:
         for a in plan.actions:
+            if not dec.crews[a.crew_id].allows(a):
+                continue
             for rid in (a.rest_resource, a.water_resource):
                 if rid:
                     assigned.add((a.crew_id, rid))

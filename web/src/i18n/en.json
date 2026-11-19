@@ -1,0 +1,23 @@
+{
+ "dir": "ltr",
+ "lang_name": "English",
+ "level_1": "STANDARD",
+ "level_2": "INCREASED CARE",
+ "level_3": "WORK / REST",
+ "level_4": "STOP",
+ "card_standard": "Drink water every hour.",
+ "card_increased": "Drink water hourly. Rest in shade if unwell.",
+ "card_work_rest": "Work {work} min, rest {rest} min in {res}.",
+ "card_stop": "Stop work. Go to shade {res}.",
+ "card_stop_2": "Drink water. Tell supervisor if unwell.",
+ "card_escalation": "Stop. Cool down. Call medic: {phone}.",
+ "crew": "Crew",
+ "updated": "updated {t}",
+ "pending": "pending native review",
+ "offline_fresh": "Offline — cached plan. Conservative levels in {min} min.",
+ "offline_stale": "Offline {dur} — showing conservative levels until reconnected.",
+ "offline_expired": "Offline plan expired — STOP-HOLD: shade, water, contact supervisor.",
+ "notice": "Decision support, not diagnosis or work authorization. No disciplinary or employment use.",
+ "report_symptoms": "Report symptoms in this crew",
+ "card_stop_any": "Stop work. Go to the nearest shade."
+}
