@@ -15,6 +15,7 @@ The free Render instance sleeps when idle; the first load can take 30–60 s.
 | Result | Value | Type |
 |---|---|---|
 | Day-ahead warning skill, clean 2026 holdout (event = level ≥ 3; prevalence 88.0 % of 1,341 work hours) | detection 99.0 %, false-alarm ratio 7.5 %, under-warning 3.7 % (air-temperature rule 16.9 %, always-warn 28.9 %) | historical forecasts vs airport observations |
+| Day-ahead STOP warnings, same holdout (event = level 4; 388 of 1,341 work hours) | detection 90.5 %, false-alarm ratio 36.6 %, critical success index 59.4 % | historical forecasts vs airport observations |
 | Fail-safe property tests | 19,000 generated cases, 0 failures | synthetic |
 | Seeded unsafe plans rejected by the checker | 100 % of non-equivalent mutants, 0 safety-critical survivors | synthetic |
 | Permitted work, simulated site, 2026 summer | 28.4 % of nominal person-hours with full information; 3.0 % with a stale forecast; 0 % offline > 1 h | simulated cost of safety |

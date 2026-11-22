@@ -1,0 +1,71 @@
+# Runs the same checks as `make test` on every push to main and every pull request.
+# It checks the code and its tests, not the evaluation numbers: `make eval` (about
+# 5 minutes, regenerates eval/out) and the Playwright suite are not part of CI.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      PYTHONPATH: .
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
+        with:
+          version: "0.11.21"
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+
+      - name: Install the locked environment (Python from backend/pyproject.toml)
+        run: uv sync --locked
+
+      - name: Lint
+        run: uv run --locked ruff check amanshift amanshift_checker eval tests
+
+      - name: Type-check engine and checker (strict)
+        run: uv run --locked mypy amanshift/engine amanshift_checker
+
+      - name: Tests (golden, unit, integration, 500-case property profile)
+        env:
+          AMANSHIFT_PROP_N: "500"
+        run: uv run --locked pytest -q
+
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - run: npm ci
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Type-check and build
+        run: npm run build
